@@ -1460,7 +1460,6 @@ select option
 								<%                        
 									Else
 								%>                
-										<div><a href="\dangki.asp">Đăng kí</a></div>
 										<div><a href="\login.asp">Đăng nhập</a></div>
 								<%
 									End If
