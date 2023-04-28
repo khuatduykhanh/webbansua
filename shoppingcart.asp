@@ -1,4 +1,4 @@
-
+<!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
 Dim idList, mycarts, totalProduct, subtotal, statusViews, statusButtons, rs
@@ -18,7 +18,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 		End if                               
 	Next
 	Dim sqlString
-	sqlString = "Select * from SANPHAM where masp IN (" & idList &")"
+	sqlString = "Select * from SanPham where MaSp IN (" & idList &")"
 	connDB.Open()
 	set rs = connDB.execute(sqlString)
 	calSubtotal(rs)
@@ -33,7 +33,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 ' Do Something...
 		subtotal = 0
 		do while not rs.EOF
-			subtotal = subtotal + Clng(mycarts.Item(CStr(rs("masp")))) * CDbl(CStr(rs("giasp")))
+			subtotal = subtotal + Clng(mycarts.Item(CStr(rs("MaSp")))) * CDbl(CStr(rs("Gia")))
 			rs.MoveNext
 		loop
 		rs.MoveFirst
@@ -102,7 +102,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 
                       <input id="form1" min="0" name="quantity" value="<%
                                     Dim id
-                                    id  = CStr(rs("masp"))
+                                    id  = CStr(rs("MaSp"))
                                     Response.Write(mycarts.Item(id))                                     
                                     %>" type="number"
                         class="form-control form-control-sm" />
@@ -113,11 +113,11 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                       </button>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">$ <%= rs("giasp")%></h6>
+                      <h6 class="mb-0">$ <%= rs("Gia")%></h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                     
-                      <a href="removecart.asp?id=<%= rs("masp")%>" class="text-muted"><i class="fas fa-times"></i></a>
+                      <a href="removecart.asp?id=<%= rs("MaSp")%>" class="text-muted"><i class="fas fa-times"></i></a>
                     </div>
                   </div>
 
