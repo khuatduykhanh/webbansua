@@ -64,6 +64,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 </head>
 <body>
 <!-- #include file="header.asp" -->
+
 <section class="h-100 h-custom" style="background-color: #eee;">
   <div class="container py-2 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -91,8 +92,8 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted"><%= rs("tensp")%></h6>
-                      <h6 class="text-black mb-0"><%= rs("mota")%></h6>
+                      <h6 class="text-muted"><%= rs("TenSp")%></h6>
+                      <h6 class="text-black mb-0"><%= rs("HDsd")%></h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                       <button class="btn btn-link px-2"
@@ -113,7 +114,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                       </button>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">$ <%= rs("Gia")%></h6>
+                      <h6 class="mb-0"><%= rs("Gia")%> đ</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                     
@@ -131,7 +132,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                 %> 
                 
                   <div class="row pt-2">
-                    <h6 class="mb-0 col-lg-10 pt-3"><a href="products.asp" class="text-body"><i
+                    <h6 class="mb-0 col-lg-10 pt-3"><a href="product.asp" class="text-body"><i
                           class="fas fa-long-arrow-alt-left me-2"></i>Quay trở lại cửa hàng</a></h6>
                           <input type="submit" name="update" value="Update" class="btn btn-warning btn-block btn-lg text-white col-lg-2 <%= statusButtons %>"
                     data-mdb-ripple-color="dark"/>
@@ -152,12 +153,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   <h5 class="text-uppercase mb-3">Shipping</h5>
 
                   <div class="mb-4 pb-2">
-                    <select class="select">
-                      <option value="1">Standard-Delivery- $5</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="4">Four</option>
-                    </select>
+                    Miễn phí
                   </div>
 
                   <h5 class="text-uppercase mb-3">Mã khuyến mại</h5>
@@ -172,12 +168,12 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total price</h5>
-                    <h5><%= subtotal %> Đ</h5>
+                    <h5 class="text-uppercase">Tổng tiền</h5>
+                    <h5><%= subtotal %> đ</h5>
                   </div>
                   <div class="row">
                     <button type="button" class="btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark">Purchase</button>
+                      data-mdb-ripple-color="dark">Mua hàng</button>
                   </div>
                 </div>
               </div>
