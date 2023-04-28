@@ -1,7 +1,7 @@
 <%
         'code for delete a product from my cart
         'lay ve product id
-        If (isnull(Session("email")) OR TRIM(Session("email")) = "") Then
+        If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
         Response.redirect("login.asp")
         End If
         Dim mycarts
