@@ -1,3 +1,4 @@
+
 <style>
     /*
     DEMO STYLE
@@ -226,35 +227,50 @@ a.article:hover {
     }
 }
 </style>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Menu</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-                    <div class="top_bar_content ml-auto">
-							
-							<div class="top_bar_user">
-								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-								<%
-									If (NOT isnull(Session("TaiKhoan"))) AND (TRIM(Session("TaiKhoan"))<>"") Then
-								%>
-									<span class="navbar-text">Welcome <%=Session("HoTen")%></span>
-									<div class="ms-2"><a href="\logout.asp">Đăng xuất</a></div>
-								<%                        
-									Else
-								%>                
-										<div><a href="\login.asp">Đăng nhập</a></div>
-								<%
-									End If
-								%>
-								
-							</div>
-						</div>
-                    
-                </div>
-            </nav>   
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>ADMIN</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Xin Chào</p>
+                <li>
+                    <a href="index.asp">Trang chủ</a>
+                </li>
+                <li >
+                    <a href="sanpham.asp">Sản Phẩm</a>
+                </li>
+                <li>
+                    <a href="magiamgia.asp">Mã Giảm Giá</a>
+                </li>
+                <li>
+                    <a href="hoadonnhap.asp">Hoá Đơn Nhập</a>
+                </li>
+                <li>
+                    <a href="hoadonxuat.asp">Hoá Đơn Xuất</a>
+                </li>
+                <li>
+                    <a href="danhsachmuahang.asp">Danh Sách Mua Hàng</a>
+                </li>
+                
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
+<script>
+    $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+            
+        });
+</script>
