@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel='shortcut icon' href='./img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
+    <link rel='shortcut icon' href='../../img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
     <title>Admin</title>
     
     <!-- Font Awesome JS -->
@@ -22,8 +22,27 @@
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </head>
+<style>
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+.content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+</style>
 <body>
+<div class="wrapper">
+    <!-- #include file="sidebar.asp" -->
+    <div class="content">
     <!-- #include file="header.asp" -->
+    
+    <div> 
+</div>
     
 </body>
 </html>
