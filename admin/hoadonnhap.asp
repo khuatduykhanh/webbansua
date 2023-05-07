@@ -1,3 +1,8 @@
+<%
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+        Response.redirect("login.asp")
+    End If
+%>
 <!DOCTYPE html>
 <html lang="en">
 

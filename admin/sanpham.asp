@@ -1,11 +1,9 @@
-<!-- include file="connect.asp" -->
+<!-- #include file="connect.asp" -->
 <%
-    ' for i=LBound(newCart) to UBound(newCart)    
-    ' Response.Write newCart(i) & "<br><p>-----</p>"
-    ' Next
-    ' Else
-    '     Response.Write " not an array"
-    ' End If
+    
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+        Response.redirect("login.asp")
+    End If
 ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
 ' ham lam tron so nguyen
     function Ceil(Number)
@@ -32,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham "
+    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -95,7 +93,7 @@
             <div class="d-flex bd-highlight mb-3">
                 <div class="me-auto p-2 bd-highlight"><h2>Danh sach San Pham</h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="/themsuasp.asp" class="btn btn-primary">Them San Pham</a>
+                    <a href="themsuasp.asp" class="btn btn-primary">Them San Pham</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -108,6 +106,7 @@
                             <th scope="col">Thương Hiệu</th>
                             <th scope="col">Giá Gốc </th>
                             <th scope="col">Giá Bán</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -132,7 +131,7 @@
                                     <td><%=Result("GiaGoc")%></td>
 
                                     <td>
-                                        <a href="addedit.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Edit</a>
+                                        <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Edit</a>
                                         <a data-href="delete.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Delete</a>
                                     </td>
                                 </tr>
