@@ -1,3 +1,8 @@
+<%
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+        Response.redirect("login.asp")
+    End If
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel='shortcut icon' href='../../img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
+    <link rel='shortcut icon' href='./img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
     <title>Admin</title>
     
     <!-- Font Awesome JS -->

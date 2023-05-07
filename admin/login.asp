@@ -1,3 +1,4 @@
+
 <!--#include file="connect.asp"-->
 <%
 Dim TaiKhoan, MatKhau
@@ -43,11 +44,11 @@ Else
     End if
     
 End if
-If(TaiKhoan = "admin" AND MatKhau = "1") Then
+If(TaiKhoan = "admin" and MatKhau = "1") Then
         Session("TaiKhoan")= "admin"
         Session("HoTen") = "admin"
         Session("Success")="Login Successfully"
-        Response.redirect("admin/index.asp")
+        Response.redirect("index.asp")
 End if
 'Lay ve thong tin dang nhap gom TaiKhoan va MatKhau
 

@@ -1,4 +1,6 @@
-
+<% @ Language="VBScript" %>  
+<!--Step 1: Register Uploader to your page -->  
+<!-- #include file="aspuploader/include_aspuploader.asp" --> 
 <!-- #include file="connect.asp" -->
 <%
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
@@ -14,14 +16,18 @@
             connDB.Open()
             cmdPrep.ActiveConnection = connDB
             cmdPrep.CommandType = 1
-            cmdPrep.CommandText = "SELECT * FROM NHANVIEN WHERE MANV=?"
+            cmdPrep.CommandText = "SELECT TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia FROM SanPham WHERE MaSp=?"
             ' cmdPrep.parameters.Append cmdPrep.createParameter("MaNV",3,1, ,id)
             cmdPrep.Parameters(0)=id
             Set Result = cmdPrep.execute 
 
             If not Result.EOF then
-                name = Result("HoTenNV")
-                hometown =  ("QueQuan")
+                tensp = Result("TenSp")
+                theloai = Result("LoaiSp")
+                thuonghieu = Result("ThuongHieu")
+                mota = Result("MoTa")
+                giagoc = Result("GiaGoc")
+                giaban = Result("Gia")
             End If
 
             ' Set Result = Nothing
@@ -29,43 +35,60 @@
         End If
     Else
         id = Request.QueryString("id")
-        name = Request.form("name")
-        hometown = Request.form("hometown")
+        tensp = Request.form("tensp")
+        theloai = Request.form("theloai")
+        thuonghieu = Request.form("thuonghieu")
+        mota = Request.form("mota")
+        giagoc = Request.form("giagoc")
+        giaban = Request.form("giaban")
 
         if (isnull (id) OR trim(id) = "") then id=0 end if
-
+        
         if (cint(id)=0) then
-            if (NOT isnull(name) and name<>"" and NOT isnull(hometown) and hometown<>"") then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban < giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "INSERT INTO NHANVIEN(HoTenNV,QueQuan) VALUES(?,?)"
-                cmdPrep.parameters.Append cmdPrep.createParameter("name",202,1,255,name)
-                cmdPrep.parameters.Append cmdPrep.createParameter("hometown",202,1,255,hometown)
-
-                cmdPrep.execute
-                Session("Success") = "New employee added!"
-                Response.redirect("index.asp")
+                cmdPrep.CommandText = "INSERT INTO SanPham(TenSp,LoaiSp,ThuongHieu,MoTa,Gia,GiaGoc) VALUES(?,?,?,?,?,?)"
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("tensp",202,1,255,tensp)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("theloai",202,1,255,theloai)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("thuonghieu",202,1,255,thuonghieu)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
+                cmdPrep.Parameters(0)=tensp
+                cmdPrep.Parameters(1)=theloai
+                cmdPrep.Parameters(2)=thuonghieu
+                cmdPrep.Parameters(3)=mota
+                cmdPrep.Parameters(4)=giaban
+                cmdPrep.Parameters(5)=giagoc
+                cmdPrep.execute    
+                Session("Success") = "da them 1 san pham"
+                Response.redirect("sanpham.asp")
             else
                 Session("Error") = "You have to input enough info"                
             end if
         else
-            if (NOT isnull(name) and name<>"" and NOT isnull(hometown) and hometown<>"") then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban < giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "UPDATE NHANVIEN SET HoTenNV=?,QueQuan=? WHERE MaNV=?"
-                cmdPrep.parameters.Append cmdPrep.createParameter("name",202,1,255,name)
-                cmdPrep.parameters.Append cmdPrep.createParameter("hometown",202,1,255,hometown)
+                cmdPrep.CommandText = "UPDATE SanPham SET TenSp=?,LoaiSp=?,ThuongHieu=?,Mota=?,Gia=?,GiaGoc=? WHERE MaSp=?"
+                cmdPrep.parameters.Append cmdPrep.createParameter("tensp",202,1,255,tensp)
+                cmdPrep.parameters.Append cmdPrep.createParameter("theloai",202,1,255,theloai)
+                cmdPrep.parameters.Append cmdPrep.createParameter("thuonghieu",202,1,255,thuonghieu)
+                cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
+                cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
+                cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
                 cmdPrep.parameters.Append cmdPrep.createParameter("MaNV",3,1, ,id)
 
                 cmdPrep.execute
-                Session("Success") = "The employee was edited!"
-                Response.redirect("index.asp") 
+                Session("Success") = "San pham da duoc sua"
+                Response.redirect("sanpham.asp") 
             else
                 Session("Error") = "You have to input enough info"
             end if
@@ -114,42 +137,85 @@
     <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
-    <form method="post" enctype="multipart/form-data" >
+    <%
+    Dim sqlString, rs
+    sqlString = "Select Max(MaSp) as Max from SanPham"
+    connDB.Open()
+    set rs = connDB.execute(sqlString) 
+    If not rs.EOF Then
+    %>   
+    <h5> Ma San Pham Hien tai : <%=rs("Max")%></h5>
+    <%
+    End If
+    %>
+   <div class="mb-3">  
+    <%
+              'Step 2: Create Uploader object     
+              Dim uploader   
+              Set uploader=new AspUploader   
+              'Step 3: Set a unique name to Uploader
+              uploader.Name="anh1"
+              uploader.SaveDirectory="Anh"  
+              uploader.AllowedFileExtensions="*.jpg,*.png,*.gif"  
+              'Step 4: Render Uploader
+              uploader.Render()
+              uploader.GetString()
+    %>  
+    </div>  
+    <form method="post"  >
     <div class="mb-3">
     <label for="sanpham" class="form-label">Tên Sản Phẩm</label>
-    <input type="text" class="form-control" name="tensp" id="sanpham">
+    <input type="text" class="form-control" name="tensp" id="sanpham" value="<%=tensp%>">
     </div>
-    
+    <div class="mb-3">
     <select class="form-select" name="theloai" aria-label="Default select example">
         <option selected>Thể Loại</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="Sua Hat">Sua hat</option>
+        <option value="Sua trai cay">sua trai cay</option>
+        <option value="Sua nguyen chat">Sua nguyen chat</option>
     </select>
+    </div>
+    <div class="mb-3">
     <select class="form-select" name="thuonghieu" aria-label="Default select example">
         <option selected>Thương Hiệu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="vinamilk">vinamilk</option>
+        <option value="TH">TH</option>
+        <option value="Ba Vi">Ba Vi</option>
+        <option value="Da Lat milk">Da Lat Milk</option>
     </select>
+    </div>
     <div class="mb-3">
     <label for="mota" class="form-label">Mô Tả: </label>
-    <textarea class="form-control" id="mota" rows="3"></textarea>
+    <textarea class="form-control" id="mota" name="mota" rows="3" value="<%=mota%>" ></textarea>
     </div>
     <div class="mb-3">
     <label for="giagoc" class="form-label">Giá Gốc: </label>
-    <input type="number" class="form-control" name="giagoc" id="giagoc">
+    <input type="number" class="form-control" name="giagoc" id="giagoc" value="<%=giagoc%>">
     </div>
     <div class="mb-3">
     <label for="giaban" class="form-label">Giá Bán </label>
-    <input type="number" class="form-control" name="giaban" id="giaban">
+    <input type="number" class="form-control" name="giaban" id="giaban" value="<%=giaban%>">
     </div> 
     <div> 
-    <div class="mb-3">
-    <label for="anh" class="form-label">Ảnh</label>
-    <input type="file" class="form-control" name="anh" id="anh" accept="image/*">
-    </div> 
+     
+    <button type="submit" class="btn btn-primary">
+        <%
+            if (id=0) then
+                Response.write("Add")
+            else
+                Response.write("Edit")
+            end if
+        %>
+        </button>
+        <a href="index.asp" class="btn btn-info">Cancel</a>  
+        <div><%=tensp%></div>
+        <div><%=theloai%></div> 
+        <div><%=thuonghieu%></div> 
+        <div><%=giaban%></div> 
+        <div><%=mota%></div> 
+        <div><%=giagoc%></div>        
     </form>
+    <
     <div> 
 </div>
 </body>

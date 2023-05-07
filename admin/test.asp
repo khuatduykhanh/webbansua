@@ -1,8 +1,20 @@
-
+<% @ Language="VBScript" %>  
+<!-- #include file="connect.asp" -->
+<!--Step 1: Register Uploader to your page -->  
+<!-- #include file="aspuploader/include_aspuploader.asp" -->  
 <%
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
         Response.redirect("login.asp")
     End If
+     
+    Dim sqlString, rs
+    sqlString = "Select Max(MaSp) as max from SanPham"
+    connDB.Open()
+    set rs = connDB.execute(sqlString) 
+    If not rs.EOF Then
+        id=1
+    End If
+    theloai=Request.form("theloai")
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +58,19 @@
     <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
-    
+       
+    <form method="post">
+    <select class="form-select" name="theloai" aria-label="Default select example">
+        <option selected>Thể Loại</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+    <button type="submit" class="btn btn-primary">check</button>
+    </form>
+    <div>
+    <%=theloai%>
+    </div>
     <div> 
 </div>
     
