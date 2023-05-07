@@ -88,12 +88,12 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   <div class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp"
+                        src="/admin/Anh/anh<%= rs("MaSp")%>.png"
                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
                       <h6 class="text-muted"><%= rs("TenSp")%></h6>
-                      <h6 class="text-black mb-0"><%= rs("HDsd")%></h6>
+                      <h6 class="text-black mb-0"><%= rs("MoTa")%></h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                       <button class="btn btn-link px-2"
