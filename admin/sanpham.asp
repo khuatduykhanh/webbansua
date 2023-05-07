@@ -131,8 +131,8 @@
                                     <td><%=Result("GiaGoc")%></td>
 
                                     <td>
-                                        <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Edit</a>
-                                        <a data-href="delete.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Delete</a>
+                                        <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
+                                        <a data-href="delete.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
