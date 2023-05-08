@@ -254,7 +254,9 @@ a.article:hover {
                 <li>
                     <a href="danhsachmuahang.asp">Danh Sách Mua Hàng</a>
                 </li>
-                
+                <li>
+                    <a href="index.asp">Trang bán hàng</a>
+                </li>
             </ul>
         </nav>
 <script>
