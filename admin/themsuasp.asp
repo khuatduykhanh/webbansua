@@ -138,6 +138,7 @@
     <div class="content">
     <!-- #include file="header.asp" -->
     <%
+    If (cint(id)=0) Then
     Dim sqlString, rs
     sqlString = "Select Max(MaSp) as Max from SanPham"
     connDB.Open()
@@ -146,6 +147,7 @@
     %>   
     <h5> Ma San Pham Hien tai : <%=rs("Max")%></h5>
     <%
+    End If
     End If
     %>
    <div class="mb-3">  
