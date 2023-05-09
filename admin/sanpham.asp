@@ -152,18 +152,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i= 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="index.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if
