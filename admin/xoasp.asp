@@ -3,10 +3,7 @@
     On Error Resume Next
     id = Request.QueryString("id")
 
-    if (isnull(id) OR trim(id)="" OR isnull(Session("TaiKhoan")) OR trim(Session("TaiKhoan"))="") then
-        Response.redirect("index.asp")
-        Response.End
-    end if
+   
 
     Set cmdPrep = Server.CreateObject("ADODB.Command")
     connDB.Open()

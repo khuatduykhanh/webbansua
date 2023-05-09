@@ -84,7 +84,7 @@
                 cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
                 cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
                 cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
-                cmdPrep.parameters.Append cmdPrep.createParameter("MaNV",3,1, ,id)
+                cmdPrep.parameters.Append cmdPrep.createParameter("Masp",3,1, ,id)
 
                 cmdPrep.execute
                 Session("Success") = "San pham da duoc sua"

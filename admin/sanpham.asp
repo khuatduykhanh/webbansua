@@ -135,7 +135,7 @@
 
                                     <td>
                                         <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="delete.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -152,26 +152,25 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i= 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="index.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if
                     %>
                 </ul>
             </nav>
-
-            <div class="modal" tabindex="-1" id="confirm-delete">
+    <!--    <div class="modal" tabindex="-1" id="confirm-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -187,7 +186,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            
         </div>
     </div> 
 </div>
