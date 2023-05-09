@@ -135,7 +135,7 @@
 
                                     <td>
                                         <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="delete.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -170,8 +170,7 @@
                     %>
                 </ul>
             </nav>
-
-            <div class="modal" tabindex="-1" id="confirm-delete">
+    <!--    <div class="modal" tabindex="-1" id="confirm-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -187,7 +186,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            
         </div>
     </div> 
 </div>

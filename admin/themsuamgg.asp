@@ -72,13 +72,14 @@
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "UPDATE GiamGia SET ThongTin=?,NgayBD=?,NgayKT=? WHERE IdMagiamgia=?"
+                cmdPrep.CommandText = "UPDATE GiamGia SET ThongTin=?,NgayBD=?,NgayKT=?,Giatri=? WHERE IdMagiamgia=?"
                 cmdPrep.parameters.Append cmdPrep.createParameter("ThongTin",202,1,255,ThongTin)
                 cmdPrep.parameters.Append cmdPrep.createParameter("NgayBD",202,1,255,NgayBD)
                 cmdPrep.parameters.Append cmdPrep.createParameter("NgayKT",202,1,255,NgayKT)         
                 cmdPrep.parameters.Append cmdPrep.createParameter("Giatri",202,1,255,Giatri)
+                cmdPrep.parameters.Append cmdPrep.createParameter("IdMagiamgia",3,1, ,id)
+               cmdPrep.execute
                
-                cmdPrep.execute
                 Session("Success") = "Ma giam gia da duoc sua"
                 Response.redirect("magiamgia.asp") 
             else
