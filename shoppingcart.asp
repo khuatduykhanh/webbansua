@@ -142,7 +142,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
               </div>
               <div class="col-lg-4 bg-secondary-subtle <%= statusButtons %>">
                 <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">TÓM TẮT</h3>
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-4">

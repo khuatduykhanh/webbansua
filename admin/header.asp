@@ -239,7 +239,7 @@ a.article:hover {
                     <div class="top_bar_content ml-auto">
 							
 							<div class="top_bar_user">
-								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
+								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt="" ></div>
 								<%
 									If (NOT isnull(Session("TaiKhoan"))) AND (TRIM(Session("TaiKhoan"))<>"") Then
 								%>

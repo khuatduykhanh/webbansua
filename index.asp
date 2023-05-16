@@ -32,6 +32,7 @@
 .features_item1{
     width:400px;
 }
+</style>
 <body>
 <!-- #include file="header.asp" -->
 <!-- #include file="carousel.asp" -->
@@ -42,11 +43,12 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
+                    <img src="./admin/Anh/anh6.png" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">Sữa tươi</h5>
+                        
                         <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
                     </div>
                 </div>
@@ -57,12 +59,12 @@
             <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img src="./admin/Anh/anh7.png" class="img-fluid rounded-start" alt="...">
                 </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                                <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
+                            <h5 class="card-title">Sữa chua tự nhiên</h5>
+                             <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
                 </div>
             </div>
             </div>
@@ -72,11 +74,11 @@
             <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
+       <img src="./admin/Anh/anh10.png" class="img-fluid rounded-start" alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">Thức uống thiên nhên từ hạt</h5>
         <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
       </div>
     </div>
@@ -85,6 +87,7 @@
         </div>
     </div>
 </div>
+
 <!-- #include file="footer.asp" -->
 </body>
 

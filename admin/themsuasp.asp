@@ -45,7 +45,7 @@
         if (isnull (id) OR trim(id) = "") then id=0 end if
         
         if (cint(id)=0) then
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban < giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban > giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -71,7 +71,7 @@
                 Session("Error") = "You have to input enough info"                
             end if
         else
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban < giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban > giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -146,7 +146,7 @@
     set rs = connDB.execute(sqlString) 
     If not rs.EOF Then
     %>   
-    <h5> Ma San Pham Hien tai : <%=rs("Max")%></h5>
+    <h5> Ma San Pham Hien tai : <%=rs("Max")+1%></h5>
     <%
     End If
     End If
@@ -159,7 +159,7 @@
               'Step 3: Set a unique name to Uploader
               uploader.Name="anh1"
               uploader.SaveDirectory="Anh"  
-              uploader.AllowedFileExtensions="*.jpg,*.png,*.gif"  
+              uploader.AllowedFileExtensions=".jpg,.png,*.gif"  
               'Step 4: Render Uploader
               uploader.Render()
               uploader.GetString()
@@ -173,9 +173,9 @@
     <div class="mb-3">
     <select class="form-select" name="theloai" aria-label="Default select example">
         <option selected>Thể Loại</option>
-        <option value="Sua Hat">Sua hat</option>
-        <option value="Sua trai cay">sua trai cay</option>
-        <option value="Sua nguyen chat">Sua nguyen chat</option>
+        <option value="Sua tuoi">Sua tuoi</option>
+        <option value="Sua chua tu nhien">Sua chua tu nhien</option>
+        <option value="Thuc uong tu nhien tu hat">Thuc uong tu nhien tu hat</option>
     </select>
     </div>
     <div class="mb-3">
@@ -204,14 +204,19 @@
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then
-                Response.write("Add")
+                Response.write("Thêm")
             else
-                Response.write("Edit")
+                Response.write("Sửa")
             end if
         %>
         </button>
         <a href="index.asp" class="btn btn-info">Cancel</a>  
-              
+        <div><%=tensp%></div>
+        <div><%=theloai%></div> 
+        <div><%=thuonghieu%></div> 
+        <div><%=giaban%></div> 
+        <div><%=mota%></div> 
+        <div><%=giagoc%></div>        
     </form>
     
     <div> 

@@ -90,10 +90,10 @@
     <div class="content">
     <!-- #include file="header.asp" -->
     <div class="container">
-            <div class="d-flex bd-highlight mb-3">
-                <div class="me-auto p-2 bd-highlight"><h2>Danh sach San Pham</h2></div>
+        <div class="d-flex bd-highlight mb-3">
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách sản phẩm</h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="themsuasp.asp" class="btn btn-primary">Them San Pham</a>
+                    <a href="themsuasp.asp" class="btn btn-primary">Thêm sản phẩm</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -101,9 +101,10 @@
                     <thead>
                         <tr>
                             <th scope="col">Mã Sản Phẩm </th>
-                            <th scope="col">Tên Sản Phẩm Viên</th>
+                            <th scope="col">Tên Sản Phẩm</th>
                             <th scope="col">Thể Loại</th>
                             <th scope="col">Thương Hiệu</th>
+                             <th scope="col">Mô Tả</th>
                             <th scope="col">Giá Gốc </th>
                             <th scope="col">Giá Bán</th>
                             <th scope="col"></th>
@@ -115,7 +116,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,Gia,GiaGoc FROM SanPham ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia FROM SanPham ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -127,12 +128,14 @@
                                     <td><%=Result("TenSp")%></td>
                                     <td><%=Result("LoaiSp")%></td>
                                     <td><%=Result("Thuonghieu")%></td>
-                                    <td><%=Result("Gia")%></td>
+                                    <td><%=Result("MoTa")%></td>
                                     <td><%=Result("GiaGoc")%></td>
+                                    <td><%=Result("Gia")%></td>
+                                    
 
                                     <td>
                                         <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="delete.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -149,45 +152,52 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
-                        for i= 1 to range
+                        for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="index.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if
                     %>
                 </ul>
             </nav>
-
-            <div class="modal" tabindex="-1" id="confirm-delete">
+      <div class="modal" tabindex="-12" id="confirm-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete Confirmation</h5>
+                            <h5 class="modal-title">Xác nhận xoá</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Are you sure?</p>
+                            <p>Bạn có chắc chắn muốn xoá?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a class="btn btn-danger btn-delete">Delete</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <a class="btn btn-danger btn-delete">Xoá</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
-    <div> 
+    </div> 
 </div>
-    
+     <script>
+            $(function()
+            {
+                $('#confirm-delete').on('show.bs.modal', function(e){
+                    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+                });
+            });
+        </script>
 </body>
 </html>
