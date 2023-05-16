@@ -135,9 +135,11 @@
 <body>
 <div class="wrapper">
     <!-- #include file="sidebar.asp" -->
-    <div class="content">
+    <div class="content"> 
     <!-- #include file="header.asp" -->
     <%
+    id = Request.QueryString("id")
+    if(cint(id) = 0) Then
     Dim sqlString, rs
     sqlString = "Select Max(MaSp) as Max from SanPham"
     connDB.Open()
@@ -146,6 +148,7 @@
     %>   
     <h5> Ma San Pham Hien tai : <%=rs("Max")%></h5>
     <%
+    End If
     End If
     %>
    <div class="mb-3">  
@@ -186,7 +189,7 @@
     </div>
     <div class="mb-3">
     <label for="mota" class="form-label">Mô Tả: </label>
-    <textarea class="form-control" id="mota" name="mota" rows="3" value="<%=mota%>" ></textarea>
+    <textarea class="form-control" id="mota" name="mota" rows="3" value="<%=mota%>" ><%=mota%></textarea>
     </div>
     <div class="mb-3">
     <label for="giagoc" class="form-label">Giá Gốc: </label>
@@ -208,14 +211,9 @@
         %>
         </button>
         <a href="index.asp" class="btn btn-info">Cancel</a>  
-        <div><%=tensp%></div>
-        <div><%=theloai%></div> 
-        <div><%=thuonghieu%></div> 
-        <div><%=giaban%></div> 
-        <div><%=mota%></div> 
-        <div><%=giagoc%></div>        
+              
     </form>
-    <
+    
     <div> 
 </div>
 </body>
