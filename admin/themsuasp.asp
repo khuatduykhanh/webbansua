@@ -45,7 +45,7 @@
         if (isnull (id) OR trim(id) = "") then id=0 end if
         
         if (cint(id)=0) then
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban < giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban > giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -71,7 +71,7 @@
                 Session("Error") = "You have to input enough info"                
             end if
         else
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban < giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban > giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -146,7 +146,7 @@
     set rs = connDB.execute(sqlString) 
     If not rs.EOF Then
     %>   
-    <h5> Ma San Pham Hien tai : <%=rs("Max")%></h5>
+    <h5> Ma San Pham Hien tai : <%=rs("Max")+1%></h5>
     <%
     End If
     End If
@@ -165,7 +165,7 @@
               uploader.GetString()
     %>  
     </div>  
-    <form method="post" action="themsuasp.asp" >
+    <form method="post"  >
     <div class="mb-3">
     <label for="sanpham" class="form-label">Tên Sản Phẩm</label>
     <input type="text" class="form-control" name="tensp" id="sanpham" value="<%=tensp%>">
@@ -204,13 +204,13 @@
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then
-                Response.write("Add")
+                Response.write("Thêm")
             else
-                Response.write("Edit")
+                Response.write("Sửa")
             end if
         %>
         </button>
-        <a href="index.asp" class="btn btn-info">Cancel</a>  
+        <a href="sanpham.asp" class="btn btn-info">Quay lại</a>  
               
     </form>
     
