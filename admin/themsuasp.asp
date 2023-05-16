@@ -84,7 +84,7 @@
                 cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
                 cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
                 cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
-                cmdPrep.parameters.Append cmdPrep.createParameter("Masp",3,1, ,id)
+                cmdPrep.parameters.Append cmdPrep.createParameter("MaNV",3,1, ,id)
 
                 cmdPrep.execute
                 Session("Success") = "San pham da duoc sua"
@@ -135,10 +135,11 @@
 <body>
 <div class="wrapper">
     <!-- #include file="sidebar.asp" -->
-    <div class="content">
+    <div class="content"> 
     <!-- #include file="header.asp" -->
     <%
-    If (cint(id)=0) Then
+    id = Request.QueryString("id")
+    if(cint(id) = 0) Then
     Dim sqlString, rs
     sqlString = "Select Max(MaSp) as Max from SanPham"
     connDB.Open()
@@ -158,13 +159,13 @@
               'Step 3: Set a unique name to Uploader
               uploader.Name="anh1"
               uploader.SaveDirectory="Anh"  
-              uploader.AllowedFileExtensions="*.jpg,*.png,*.gif"  
+              uploader.AllowedFileExtensions=".jpg,.png,*.gif"  
               'Step 4: Render Uploader
               uploader.Render()
               uploader.GetString()
     %>  
     </div>  
-    <form method="post"  >
+    <form method="post" action="themsuasp.asp" >
     <div class="mb-3">
     <label for="sanpham" class="form-label">Tên Sản Phẩm</label>
     <input type="text" class="form-control" name="tensp" id="sanpham" value="<%=tensp%>">
@@ -172,9 +173,9 @@
     <div class="mb-3">
     <select class="form-select" name="theloai" aria-label="Default select example">
         <option selected>Thể Loại</option>
-        <option value="Sua Hat">Sua hat</option>
-        <option value="Sua trai cay">sua trai cay</option>
-        <option value="Sua nguyen chat">Sua nguyen chat</option>
+        <option value="Sua tuoi">Sua tuoi</option>
+        <option value="Sua chua tu nhien">Sua chua tu nhien</option>
+        <option value="Thuc uong tu nhien tu hat">Thuc uong tu nhien tu hat</option>
     </select>
     </div>
     <div class="mb-3">
@@ -188,7 +189,7 @@
     </div>
     <div class="mb-3">
     <label for="mota" class="form-label">Mô Tả: </label>
-    <textarea class="form-control" id="mota" name="mota" rows="3" ><%=mota%></textarea>
+    <textarea class="form-control" id="mota" name="mota" rows="3" value="<%=mota%>" ><%=mota%></textarea>
     </div>
     <div class="mb-3">
     <label for="giagoc" class="form-label">Giá Gốc: </label>
@@ -203,14 +204,16 @@
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then
-                Response.write("Thêm")
+                Response.write("Add")
             else
-                Response.write("Sửa")
+                Response.write("Edit")
             end if
         %>
         </button>
-        <a href="sanpham.asp" class="btn btn-info">Quay lạil</a>        
+        <a href="index.asp" class="btn btn-info">Cancel</a>  
+              
     </form>
+    
     <div> 
 </div>
 </body>

@@ -101,7 +101,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Mã Sản Phẩm </th>
-                            <th scope="col">Tên Sản Phẩm Viên</th>
+                            <th scope="col">Tên Sản Phẩm</th>
                             <th scope="col">Thể Loại</th>
                             <th scope="col">Thương Hiệu</th>
                              <th scope="col">Mô Tả</th>
@@ -135,7 +135,7 @@
 
                                     <td>
                                         <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
-                                        <a href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" title="Delete">Xoá</a>
+                                        <a href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -155,7 +155,7 @@
                         <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
-                        for i= 1 to range
+                        for i = 1 to range
                     %>
                             <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
                     <%
@@ -170,7 +170,7 @@
                     %>
                 </ul>
             </nav>
-    <!--    <div class="modal" tabindex="-1" id="confirm-delete">
+      <div class="modal" tabindex="-12" id="confirm-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -186,11 +186,18 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             
         </div>
     </div> 
 </div>
-    
+     <script>
+            $(function()
+            {
+                $('#confirm-delete').on('show.bs.modal', function(e){
+                    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+                });
+            });
+        </script>
 </body>
 </html>
