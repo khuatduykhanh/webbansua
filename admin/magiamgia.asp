@@ -128,7 +128,7 @@
                                     <td><%=Result("Giatri")%></td>
                                     <td>
                                         <a href="themsuamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-secondary">Sửa</a>
-                                        <a href="xoamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a data-href="xoamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -163,7 +163,7 @@
                     %>
                 </ul>
             </nav>
-        <!-- <div class="modal" tabindex="-1" id="confirm-delete">
+        <div class="modal" tabindex="-1" id="confirm-delete">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -180,10 +180,17 @@
                     </div>
                 </div>
             </div>
-            -->
+            
             
         </div>
 </div>
-    
+     <script>
+            $(function()
+            {
+                $('#confirm-delete').on('show.bs.modal', function(e){
+                    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+                });
+            });
+        </script>
 </body>
 </html>

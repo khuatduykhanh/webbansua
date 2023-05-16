@@ -1546,10 +1546,10 @@ select option
 								<ul class="standard_dropdown main_nav_dropdown main_navigation_center">
 									<li><a href="\index.asp">Trang chủ<i class="fas fa-chevron-down"></i></a></li>
 									<li class="hassubs">
-										<a href="\product.asp">Sản phẩm<i class="fas fa-chevron-down"></i></a>
+										<a href="\product.asp">Sản phẩm</a>
 									</li>
 									<li class="hassubs">
-										<a href="#">Sữa tươi<i class="fas fa-chevron-down"></i></a>
+										<a href="suatuoi.asp">Sữa tươi<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
 												<a href="#">Sữa tươi thanh trùng<i class="fas fa-chevron-down"></i></a>
@@ -1558,7 +1558,7 @@ select option
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">Sữa chua tự nhiên<i class="fas fa-chevron-down"></i></a>
+										<a href="suachuatn.asp">Sữa chua tự nhiên<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
 												<a href="#">Sữa chua ăn tự nhiên<i class="fas fa-chevron-down"></i></a>
@@ -1568,7 +1568,7 @@ select option
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">Thức uống thiên nhiên từ hạt<i class="fas fa-chevron-down"></i></a>
+										<a href="suahat.asp">Thức uống thiên nhiên từ hạt<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
 												<a href="#">Sữa hạt<i class="fas fa-chevron-down"></i></a>

@@ -2,7 +2,7 @@
 <%
     ' code here to retrive the data from product table
     Dim sqlString, rs
-    sqlString = "Select * from SanPham"
+    sqlString = "Select * from SanPham where loaiSp = 'Sua tuoi'"
     connDB.Open()
     set rs = connDB.execute(sqlString)    
 %>
@@ -47,7 +47,7 @@
                                     <h5><%
                                             = rs("TenSp")
                                         %></h5>
-                                    
+                                   
                                     <div class="mt-1 mb-0 text-muted small">
                                         <span>
                                          <%
