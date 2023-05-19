@@ -146,12 +146,13 @@
     set rs = connDB.execute(sqlString) 
     If not rs.EOF Then
     %>   
-    <h5> Ma San Pham Hien tai : <%=rs("Max")+1%></h5>
+    <h5>Mã sản phẩm hiện tại: <%=rs("Max")+1%></h5>
     <%
     End If
     End If
     %>
-   <div class="mb-3">  
+   <div class="mb-3"> 
+   <label for="sanpham" class="form-label">Tải ảnh lên tại đây:</label>
     <%
               'Step 2: Create Uploader object     
               Dim uploader   

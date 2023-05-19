@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(MaNhacc) AS count FROM Nhacc"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -92,22 +92,19 @@
     <!-- #include file="header.asp" -->
     <div class="container">
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách sản phẩm</h2></div>
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách nhà cung cấp</h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="themsuasp.asp" class="btn btn-primary">Thêm sản phẩm</a>
+                    <a href="themsuanhacc.asp" class="btn btn-primary">Thêm nhà cung cấp</a>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã Sản Phẩm </th>
-                            <th scope="col">Tên Sản Phẩm</th>
-                            <th scope="col">Thể Loại</th>
-                            <th scope="col">Thương Hiệu</th>
-                             <th scope="col">Mô Tả</th>
-                            <th scope="col">Giá Gốc </th>
-                            <th scope="col">Giá Bán</th>
+                            <th scope="col">Mã nhà cung cấp </th>
+                            <th scope="col">Tên nhà cung cấp</th>
+                            <th scope="col">Địa chỉ nhà cung cấp</th>
+                            <th scope="col">SĐT Nhà cung cấp</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -117,7 +114,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia FROM SanPham ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT MaNhacc,TenNhacc,DCNhacc,SDTNhacc FROM Nhacc ORDER BY MaNhacc OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -125,18 +122,14 @@
                             do while not Result.EOF
                         %>
                                 <tr>
-                                    <td><%=Result("MaSp")%></td>
-                                    <td><%=Result("TenSp")%></td>
-                                    <td><%=Result("LoaiSp")%></td>
-                                    <td><%=Result("Thuonghieu")%></td>
-                                    <td><%=Result("MoTa")%></td>
-                                    <td><%=Result("GiaGoc")%></td>
-                                    <td><%=Result("Gia")%></td>
-                                    
+                                    <td><%=Result("MaNhacc")%></td>
+                                    <td><%=Result("TenNhacc")%></td>
+                                    <td><%=Result("DCNhacc")%></td>
+                                    <td><%=Result("SDTNhacc")%></td>
 
                                     <td>
-                                        <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a href="themsuanhacc.asp?id=<%=Result("MaNhacc")%>" class="btn btn-secondary">Sửa</a>
+                                        <a data-href="xoanhacc.asp?id=<%=Result("MaNhacc")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -153,18 +146,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="Nhacc.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="Nhacc.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="Nhacc.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if

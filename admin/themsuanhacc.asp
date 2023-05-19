@@ -1,4 +1,3 @@
-
 <% @ Language="VBScript" %>  
 <!--Step 1: Register Uploader to your page -->  
 <!-- #include file="aspuploader/include_aspuploader.asp" --> 
@@ -17,15 +16,16 @@
             connDB.Open()
             cmdPrep.ActiveConnection = connDB
             cmdPrep.CommandType = 1
-            cmdPrep.CommandText = "SELECT ThongTin,NgayBD,NgayKT FROM GiamGia WHERE IdMagiamgia=?"
+            cmdPrep.CommandText = "SELECT TenNhacc,DCNhacc,SDTNhacc FROM Nhacc WHERE MaNhacc=?"
             ' cmdPrep.parameters.Append cmdPrep.createParameter("MaNV",3,1, ,id)
             cmdPrep.Parameters(0)=id
             Set Result = cmdPrep.execute 
 
             If not Result.EOF then
-                ThongTin = Result("ThongTin")
-                NgayBD = Result("NgayBD")
-                NgayKT = Result("NgayKT")
+                TenNhacc = Result("TenNhacc")
+                DCNhacc = Result("DCNhacc")
+                SDTNhacc = Result("SDTNhacc")
+              
             End If
 
             ' Set Result = Nothing
@@ -33,55 +33,52 @@
         End If
     Else
         id = Request.QueryString("id")
-        ThongTin = Request.form("ThongTin")
-        NgayBD = Request.form("NgayBD")
-        NgayKT = Request.form("NgayKT")
-        Giatri = Request.form("Giatri")
+        TenNhacc = Request.form("TenNhacc")
+        DCNhacc = Request.form("DCNhacc")
+        SDTNhacc = Request.form("SDTNhacc")
+
         if (isnull (id) OR trim(id) = "") then id=0 end if
         
         if (cint(id)=0) then
-            if (NOT isnull(ThongTin) and ThongTin<>"" and NOT isnull(NgayBD) and NgayBD<>"" and NOT isnull(NgayKT) and NgayKT<>""and NOT isnull(Giatri) and Giatri<>""  ) then
+            if (NOT isnull(TenNhacc) and TenNhacc<>"" and NOT isnull(DCNhacc) and DCNhacc<>"" and NOT isnull(SDTNhacc) and SDTNhacc<>"" ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "INSERT INTO GiamGia(ThongTin,NgayBD,NgayKT,Giatri) VALUES(?,?,?,?)"
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("ThongTin",202,1,255,ThongTin)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("NgayBD",202,1,255,NgayBD)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("NgayKT",202,1,255,NgayKT)
+                cmdPrep.CommandText = "INSERT INTO Nhacc(TenNhacc,DCNhacc,SDTNhacc) VALUES(?,?,?)"
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("TenNhacc",202,1,255,TenNhacc)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("DCNhacc",202,1,255,DCNhacc)
+                ' cmdPrep.parameters.Append cmdPrep.createParameter("SDTNhacc",202,1,255,SDTNhacc)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
-                cmdPrep.Parameters(0)=ThongTin
-                cmdPrep.Parameters(1)=NgayBD
-                cmdPrep.Parameters(2)=NgayKT
-                cmdPrep.Parameters(3)=Giatri
-                
+                cmdPrep.Parameters(0)=TenNhacc
+                cmdPrep.Parameters(1)=DCNhacc
+                cmdPrep.Parameters(2)=SDTNhacc
 
                 cmdPrep.execute    
-                Session("Success") = "da them 1 ma giam gia"
-                Response.redirect("magiamgia.asp")
+                Session("Success") = "da them 1 nhà cung cấp"
+                Response.redirect("Nhacc.asp")
             else
                 Session("Error") = "You have to input enough info"                
             end if
         else
-            if (NOT isnull(ThongTin) and ThongTin<>"" and NOT isnull(NgayBD) and NgayBD<>"" and NOT isnull(NgayKT) and NgayKT<>""and NOT isnull(Giatri) and Giatri<>""  ) then
+            if (NOT isnull(TenNhacc) and TenNhacc<>"" and NOT isnull(DCNhacc) and DCNhacc<>"" and NOT isnull(SDTNhacc) and SDTNhacc<>"" ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "UPDATE GiamGia SET ThongTin=?,NgayBD=?,NgayKT=?,Giatri=? WHERE IdMagiamgia=?"
-                cmdPrep.parameters.Append cmdPrep.createParameter("ThongTin",202,1,255,ThongTin)
-                cmdPrep.parameters.Append cmdPrep.createParameter("NgayBD",202,1,255,NgayBD)
-                cmdPrep.parameters.Append cmdPrep.createParameter("NgayKT",202,1,255,NgayKT)         
-                cmdPrep.parameters.Append cmdPrep.createParameter("Giatri",202,1,255,Giatri)
-                cmdPrep.parameters.Append cmdPrep.createParameter("IdMagiamgia",3,1, ,id)
-               cmdPrep.execute
-               
-                Session("Success") = "Ma giam gia da duoc sua"
-                Response.redirect("magiamgia.asp") 
+                cmdPrep.CommandText = "UPDATE Nhacc SET TenNhacc=?,DCNhacc=?,SDTNhacc=? WHERE MaNhacc=?"
+                cmdPrep.parameters.Append cmdPrep.createParameter("TenNhacc",202,1,255,TenNhacc)
+                cmdPrep.parameters.Append cmdPrep.createParameter("DCNhacc",202,1,255,DCNhacc)
+                cmdPrep.parameters.Append cmdPrep.createParameter("SDTNhacc",202,1,255,SDTNhacc)
+                cmdPrep.parameters.Append cmdPrep.createParameter("MaNhacc",3,1, ,id)
+
+                cmdPrep.execute
+                Session("Success") = "Nha cung cấp đã được sửa"
+                Response.redirect("Nhacc.asp") 
             else
                 Session("Error") = "You have to input enough info"
             end if
@@ -128,54 +125,52 @@
 <body>
 <div class="wrapper">
     <!-- #include file="sidebar.asp" -->
-    <div class="content">
+    <div class="content"> 
     <!-- #include file="header.asp" -->
     <%
-    If (cint(id)=0) Then
+    id = Request.QueryString("id")
+    if(cint(id) = 0) Then
     Dim sqlString, rs
-    sqlString = "Select Max(IdMagiamgia) as Max from GiamGia"
+    sqlString = "Select Max(MaNhacc) as Max from Nhacc "
     connDB.Open()
     set rs = connDB.execute(sqlString) 
     If not rs.EOF Then
     %>   
-    <h5> Mã mã giảm giá hiện tại: <%=rs("Max")%></h5>
+    <h5> Mã nhà cung cấp hiện tai: <%=rs("Max")+1%></h5>
     <%
     End If
     End If
     %>
-    
+   <div class="mb-3">  
+    </div>  
     <form method="post"  >
     <div class="mb-3">
-    <label for="thongtin" class="form-label">Thông tin mã giảm giá</label>
-    <input type="text" class="form-control" name="ThongTin" id="thongtin" value="<%=ThongTin%>">
+    <label for="TenNhacc" class="form-label">Tên nhà cung cấp</label>
+    <input type="text" class="form-control" name="TenNhacc" id="TenNhacc" value="<%=TenNhacc%>">
     </div>
     <div class="mb-3">
-    <label for="ngaybd" class="form-label">Ngày bắt đầu</label>
-    <input type="date" class="form-control" name="ngaybd" id="ngaybd" value="<%=NgayBD%>">
-
-
+    <label for="DCNhacc" class="form-label">Địa chỉ nhà cung cấp</label>
+    <input type="text" class="form-control" name="DCNhacc" id="DCNhacc" value="<%=DCNhacc%>">
     </div>
     <div class="mb-3">
-    <label for="ngaykt" class="form-label">Ngày kết thúc</label>
-    <input type="date" class="form-control" name="ngaykt" id="ngaykt" value="<%=NgayKT%>">
+   <label for="SDTNhacc" class="form-label">Số điện thoại nhà cung cấp</label>
+    <input type="text" class="form-control" name="SDTNhacc" id="SDTNhacc" value="<%=SDTNhacc%>">
     </div>
-    <div class="mb-3">
-    <label for="giatri" class="form-label">Giá trị mã giảm giá</label>
-    <input type="text" class="form-control" name="giatri" id="giatri" value="<%=Giatri%>">
-    </div>
+    <div> 
      
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then
                 Response.write("Thêm")
-
             else
                 Response.write("Sửa")
             end if
         %>
         </button>
-        <a href="magiamgia.asp" class="btn btn-info">Quay lại</a>       
+        <a href="Nhacc.asp" class="btn btn-info">Quay lại</a>  
+              
     </form>
+    
     <div> 
 </div>
 </body>

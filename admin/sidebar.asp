@@ -252,11 +252,15 @@ a.article:hover {
                     <a href="hoadonxuat.asp">Hoá Đơn Xuất</a>
                 </li>
                 <li>
+                    <a href="Nhacc.asp">Nhà cung cấp</a>
+                </li>
+                <li>
                     <a href="danhsachmuahang.asp">Danh Sách Mua Hàng</a>
                 </li>
                 <li>
                     <a href="index.asp">Trang bán hàng</a>
                 </li>
+                
             </ul>
         </nav>
 <script>

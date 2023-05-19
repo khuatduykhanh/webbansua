@@ -243,7 +243,7 @@ a.article:hover {
 								<%
 									If (NOT isnull(Session("TaiKhoan"))) AND (TRIM(Session("TaiKhoan"))<>"") Then
 								%>
-									<span class="navbar-text">Welcome <%=Session("HoTen")%></span>
+									<span class="navbar-text">Xin chào <%=Session("HoTen")%></span>
 									<div class="ms-2"><a href="\logout.asp">Đăng xuất</a></div>
 								<%                        
 									Else
