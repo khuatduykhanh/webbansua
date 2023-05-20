@@ -1,20 +1,13 @@
-<% @ Language="VBScript" %>  
 <!-- #include file="connect.asp" -->
-<!--Step 1: Register Uploader to your page -->  
-<!-- #include file="aspuploader/include_aspuploader.asp" -->  
 <%
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
         Response.redirect("login.asp")
     End If
-     
-    Dim sqlString, rs
-    sqlString = "Select Max(MaSp) as max from SanPham"
+    ' code here to retrive the data from product table
+    Dim sqlString1, rs1
+    sqlString1 = "Select TenSp from SanPham"
     connDB.Open()
-    set rs = connDB.execute(sqlString) 
-    If not rs.EOF Then
-        id=1
-    End If
-    theloai=Request.form("theloai")
+    set rs1 = connDB.execute(sqlString1)    
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,26 +46,111 @@
     transition: all 0.3s;
 }
 </style>
+
 <body>
 <div class="wrapper">
     <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
+        <div style="display:flex">
+            <p style="margin-right: 20px">Nhap so luong san pham nhap :</p>
+            <form method='get' name="myForm">
+                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                      <input min="0" name="quantity"  type="number"
+                        class="col-form-label " />
+
+                      <button type="submit" class="btn btn-primary">Gui</button>
+                </div>
+            </form>
+        </div>
+        
+        <form>
+
+        </form>
+        <%
        
-    <form method="post">
-    <select class="form-select" name="theloai" aria-label="Default select example">
-        <option selected>Thể Loại</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <button type="submit" class="btn btn-primary">check</button>
-    </form>
-    <div>
-    <%=theloai%>
-    </div>
+            id = Request.QueryString("quantity")
+            For i=1 To id Step 1
+        %>
+            <div style="display: flex;flex-direction: column; margin-top:10px" >
+                <div style="display: flex;flex-direction: row" >
+                    <form method="post" style="display: flex">
+                    <div style="margin-right:20px" ><%=i%></div>
+                    <div style="margin-right:20px">
+                        <label for="masp" class="form-label">Ma San Pham</label>
+                        <input type="number" class="form-control" name="masp" id="masp" >
+                    </div>
+                    <select class="form-select" aria-label="Default select example">
+                        <%
+                            do while not rs1.EOF
+                        %>
+                        <option value="<%=rs1("TenSp")%>"><%=rs1("TenSp")%></option>
+                        <%
+                            rs1.MoveNext
+                            loop
+                            rs1.Close()
+                            connDB.Close()
+                        %>
+                    </select>
+                    <div style="margin-right:20px">
+                        <label for="soluong" class="form-label">So Luong</label>
+                        <input type="number" class="form-control" name="soluong" class="sl" id="soluong" >
+                    </div>
+                    <div style="margin-right:20px">
+                        <label for="dongia" class="form-label">Don Gia</label>
+                        <input type="number" class="form-control" name="dongia" class="dg" id="dongia" >
+                    </div>
+                    <div style="margin-right:20px">
+                        <label for="thanhtien" class="form-label">Thanh Tien</label>
+                        <input type="number" class="form-control" name="thanhtien" clas="tt" id="thanhtien" >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Nhap</button>
+                    </form>
+                    <%
+                        if (NOT isnull(masp) and masp<>"" and NOT isnull(soluong) and soluong<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban < giagoc) then
+                            Set cmdPrep = Server.CreateObject("ADODB.Command")
+                            connDB.Open()
+                            cmdPrep.ActiveConnection = connDB
+                            cmdPrep.CommandType = 1
+                            cmdPrep.Prepared = True
+                            cmdPrep.CommandText = "INSERT INTO SanPham(TenSp,LoaiSp,ThuongHieu,MoTa,Gia,GiaGoc,SoLuong) VALUES(?,?,?,?,?,?,0)"
+                            ' cmdPrep.parameters.Append cmdPrep.createParameter("tensp",202,1,255,tensp)
+                            ' cmdPrep.parameters.Append cmdPrep.createParameter("theloai",202,1,255,theloai)
+                            ' cmdPrep.parameters.Append cmdPrep.createParameter("thuonghieu",202,1,255,thuonghieu)
+                            ' cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
+                            ' cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
+                            ' cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
+                            cmdPrep.Parameters(0)=tensp
+                            cmdPrep.Parameters(1)=theloai
+                            cmdPrep.Parameters(2)=thuonghieu
+                            cmdPrep.Parameters(3)=mota
+                            cmdPrep.Parameters(4)=giaban
+                            cmdPrep.Parameters(5)=giagoc
+                            cmdPrep.execute    
+                            Session("Success") = "da them 1 san pham"
+                            Response.redirect("sanpham.asp")
+                        else
+                            Session("Error") = "You have to input enough info"                
+                        end if
+                    %>
+                </div>
+            <div>
+        <%
+            Next
+        %>
+        </div>
     <div> 
 </div>
     
 </body>
+<script>
+    let x = document.forms["myForm"]["quantity"].value;
+    for (let i = 0; i < x; i++) {
+        let soluong = document.getElementsByClassName(“sl”).[i].value
+        let dongia = document.getElementsByClassName(“dg”).[i].value
+        console.log(soluong)
+        
+    }
+    
+</script>
 </html>

@@ -4,7 +4,7 @@
 <!-- #include file="aspuploader/include_aspuploader.asp" --> 
 <!-- #include file="connect.asp" -->
 <%
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+   If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
     If (Request.ServerVariables("REQUEST_METHOD") = "GET") THEN        

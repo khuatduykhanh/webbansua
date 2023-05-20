@@ -3,7 +3,7 @@
 <!-- #include file="aspuploader/include_aspuploader.asp" --> 
 <!-- #include file="connect.asp" -->
 <%
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
     If (Request.ServerVariables("REQUEST_METHOD") = "GET") THEN        
@@ -45,13 +45,13 @@
         if (isnull (id) OR trim(id) = "") then id=0 end if
         
         if (cint(id)=0) then
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban > giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban < giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "INSERT INTO SanPham(TenSp,LoaiSp,ThuongHieu,MoTa,Gia,GiaGoc) VALUES(?,?,?,?,?,?)"
+                cmdPrep.CommandText = "INSERT INTO SanPham(TenSp,LoaiSp,ThuongHieu,MoTa,Gia,GiaGoc,SoLuong) VALUES(?,?,?,?,?,?,0)"
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("tensp",202,1,255,tensp)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("theloai",202,1,255,theloai)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("thuonghieu",202,1,255,thuonghieu)
@@ -71,7 +71,7 @@
                 Session("Error") = "You have to input enough info"                
             end if
         else
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban > giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban < giagoc) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -210,13 +210,7 @@
             end if
         %>
         </button>
-        <a href="index.asp" class="btn btn-info">Cancel</a>  
-        <div><%=tensp%></div>
-        <div><%=theloai%></div> 
-        <div><%=thuonghieu%></div> 
-        <div><%=giaban%></div> 
-        <div><%=mota%></div> 
-        <div><%=giagoc%></div>        
+        <a href="sanpham.asp" class="btn btn-info">Cancel</a>        
     </form>
     
     <div> 

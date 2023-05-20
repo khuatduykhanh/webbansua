@@ -1,7 +1,7 @@
 <!-- #include file="connect.asp" -->
 <%
     
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
 ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
@@ -107,6 +107,7 @@
                              <th scope="col">Mô Tả</th>
                             <th scope="col">Giá Gốc </th>
                             <th scope="col">Giá Bán</th>
+                            <th scope="col">So Luong</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -116,7 +117,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia FROM SanPham ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia,SoLuong FROM SanPham ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -131,6 +132,7 @@
                                     <td><%=Result("MoTa")%></td>
                                     <td><%=Result("GiaGoc")%></td>
                                     <td><%=Result("Gia")%></td>
+                                    <td><%=Result("SoLuong")%></td>
                                     
 
                                     <td>

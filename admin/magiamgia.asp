@@ -1,6 +1,6 @@
 <!-- #include file="connect.asp" -->
 <%
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
 
@@ -67,7 +67,8 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+     
+   
 </head>
 <style>
 .wrapper {
@@ -128,7 +129,7 @@
                                     <td><%=Result("Giatri")%></td>
                                     <td>
                                         <a href="themsuamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="xoamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a data-href="xoamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoa</a>
                                     </td>
                                 </tr>
                         <%
@@ -180,9 +181,6 @@
                     </div>
                 </div>
             </div>
-            
-            
-        </div>
 </div>
      <script>
             $(function()

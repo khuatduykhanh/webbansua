@@ -1,5 +1,8 @@
 <!-- #include file="connect.asp" -->
 <%
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
+        Response.redirect("login.asp")
+    End If
     On Error Resume Next
     id = Request.QueryString("id")
 
