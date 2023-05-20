@@ -1,6 +1,6 @@
 <!-- #include file="connect.asp" -->
 <%
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
         Response.redirect("login.asp")
     End If
 
@@ -67,8 +67,8 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-     
-   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </head>
 <style>
 .wrapper {
@@ -129,7 +129,7 @@
                                     <td><%=Result("Giatri")%></td>
                                     <td>
                                         <a href="themsuamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="xoamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoa</a>
+                                        <a data-href="xoamgg.asp?id=<%=Result("IdMagiamgia")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
                                     </td>
                                 </tr>
                         <%
@@ -168,19 +168,22 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete Confirmation</h5>
+                            <h5 class="modal-title">Xác nhận xoá</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Are you sure?</p>
+                            <p>Bạn có chắc chắn muốn xoá?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a class="btn btn-danger btn-delete">Delete</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
+                            <a class="btn btn-danger btn-delete">Xoá</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            
+        </div>
 </div>
      <script>
             $(function()
