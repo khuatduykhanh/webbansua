@@ -1,7 +1,51 @@
+<!-- #include file="connect.asp" -->
 <%
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
+    
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
+' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
+' ham lam tron so nguyen
+    function Ceil(Number)
+        Ceil = Int(Number)
+        if Ceil<>Number Then
+            Ceil = Ceil + 1
+        end if
+    end function
+
+    function checkPage(cond, ret) 
+        if cond=true then
+            Response.write ret
+        else
+            Response.write ""
+        end if
+    end function
+' trang hien tai
+    page = Request.QueryString("page")
+    limit = 10
+
+    if (trim(page) = "") or (isnull(page)) then
+        page = 1
+    end if
+
+    offset = (Clng(page) * Clng(limit)) - Clng(limit)
+
+    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    connDB.Open()
+    Set CountResult = connDB.execute(strSQL)
+
+    totalRows = CLng(CountResult("count"))
+
+    Set CountResult = Nothing
+' lay ve tong so trang
+    pages = Ceil(totalRows/limit)
+    'gioi han tong so trang la 5
+    Dim range
+    If (pages<=5) Then
+        range = pages
+    Else
+        range = 5
+    End if
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +89,113 @@
     <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
-    
-    <div> 
+    <div class="container">
+        <div class="d-flex bd-highlight mb-3">
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoa don nhap</h2></div>
+                <div class="p-2 bd-highlight">
+                    <a href="themsuasp.asp" class="btn btn-primary">Tao hoa don moi</a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã Hoa Don </th>
+                            <th scope="col">Ten Nha Cung Cap</th>
+                            <th scope="col">Ngay Nhap</th>
+                            <th scope="col">Tong Nhap</th>
+                             <th scope="col">So Luong Mat Hang</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            Set cmdPrep = Server.CreateObject("ADODB.Command")
+                            cmdPrep.ActiveConnection = connDB
+                            cmdPrep.CommandType = 1
+                            cmdPrep.Prepared = True
+                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia,SoLuong FROM SanPham ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
+                            cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
+
+                            Set Result = cmdPrep.execute
+                            do while not Result.EOF
+                        %>
+                                <tr>
+                                    <td><%=Result("MaSp")%></td>
+                                    <td><%=Result("TenSp")%></td>
+                                    <td><%=Result("LoaiSp")%></td>
+                                    <td><%=Result("Thuonghieu")%></td>
+                                    <td><%=Result("MoTa")%></td>
+                                    <td><%=Result("GiaGoc")%></td>
+                                    <td><%=Result("Gia")%></td>
+                                    <td><%=Result("SoLuong")%></td>
+                                    
+
+                                    <td>
+                                        <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
+                                        <a href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                    </td>
+                                </tr>
+                        <%
+                                Result.MoveNext
+                            loop
+                        %>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page Navigation">
+                <ul class="pagination pagination-sm justify-content-center my-5">
+                    <% if (pages>1) then
+                    'kiem tra trang hien tai co >=2
+                        if(Clng(page)>=2) then
+                    %>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                    <%    
+                        end if 
+                        for i = 1 to range
+                    %>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                    <%
+                        next
+                        if (Clng(page)<pages) then
+
+                    %>
+                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                    <%
+                        end if    
+                    end if
+                    %>
+                </ul>
+            </nav>
+      <div class="modal" tabindex="-12" id="confirm-delete">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Xác nhận xoá</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn xoá?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <a class="btn btn-danger btn-delete">Xoá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div> 
 </div>
-    
+     <script>
+            $(function()
+            {
+                $('#confirm-delete').on('show.bs.modal', function(e){
+                    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+                });
+            });
+        </script>
 </body>
 </html>

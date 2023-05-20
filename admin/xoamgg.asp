@@ -3,14 +3,15 @@
     On Error Resume Next
     id = Request.QueryString("id")
 
-   
-
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
+        Response.redirect("login.asp")
+    End If
     Set cmdPrep = Server.CreateObject("ADODB.Command")
     connDB.Open()
     cmdPrep.ActiveConnection = connDB
     cmdPrep.CommandType = 1
     cmdPrep.CommandText = "DELETE FROM GiamGia WHERE IdMagiamgia=?"
-    cmdPrep.parameters.Append cmdPrep.createParameter("IdMagiamgia",3,1, ,id)
+    cmdPrep.parameters.Append cmdPrep.createParameter("id",3,1, ,id)
 
     cmdPrep.execute
     connDB.Close()
@@ -19,7 +20,7 @@
     Else
         Session("Error") = Err.Description
     End If
-    Response.Redirect("magiamgia.asp")
+    Response.Redirect("index.asp")
     On Error Goto 0    
 
     
