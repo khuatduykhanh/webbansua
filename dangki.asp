@@ -50,9 +50,9 @@
 </head>
 <body>
 
-<section class="vh-100" style="background-color: #508bfc;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+<section class="vh-100%" style="background-color: #508bfc;">
+  <div class="container py-5 h-100%">
+    <div class="row d-flex justify-content-center align-items-center h-100%">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-6 text-center">
@@ -62,28 +62,36 @@
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="taikhoan" name="taikhoan" value="<%=taikhoan%>" placeholder="text">
               <label for="taikhoan">Tên đăng nhập</label>
+              <div class="invalid-feedback">Vui lòng kiểm tra lại tên đăng nhập (Không để trống và có ít nhất 5 ký tự).</div>
+
             </div>
             <div class="form-floating mb-3">
               <input type="password" class="form-control" id="matkhau" name="matkhau"value="<%=matkhau%>" placeholder="Password">
               <label for="matkhau">Mật khẩu</label>
+              <div class="invalid-feedback">Vui lòng kiểm tra lại mật khẩu (Có độ dài 8 ký tự trong đó có ít nhất 1 ký tự thường, ký tự hoa, số, ký tự đặc biệt).</div>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="name" name="name" value="<%=name%>" placeholder="text">
               <label for="name">Họ và tên</label>
+              <div class="invalid-feedback">Vui lòng không để trống Họ và tên.</div>
+
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="sdt" name="sdt" value="<%=sdt%>" placeholder="text">
               <label for="sdt">Số điện thoại</label>
+              <div class="invalid-feedback">Vui lòng kiểm tra lại SĐT (bắt đầu từ 0 và có 10 số).</div>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="diachi" name="diachi" value="<%=diachi%>" placeholder="text">
               <label for="diachi">Địa chỉ</label>
+              <div class="invalid-feedback">Vui lòng không để trống địa chỉ.</div>
             </div>
 
             <!-- Checkbox -->
             <div class="form-check d-flex justify-content-start mb-4">
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-              <label class="form-check-label" for="form1Example3"> Tôi đồng ý với các điều khoản sử dụng và chính sách bảo mật của Store </label>
+              <label class="form-check-label" for="form1Example3"> Tôi đồng ý với các điều khoản sử dụng và chính sách bảo mật của Store. </label>
+              
             </div>
 
             <a href="\login.asp" class="btn btn-light btn-lg btn-outline-primary" role="button">Đăng nhập</a>
@@ -95,5 +103,130 @@
     </div>
   </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script>
+ 
+
+        document.querySelector('#taikhoan').addEventListener('blur', validateTaikhoan);
+
+        document.querySelector('#matkhau').addEventListener('blur', validateMatkhau);
+
+        document.querySelector('#name').addEventListener('blur', validateName);
+        
+        document.querySelector('#sdt').addEventListener('blur', validateSdt);
+        
+         document.querySelector('#diachi').addEventListener('blur', validateDiachi);
+
+        const reSpaces = /^\S*$/;
+
+       
+        
+        function validateTaikhoan(e){
+            const taikhoan = document.querySelector('#taikhoan');
+            const re =  /^.{5,}$/;
+             if (reSpaces.test(taikhoan.value) && re.test(taikhoan.value)) {
+                taikhoan.classList.remove('is-invalid');
+                taikhoan.classList.add('is-valid');
+
+                return true;
+            } else {
+                taikhoan.classList.add('is-invalid');
+                taikhoan.classList.remove('is-valid');
+
+                return false;
+            }
+        }
+
+        function validateSdt(e){
+            const sdt = document.querySelector('#sdt');
+            const re = /^0\d{9}$/;
+             if (reSpaces.test(sdt.value) && re.test(sdt.value)) {
+                sdt.classList.remove('is-invalid');
+                sdt.classList.add('is-valid');
+
+                return true;
+            } else {
+                sdt.classList.add('is-invalid');
+                sdt.classList.remove('is-valid');
+
+                return false;
+            }
+        }
+
+        function validateMatkhau(e){
+            const sdt = document.querySelector('#matkhau');
+            const re = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})(?=.*[!@#$%^&*])/;
+             if (reSpaces.test(matkhau.value) && re.test(matkhau.value)) {
+                matkhau.classList.remove('is-invalid');
+                matkhau.classList.add('is-valid');
+
+                return true;
+            } else {
+                matkhau.classList.add('is-invalid');
+                matkhau.classList.remove('is-valid');
+
+                return false;
+            }
+        }
+        function validateName(e){
+            const name = document.querySelector('#name');
+            const re = /\S/;
+             if (reSpaces.test(name.value)&& re.test(name.value)) {
+                name.classList.remove('is-invalid');
+                name.classList.add('is-valid');
+
+                return true;
+            } else {
+                name.classList.add('is-invalid');
+                name.classList.remove('is-valid');
+
+                return false;
+            }
+        }
+
+        function validateDiachi(e){
+            const diachi = document.querySelector('#diachi');
+            const re = /\S/;
+             if (reSpaces.test(diachi.value)&& re.test(diachi.value)) {
+                diachi.classList.remove('is-invalid');
+                diachi.classList.add('is-valid');
+
+                return true;
+            } else {
+                diachi.classList.add('is-invalid');
+                diachi.classList.remove('is-valid');
+
+                return false;
+            }
+        }
+
+      
+
+        (function() {
+            const forms = document.querySelectorAll('.needs-validation');
+
+            for (let form of forms) {
+                form.addEventListener(
+                    'submit',
+                    function(event) {
+                        if (!form.checkValidity() ||
+                            !validateTaikhoan()||
+                            !validateMatkhau()||
+                            !validateName()||
+                            !validateSdt()
+                        ) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        } else {
+                            form.classList.add('was-validated');
+                        }
+                    },
+                    false
+                );
+            }
+        })();
+    </script>
 </body>
+
 </html>
