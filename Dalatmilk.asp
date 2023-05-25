@@ -2,7 +2,7 @@
 <%
     ' code here to retrive the data from product table
     Dim sqlString, rs
-    sqlString = "Select * from SanPham where loaiSp = 'Sua tuoi'"
+    sqlString = "Select * from SanPham where ThuongHieu = 'Da Lat Milk'"
     connDB.Open()
     set rs = connDB.execute(sqlString)    
 %>

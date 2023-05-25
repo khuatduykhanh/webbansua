@@ -58,7 +58,7 @@
           <div class="card-body p-6 text-center">
 
             <h3 class="mb-5">Đăng ký</h3>
-            <form method="post" action="dangki.asp">
+            <form method="post" action="dangki.asp" >
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="taikhoan" name="taikhoan" value="<%=taikhoan%>" placeholder="text">
               <label for="taikhoan">Tên đăng nhập</label>
@@ -88,10 +88,12 @@
             </div>
 
             <!-- Checkbox -->
-            <div class="form-check d-flex justify-content-start mb-4">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-              <label class="form-check-label" for="form1Example3"> Tôi đồng ý với các điều khoản sử dụng và chính sách bảo mật của Store. </label>
-              
+            <div class="form-check d-flex justify-content-start mb-4" >
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+                    <label class="form-check-label" for="invalidCheck"> Tôi đồng ý với các điều khoản sử dụng và chính sách bảo mật của Store. </label>
+               <div class="invalid-feedback">
+                Bạn cần đồng ý với điều khoản trước khi đăng ký.
+                </div>
             </div>
 
             <a href="\login.asp" class="btn btn-light btn-lg btn-outline-primary" role="button">Đăng nhập</a>
@@ -171,7 +173,7 @@
         }
         function validateName(e){
             const name = document.querySelector('#name');
-            const re = /\S/;
+            const re = /^.+$/;
              if (reSpaces.test(name.value)&& re.test(name.value)) {
                 name.classList.remove('is-invalid');
                 name.classList.add('is-valid');
@@ -187,7 +189,7 @@
 
         function validateDiachi(e){
             const diachi = document.querySelector('#diachi');
-            const re = /\S/;
+            const re = /^.+$/;
              if (reSpaces.test(diachi.value)&& re.test(diachi.value)) {
                 diachi.classList.remove('is-invalid');
                 diachi.classList.add('is-valid');
@@ -207,20 +209,20 @@
             const forms = document.querySelectorAll('.needs-validation');
 
             for (let form of forms) {
-                form.addEventListener(
-                    'submit',
-                    function(event) {
+                form.addEventListener('submit',function(event) {
                         if (!form.checkValidity() ||
                             !validateTaikhoan()||
                             !validateMatkhau()||
                             !validateName()||
-                            !validateSdt()
+                            !validateSdt()||
+                            !checkValidity()
                         ) {
                             event.preventDefault();
                             event.stopPropagation();
                         } else {
                             form.classList.add('was-validated');
                         }
+                    alert("dang ky thanh cong")
                     },
                     false
                 );

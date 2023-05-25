@@ -1,8 +1,9 @@
 <!--#include file="connect.asp"-->
 <%
     ' code here to retrive the data from product table
+    searchInput = Request.QueryString("searchinput")
     Dim sqlString, rs
-    sqlString = "Select * from SanPham where loaiSp = 'Sua tuoi'"
+    sqlString = "Select * from SanPham Where TenSp Like '%" & searchInput & "%'"
     connDB.Open()
     set rs = connDB.execute(sqlString)    
 %>
@@ -21,6 +22,7 @@
 
 <body>
 <!-- #include file="header.asp" -->
+
     <section style="background-color: #eee;">        
         <div class="container py-3">
         <%
@@ -47,7 +49,7 @@
                                     <h5><%
                                             = rs("TenSp")
                                         %></h5>
-                                   
+                                    
                                     <div class="mt-1 mb-0 text-muted small">
                                         <span>
                                          <%
@@ -76,7 +78,7 @@
                                     </div>
                                     <h6 class="text-success">Miễn phí vận chuyển</h6>
                                     <div class="d-flex flex-column mt-4">
-                                        <a class="btn btn-primary btn-sm" type="button" href="chitietsp.asp?idproduct=<%= rs("MaSp")%>">Chi tiết</a>
+                                        <button class="btn btn-primary btn-sm" type="button">Chi tiết</button>
                                         <a class="btn btn-outline-primary btn-sm mt-2" href="addCart.asp?idproduct=<%= rs("MaSp")%>">
                                             Thêm vào giỏ hàng
                                         </a>

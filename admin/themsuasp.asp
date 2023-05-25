@@ -1,4 +1,5 @@
-<% @ Language="VBScript" %>  
+
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!--Step 1: Register Uploader to your page -->  
 <!-- #include file="aspuploader/include_aspuploader.asp" --> 
 <!-- #include file="connect.asp" -->
@@ -178,9 +179,9 @@
     <div class="mb-3">
     <select class="form-select" name="theloai" aria-label="Default select example">
         <option selected>Thể Loại</option>
-        <option value="Sua tuoi">Sua tuoi</option>
-        <option value="Sua chua tu nhien">Sua chua tu nhien</option>
-        <option value="Thuc uong tu nhien tu hat">Thuc uong tu nhien tu hat</option>
+        <option value="Sua tuoi">Sữa tươi</option>
+        <option value="Sua chua tu nhien">Sữa chua tự nhiên</option>
+        <option value="Thuc uong tu nhien tu hat">Thức uống tự nhiên từ hạt</option>
     </select>
     </div>
     <div class="mb-3">
