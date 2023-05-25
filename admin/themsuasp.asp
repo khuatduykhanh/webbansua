@@ -140,15 +140,19 @@
     <%
     id = Request.QueryString("id")
     if(cint(id) = 0) Then
-    Dim sqlString, rs
-    sqlString = "Select Max(MaSp) as Max from SanPham"
-    connDB.Open()
-    set rs = connDB.execute(sqlString) 
-    If not rs.EOF Then
-    %>   
-    <h5>Mã sản phẩm hiện tại: <%=rs("Max")+1%></h5>
-    <%
-    End If
+        Dim sqlString, rs
+        sqlString = "Select Max(MaSp) as Max from SanPham"
+        connDB.Open()
+        set rs = connDB.execute(sqlString) 
+        If not rs.EOF Then
+            %>   
+                <h5>Mã sản phẩm hiện tại: <%=rs("Max")+1%></h5>
+            <%
+        Else
+            %>   
+                <h5>Mã sản phẩm hiện tại: 1</h5>
+            <%
+        End If
     End If
     %>
    <div class="mb-3"> 
