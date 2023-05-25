@@ -23,7 +23,7 @@ If (NOT isnull(TaiKhoan) AND NOT isnull(MatKhau) AND TRIM(TaiKhoan)<>"" AND TRIM
         ' dang nhap thanh cong
         Session("TaiKhoan")=result("TaiKhoan")
         Session("HoTen") = result("HoTen")
-        Session("Success")="Login Successfully"
+        Session("Success")="Đăng nhập thành công"
         Dim carts(2)
         carts(0)=5
         carts(1)=10
@@ -32,14 +32,14 @@ If (NOT isnull(TaiKhoan) AND NOT isnull(MatKhau) AND TRIM(TaiKhoan)<>"" AND TRIM
         Response.redirect("index.asp")
     Else
         ' dang nhap ko thanh cong
-        Session("Error") = "Wrong TaiKhoan or MatKhau"
+        Session("Error") = "Tài khoản hoặc mật khẩu không chính xác."
     End if
     result.Close()
     connDB.Close()
 Else
     ' Kiem tra vi co the trung voi truong hop logout
     If (Request.ServerVariables("REQUEST_METHOD") = "POST") Then
-        Session("Error")="Please input TaiKhoan and MatKhau."
+        Session("Error")="Hãy điền tài khoản và mật khẩu."
     End if
     
 End if
@@ -74,8 +74,10 @@ End if
 
 
 <body>
+ 
 <section class="vh-100" style="background-color: #508bfc;">
   <div class="container py-5 h-100">
+ 
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
@@ -97,7 +99,16 @@ End if
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
               <label class="form-check-label" for="form1Example3"> Nhớ mật khẩu </label>
             </div>
-
+    <%
+        If (NOT IsEmpty(Session("Error")) AND NOT isnull(Session("Error"))) AND (TRIM(Session("Error"))<>"") Then
+    %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%=Session("Error")%>
+            </div>
+    <%
+            Session.Contents.Remove("Error")
+        End If
+    %>   
             <button class="btn btn-primary btn-lg btn-block" type="submit">Đăng nhập</button>
             <a href="\dangki.asp" class="btn btn-light btn-lg btn-outline-primary" role="button">Đăng kí</a>
           </form>

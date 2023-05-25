@@ -34,7 +34,20 @@
 }
 </style>
 <body>
+  
 <!-- #include file="header.asp" -->
+<div class="container">
+    <%
+        If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
+    %>
+            <div class="alert alert-success mt-2" role="alert">
+                <%=Session("Success")%>
+            </div>
+    <%
+            Session.Contents.Remove("Success")
+        End If
+    %>
+</div>
 <!-- #include file="carousel.asp" -->
 <div clas="row g-2">
   <div class='featured_product'><p>Sản Phẩm Nổi Bật</p></div>
@@ -43,7 +56,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="./admin/Anh/anh6.png" class="img-fluid rounded-start" alt="...">
+                    <img src="./admin/Anh/anh6.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -59,7 +72,7 @@
             <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                <img src="./admin/Anh/anh7.png" class="img-fluid rounded-start" alt="...">
+                <img src="./admin/Anh/anh7.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
                 </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -74,7 +87,7 @@
             <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-       <img src="./admin/Anh/anh10.png" class="img-fluid rounded-start" alt="...">
+       <img src="./admin/Anh/anh10.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
     </div>
     <div class="col-md-8">
       <div class="card-body">

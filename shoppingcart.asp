@@ -160,8 +160,8 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 
                   <div class="mb-5">
                     <div class="form-outline">
-                      <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea2">Nhập mã của bạn</label>
+                      <input type="text" id="form3Examplea2" name="nhapkm" class="form-control form-control-lg" placeholder="Nhập mã của bạn tại đây"/>
+                      
                     </div>
                   </div>
 
@@ -169,6 +169,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
+        
                     <h5><%= subtotal %> đ</h5>
                   </div>
                   <div class="row">

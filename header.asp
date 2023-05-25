@@ -1,3 +1,4 @@
+
 <style>
 @charset "utf-8";
 /* CSS Document */
@@ -236,6 +237,7 @@ section
 	width: 100%;
 	z-index: 10;
 	height:208px;
+	
 }
 
 /*********************************
@@ -422,7 +424,7 @@ section
 {
 	margin-right: 21px;
 }
-.top_bar_user div:nth-child(2)::after
+/* .top_bar_user div:nth-child(2)::after
 {
 	display: block;
 	position: absolute;
@@ -437,7 +439,7 @@ section
 	height: 17px;
 	background: rgba(0,0,0,0.1);
 	content: '';
-}
+} */
 .top_bar_user a
 {
 	font-size: 16px;
@@ -1427,6 +1429,9 @@ select option
 	
 	
 }
+.container{
+    height:100%;
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 
@@ -1492,11 +1497,18 @@ select option
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
+									<form action="find.asp" class="header_search_form clearfix">
+										<input type="search" required="required" name="searchinput" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
+									
 										
 										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt=""></button>
+
+										<% ' Mã ASP Classic để hiển thị kết quả nhập vào
+        								searchInput = Request.QueryString("searchinput")
+
+        								%>
 									</form>
+						
 								</div>
 							</div>
 						</div>
@@ -1549,21 +1561,24 @@ select option
 										<a href="\product.asp">Sản phẩm</a>
 									</li>
 									<li class="hassubs">
-										<a href="suatuoi.asp">Sữa tươi<i class="fas fa-chevron-down"></i></a>
+										<a href="product.asp">Thể loại<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
-												<a href="#">Sữa tươi thanh trùng<i class="fas fa-chevron-down"></i></a>
+												<a href="suatuoi.asp">Sữa tươi<i class="fas fa-chevron-down"></i></a>
 											</li>
-											<li><a href="#">Sữa tươi tiệt trùng<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="suachuatn.asp">Sữa chua tự nhiên <i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="suahat.asp">Thức uống thiên nhiên từ hạt <i class="fas fa-chevron-down"></i></a></li>
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="suachuatn.asp">Sữa chua tự nhiên<i class="fas fa-chevron-down"></i></a>
+										<a href="product.asp">Thương hiệu<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
-												<a href="#">Sữa chua ăn tự nhiên<i class="fas fa-chevron-down"></i></a>
+												<a  href="TH.asp">TH<i class="fas fa-chevron-down"></i></a>
 											</li>
-											<li><a href="#">Sữa chua uống tự nhiên<i class="fas fa-chevron-down"></i></a></li>
+											<li><a   href="vinamilk.asp">Vinamilk<i class="fas fa-chevron-down"></i></a></li>
+											<li><a   href="Bavi.asp">Ba Vi<i class="fas fa-chevron-down"></i></a></li>
+											<li><a   href="Dalatmilk.asp">Da Lat Milk<i class="fas fa-chevron-down"></i></a></li>
 											
 										</ul>
 									</li>
