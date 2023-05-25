@@ -4,8 +4,11 @@
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
-' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
-' ham lam tron so nguyen
+    ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
+    ' ham lam tron so nguyen
+    id = Request.QueryString("id")
+    sl = Request.QueryString("sl")
+    tongnhap = Request.QueryString("tongnhap")
     function Ceil(Number)
         Ceil = Int(Number)
         if Ceil<>Number Then
@@ -69,7 +72,6 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </head>
 <style>
@@ -92,46 +94,44 @@
     <!-- #include file="header.asp" -->
     <div class="container">
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoa don nhap</h2></div>
+            <div class="me-auto p-2 bd-highlight"><h2>Chi tiet hoa don cua Ma HD Nhap <%=id%></h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="themhoadonnhap.asp" class="btn btn-primary">Tao hoa don moi</a>
+                    <a href="themchitiethoadonnhap.asp?sl=<%=sl%>&id=<%=id%>&tongnhap=<%=tongnhap%>" class="btn btn-primary">Them </a>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã Hoa Don </th>
-                            <th scope="col">Ten Nha Cung Cap</th>
-                            <th scope="col">So Luong MH chua nhap CTHD</th>
-                            <th scope="col">Ngay Nhap</th>
-                            <th scope="col">Tong Nhap</th>
-                            <th scope="col"></th>
+                            <th scope="col">Ma CTHD Nhap </th>
+                            <th scope="col">Ma HD Nhap</th>
+                            <th scope="col">Ma San Pham</th>
+                            <th scope="col">Ten San Pham</th>
+                            <th scope="col">Loai San Pham</th>
+                            <th scope="col">Gia Nhap</th>
+                            <th scope="col">So Luong Nhap</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
+                            id = Request.QueryString("id")
                             Set cmdPrep = Server.CreateObject("ADODB.Command")
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc"
-                            cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
-                            cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
-
+                            cmdPrep.CommandText = "SELECT * FROM CTHDNhap WHERE MaHDnhap = ?"
+                            cmdPrep.Parameters(0)= id
                             Set Result = cmdPrep.execute
                             do while not Result.EOF
                         %>
                                 <tr>
+                                    <td><%=Result("MactHDnhap")%></td>
                                     <td><%=Result("MaHDnhap")%></td>
-                                    <td><%=Result("TenNhacc")%></td>
-                                    <td><%=Result("SoLoaiMHNhap")%></td>
-                                    <td><%=Result("NgayNhap")%></td>
-                                    <td><%=Result("TongNhap")%></td>
-                                    <td>
-                                        <a href="chitiethoadonnhap.asp?id=<%=Result("MaHDnhap")%>&sl=<%=Result("SoLoaiMHNhap")%>&tongnhap=<%=Result("TongNhap")%>" class="btn btn-secondary">Xem </a>
-                                        <a data-href="xoahdnhap.asp?id=<%=Result("MaHDnhap")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
-                                    </td>
+                                    <td><%=Result("Masp")%></td>
+                                    <td><%=Result("Tensp")%></td>
+                                    <td><%=Result("Loaisp")%></td>
+                                    <td><%=Result("GiaNhap")%></td>
+                                    <td><%=Result("SLNhap")%></td>
                                 </tr>
                         <%
                                 Result.MoveNext
