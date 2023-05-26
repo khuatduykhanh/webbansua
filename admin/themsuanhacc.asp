@@ -1,4 +1,4 @@
- <%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
+<% @ Language="VBScript" %>
 <!--Step 1: Register Uploader to your page -->  
 <!-- #include file="aspuploader/include_aspuploader.asp" --> 
 <!-- #include file="connect.asp" -->
