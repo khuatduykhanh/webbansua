@@ -20,6 +20,7 @@
 </head>
 
 <body>
+
 <!-- #include file="header.asp" -->
     <section style="background-color: #eee;">        
         <div class="container py-3">
@@ -35,7 +36,7 @@
                                     <div class="bg-image hover-zoom ripple rounded ripple-surface">
                                         <img src="/admin/Anh/anh<%= rs("MaSp")%>.png"
                                             class="w-100" />
-                                        <a href="#!">
+                                        <a href="">
                                             <div class="hover-overlay">
                                                 <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);">
                                                 </div>
@@ -74,9 +75,9 @@
                                     <div class="d-flex flex-row align-items-center mb-1">
                                         <h4 class="mb-1 me-1"><%= rs("Gia")%>đ</h4>
                                     </div>
-                                    <h6 class="text-success">Free shipping</h6>
+                                    <h6 class="text-success">Miễn phí vận chuyển</h6>
                                     <div class="d-flex flex-column mt-4">
-                                        <button class="btn btn-primary btn-sm" type="button">Chi tiết</button>
+                                        <a class="btn btn-primary btn-sm"  href="chitietsp.asp?idproduct=<%= rs("MaSp")%>">Chi tiết</a>
                                         <a class="btn btn-outline-primary btn-sm mt-2" href="addCart.asp?idproduct=<%= rs("MaSp")%>">
                                             Thêm vào giỏ hàng
                                         </a>

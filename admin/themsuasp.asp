@@ -1,3 +1,4 @@
+
 <% @ Language="VBScript" %>  
 <!--Step 1: Register Uploader to your page -->  
 <!-- #include file="aspuploader/include_aspuploader.asp" --> 
@@ -65,10 +66,10 @@
                 cmdPrep.Parameters(4)=giaban
                 cmdPrep.Parameters(5)=giagoc
                 cmdPrep.execute    
-                Session("Success") = "da them 1 san pham"
+                Session("Success") = "Thêm 1 sản phẩm thành công."
                 Response.redirect("sanpham.asp")
             else
-                Session("Error") = "You have to input enough info"                
+                Session("Error") = "Bạn phải nhập đủ thông tin."                
             end if
         else
             if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban < giagoc) then
@@ -87,10 +88,10 @@
                 cmdPrep.parameters.Append cmdPrep.createParameter("MaNV",3,1, ,id)
 
                 cmdPrep.execute
-                Session("Success") = "San pham da duoc sua"
+                Session("Success") = "Sản phẩm đã được sửa thành công."
                 Response.redirect("sanpham.asp") 
             else
-                Session("Error") = "You have to input enough info"
+                Session("Error") = "Bạn cần nhập đủ thông tin"
             end if
         end if
     End If    
@@ -176,17 +177,19 @@
     <input type="text" class="form-control" name="tensp" id="sanpham" value="<%=tensp%>">
     </div>
     <div class="mb-3">
+    <label for="loaisp" class="form-label">Thể Loại</label>
     <select class="form-select" name="theloai" aria-label="Default select example">
-        <option selected>Thể Loại</option>
-        <option value="Sua tuoi">Sua tuoi</option>
-        <option value="Sua chua tu nhien">Sua chua tu nhien</option>
-        <option value="Thuc uong tu nhien tu hat">Thuc uong tu nhien tu hat</option>
+        <option selected><%=theloai%></option>
+        <option value="Sua tuoi">Sữa tươi</option>
+        <option value="Sua chua tu nhien">Sữa chua tự nhiên</option>
+        <option value="Thuc uong tu nhien tu hat">Thức uống tự nhiên từ hạt</option>
     </select>
     </div>
     <div class="mb-3">
-    <select class="form-select" name="thuonghieu" aria-label="Default select example">
-        <option selected>Thương Hiệu</option>
-        <option value="vinamilk">vinamilk</option>
+    <label for="thuonghieu" class="form-label">Thương Hiệu</label>
+    <select class="form-select" name="thuonghieu" aria-label="Default select example" >
+        <option selected><%=ThuongHieu%></option>
+        <option value="vinamilk"> vinamilk</option>
         <option value="TH">TH</option>
         <option value="Ba Vi">Ba Vi</option>
         <option value="Da Lat milk">Da Lat Milk</option>

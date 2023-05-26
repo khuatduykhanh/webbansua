@@ -21,9 +21,9 @@
                     End If
                     'saving new session value
                 
-                Session("Success") = "The Product has bean removed from your cart."  
+                Session("Success") = "Sản phẩm đã được xoá ra khỏi giỏ hàng của bạn."  
                 Else
-                Session("Error") = "The Product is not exists, please ty again."   
+                Session("Error") = "Sản phẩm không tồn tại vui lòng xem lại."   
                 end if            
             ElseIf (Request.ServerVariables("REQUEST_METHOD") = "POST") Then
             'Do something... 
