@@ -146,7 +146,7 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i= 1 to range
@@ -157,7 +157,7 @@
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="index.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
