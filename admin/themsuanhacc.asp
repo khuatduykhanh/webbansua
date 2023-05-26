@@ -1,6 +1,4 @@
-<% @ Language="VBScript" %>  
-<!--Step 1: Register Uploader to your page -->  
-<!-- #include file="aspuploader/include_aspuploader.asp" --> 
+<% @ Language="VBScript" %>
 <!-- #include file="connect.asp" -->
 <%
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
@@ -56,6 +54,7 @@
                 cmdPrep.Parameters(0)=TenNhacc
                 cmdPrep.Parameters(1)=DCNhacc
                 cmdPrep.Parameters(2)=SDTNhacc
+
                 cmdPrep.execute    
                 Session("Success") = "da them 1 nhà cung cấp"
                 Response.redirect("Nhacc.asp")

@@ -1,7 +1,4 @@
-
-<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
-<!--Step 1: Register Uploader to your page -->  
-<!-- #include file="aspuploader/include_aspuploader.asp" --> 
+<% @ Language="VBScript" %>
 <!-- #include file="connect.asp" -->
 <%
    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
