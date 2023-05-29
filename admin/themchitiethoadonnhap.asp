@@ -103,27 +103,27 @@
     <!-- #include file="header.asp" -->
         <form method="post"  >
             <div class="mb-3">
-            <label for="msp" class="form-label">Ma san pham</label>
+            <label for="msp" class="form-label">Mã sản phẩm</label>
             <input type="number" class="form-control" name="msp" id="msp">
             </div>
             <div class="mb-3">
-            <label for="tensp" class="form-label">Ten San Pham</label>
+            <label for="tensp" class="form-label">Tên sản phẩm</label>
             <input type="text" class="form-control" name="tensp" id="tensp">
             </div>
             <div class="mb-3">
-            <label for="loaisp" class="form-label">Loai San Pham </label>
+            <label for="loaisp" class="form-label">Loại sản phẩm</label>
             <input type="text" class="form-control" name="loaisp" id="loaisp">
             </div> 
             <div class="mb-3">
-            <label for="gianhap" class="form-label">Gia Nhap </label>
+            <label for="gianhap" class="form-label">Giá nhập</label>
             <input type="number" class="form-control" name="gianhap" id="gianhap">
             </div> 
             <div class="mb-3">
-            <label for="slnhap" class="form-label">So luong nhap </label>
+            <label for="slnhap" class="form-label">Số lượng nhập</label>
             <input type="number" class="form-control" name="slnhap" id="slnhap">
             </div> 
-            <button type="submit" class="btn btn-primary" >Them</button>
-                <a href="hoadonnhap.asp" class="btn btn-info">Huy</a>        
+            <button type="submit" class="btn btn-primary" >Thêm</button>
+                <a href="hoadonnhap.asp" class="btn btn-info">Huỷ</a>        
         </form>
     <div> 
 </div>

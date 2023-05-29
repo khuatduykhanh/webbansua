@@ -159,8 +159,8 @@
     <input type="date" class="form-control" name="ngaykt" id="ngaykt" value="<%=NgayKT%>">
     </div>
     <div class="mb-3">
-    <label for="giatri" class="form-label">Giá trị mã giảm giá</label>
-    <input type="text" class="form-control" name="giatri" id="giatri" value="<%=Giatri%>">
+    <label for="Giatri" class="form-label">Giá trị mã giảm giá</label>
+    <input type="number" class="form-control" name="Giatri" id="Giatri" value="<%=Giatri%>">
     </div>
      
     <button type="submit" class="btn btn-primary">

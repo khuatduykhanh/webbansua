@@ -2,7 +2,6 @@
 <style>
 @charset "utf-8";
 /* CSS Document */
-
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
 
 /*********************************

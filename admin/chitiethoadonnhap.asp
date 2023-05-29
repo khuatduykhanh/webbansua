@@ -96,20 +96,21 @@
         <div class="d-flex bd-highlight mb-3">
             <div class="me-auto p-2 bd-highlight"><h2>Chi tiet hoa don cua Ma HD Nhap <%=id%></h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="themchitiethoadonnhap.asp?sl=<%=sl%>&id=<%=id%>&tongnhap=<%=tongnhap%>" class="btn btn-primary">Them </a>
+                    <a href="themchitiethoadonnhap.asp?sl=<%=sl%>&id=<%=id%>&tongnhap=<%=tongnhap%>" class="btn btn-primary">Thêm </a>
+                    <a href="hoadonnhap.asp" class="btn btn-danger">Quai lại </a>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Ma CTHD Nhap </th>
-                            <th scope="col">Ma HD Nhap</th>
-                            <th scope="col">Ma San Pham</th>
-                            <th scope="col">Ten San Pham</th>
-                            <th scope="col">Loai San Pham</th>
-                            <th scope="col">Gia Nhap</th>
-                            <th scope="col">So Luong Nhap</th>
+                            <th scope="col">Mã CTHD nhập </th>
+                            <th scope="col">Mã HD nhập</th>
+                            <th scope="col">Mã sản phẩm</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Loại sản phẩm</th>
+                            <th scope="col">Giá nhập</th>
+                            <th scope="col">Số lượng nhập</th>
                         </tr>
                     </thead>
                     <tbody>
