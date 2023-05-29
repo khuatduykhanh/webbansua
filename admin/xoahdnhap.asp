@@ -1,13 +1,12 @@
 <!-- #include file="connect.asp" -->
 <%
+
+  
+    On Error Resume Next
+    id = Request.QueryString("id")
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
-    On Error Resume Next
-    id = Request.QueryString("id")
-
-   
-
     Set cmdPrep = Server.CreateObject("ADODB.Command")
     connDB.Open()
     cmdPrep.ActiveConnection = connDB
@@ -18,7 +17,7 @@
     cmdPrep.execute
     connDB.Close()
     If Err.Number = 0 Then
-    Session("Success") = "Deleted"    
+    Session("Success") = "Đã xoá"    
     Else
         Session("Error") = Err.Description
     End If

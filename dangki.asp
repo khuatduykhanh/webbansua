@@ -1,4 +1,6 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!-- #include file="connect.asp" -->
+
 <%
         id = Request.QueryString("id")
         taikhoan = Request.form("taikhoan")
@@ -25,18 +27,16 @@
                 If Err.Number = 0 Then 
                 ' Set rs = connDB.execute("SELECT @@IDENTITY AS NewID")
                 '     Response.write(rs("NewID"))  
-                    Session("Success") = "New employee added!"                    
-                    Response.redirect("index.asp")  
+                    Session("Success") = "Thêm người dùng thành công!"                    
+                    Response.redirect("login.asp")  
                 Else  
                     handleError(Err.Description)
                 End If
                 On Error GoTo 0
             else
-                Session("Error") = "You have to input enough info"                
+                Session("Error") = "Bạn phải nhập đủ thông tin."                
             end if
 %>
-
-
 
 <html>
 <head>
@@ -95,10 +95,22 @@
                 Bạn cần đồng ý với điều khoản trước khi đăng ký.
                 </div>
             </div>
-
+    <%
+        If (NOT IsEmpty(Session("Error")) AND NOT isnull(Session("Error"))) AND (TRIM(Session("Error"))<>"") Then
+    %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%=Session("Error")%>
+            </div>
+    <%
+            Session.Contents.Remove("Error")
+        End If
+    %>    
             <a href="\login.asp" class="btn btn-light btn-lg btn-outline-primary" role="button">Đăng nhập</a>
             <button class="btn btn-primary btn-lg btn-block " type="submit">Đăng Ký</button>
+
+              
             </form>
+  
           </div>
         </div>
       </div>

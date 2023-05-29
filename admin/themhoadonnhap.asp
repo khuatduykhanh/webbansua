@@ -19,7 +19,7 @@
         tongnhap = 0 
         if (NOT isnull(manhacc) and manhacc<>"" and NOT isnull(soluongloaimhnhap) and soluongloaimhnhap<>"" and NOT isnull(tongnhap) and tongnhap<>"" and soluongloaimhnhap > 0 ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
-                connDB.Open()
+              
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
@@ -86,17 +86,17 @@
      
     <form method="post" >
     <div class="mb-3">
-    <label for="nhacc" class="form-label">Ma nha cung cap</label>
+    <label for="nhacc" class="form-label">Mã nhà cung cấp</label>
     <input type="number" class="form-control" name="nhacc" id="nhacc">
     </div>
     <div class="mb-3">
-    <label for="sl" class="form-label">So luong loai mat hang nhap: </label>
+    <label for="sl" class="form-label">Số lượng loại mặt hàng nhập: </label>
     <input type="number" class="form-control" name="sl" id="sl">
     </div>
     
      
-    <button type="submit" class="btn btn-primary">Them</button>
-        <a href="hoadonnhap.asp" class="btn btn-info">Huy</a>        
+    <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="hoadonnhap.asp" class="btn btn-info">Huỷ</a>        
     </form>
     
     <div> 

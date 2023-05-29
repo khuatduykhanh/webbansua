@@ -92,21 +92,21 @@
     <!-- #include file="header.asp" -->
     <div class="container">
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoa don nhap</h2></div>
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoá đơn nhập</h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="themhoadonnhap.asp" class="btn btn-primary">Tao hoa don moi</a>
+                    <a href="themhoadonnhap.asp" class="btn btn-primary">Tạo hoá đơn mới</a>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã Hoa Don </th>
-                            <th scope="col">Ten Nha Cung Cap</th>
-                            <th scope="col">So Luong MH chua nhap CTHD</th>
-                            <th scope="col">Ngay Nhap</th>
-                            <th scope="col">Tong Nhap</th>
-                            <th scope="col"></th>
+                            <th scope="col">Mã hoá đơn</th>
+                            <th scope="col">Tên nhà cung cấp</th>
+                            <th scope="col">SL mặt hàng chưa nhập CTHD</th>
+                            <th scope="col">Ngày nhập</th>
+                            <th scope="col">Tổng nhập</th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,7 +115,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc"
+                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc "
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 

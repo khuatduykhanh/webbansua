@@ -84,6 +84,7 @@
     min-height: 100vh;
     transition: all 0.3s;
 }
+
 </style>
 <body>
 <div class="wrapper">
@@ -105,11 +106,11 @@
                             <th scope="col">Tên Sản Phẩm</th>
                             <th scope="col">Thể Loại</th>
                             <th scope="col">Thương Hiệu</th>
-                             <th scope="col">Mô Tả</th>
+                            <th scope="col">Mô Tả</th>
                             <th scope="col">Giá Gốc </th>
                             <th scope="col">Giá Bán</th>
-                            <th scope="col">So Luong</th>
-                            <th scope="col"></th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>

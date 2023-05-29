@@ -136,7 +136,7 @@
     set rs = connDB.execute(sqlString) 
     If not rs.EOF Then
     %>   
-    <h5> Mã nhà cung cấp hiện tai: <%=rs("Max")+1%></h5>
+    <h5> Mã nhà cung cấp hiện tại: <%=rs("Max")+1%></h5>
     <%
     End If
     End If

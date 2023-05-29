@@ -1,3 +1,4 @@
+
 <!--#include file="connect.asp"-->
 <%
 Dim TaiKhoan, MatKhau
@@ -23,7 +24,7 @@ If (NOT isnull(TaiKhoan) AND NOT isnull(MatKhau) AND TRIM(TaiKhoan)<>"" AND TRIM
         ' dang nhap thanh cong
         Session("TaiKhoan")=result("TaiKhoan")
         Session("HoTen") = result("HoTen")
-        Session("Success")="Đăng nhập thành công"
+        Session("Success")="Đăng nhập thành công."
         Dim carts(2)
         carts(0)=5
         carts(1)=10
@@ -46,7 +47,7 @@ End if
 If(TaiKhoan = "admin" AND MatKhau = "1") Then
         Session("TaiKhoan")= "admin"
         Session("HoTen") = "admin"
-        Session("Success")="Login Successfully"
+        Session("Success")="Đăng nhập thành công."
         Response.redirect("admin/index.asp")
 End if
 'Lay ve thong tin dang nhap gom TaiKhoan va MatKhau
