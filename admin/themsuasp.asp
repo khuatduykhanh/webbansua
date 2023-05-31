@@ -51,7 +51,7 @@
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "INSERT INTO SanPham(TenSp,LoaiSp,ThuongHieu,MoTa,Gia,GiaGoc,SoLuong) VALUES(?,?,?,?,?,?,0)"
+                cmdPrep.CommandText = "INSERT INTO SanPham(TenSp,LoaiSp,ThuongHieu,MoTa,Gia,GiaGoc,SoLuong,TrangThai) VALUES(?,?,?,?,?,?,0,1)"
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("tensp",202,1,255,tensp)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("theloai",202,1,255,theloai)
                 ' cmdPrep.parameters.Append cmdPrep.createParameter("thuonghieu",202,1,255,thuonghieu)

@@ -1,3 +1,4 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!-- #include file="connect.asp" -->
 <%
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
@@ -12,7 +13,7 @@
     connDB.Open()
     cmdPrep.ActiveConnection = connDB
     cmdPrep.CommandType = 1
-    cmdPrep.CommandText = "DELETE FROM SanPham WHERE Masp=?"
+    cmdPrep.CommandText = "UPDATE SanPham SET TrangThai = '0' WHERE Masp=?"
     cmdPrep.parameters.Append cmdPrep.createParameter("MaSp",3,1, ,id)
 
     cmdPrep.execute
