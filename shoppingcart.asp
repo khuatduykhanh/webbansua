@@ -1,3 +1,4 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
@@ -40,9 +41,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 	End Sub
   Sub defineItems(v)
     If (v>1) Then
-      Response.Write(" Items")
+      Response.Write(" Sản phẩm")
     Else
-      Response.Write(" Item")
+      Response.Write(" Sản phẩm")
     End If
   End Sub
 %>
@@ -62,10 +63,11 @@ If (NOT IsEmpty(Session("mycarts"))) Then
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
 </head>
+
 <body>
 <!-- #include file="header.asp" -->
 
-<section class="h-100 h-custom" style="background-color: #eee;">
+<section class="h-100 h-custom" style="background-color: #eee; ">
   <div class="container py-2 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -73,7 +75,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
           <div class="card-body p-0">
             <div class="row g-0">
               <div class="col-lg-8">
-                <div class="p-5">
+                <div class="p-4">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Giỏ hàng</h1>
                     <h6 class="mb-0 text-muted"><%= totalProduct %> <%call defineItems(totalProduct) %></h6>
@@ -112,6 +114,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                         <i class="fas fa-plus"></i>
                       </button>
+                       <div class="invalid-feedback">
+                Vui lòng nhập số lượng lớn hơn 0.
+                </div>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0"><%= rs("Gia")%> đ</h6>
@@ -134,8 +139,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   <div class="row pt-2">
                     <h6 class="mb-0 col-lg-10 pt-3"><a href="product.asp" class="text-body"><i
                           class="fas fa-long-arrow-alt-left me-2"></i>Quay trở lại cửa hàng</a></h6>
-                          <input type="submit" name="update" value="Update" class="btn btn-warning btn-block btn-lg text-white col-lg-2 <%= statusButtons %>"
-                    data-mdb-ripple-color="dark"/>
+                          
                   </div>
                 </form>
                 </div>
@@ -170,7 +174,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
         
-                    <h5><%= subtotal %> đ</h5>
+                    <h5><%= subtotal %> Đ</h5>
                   </div>
                   <div class="row">
                     <button type="button" class="btn btn-success btn-lg"

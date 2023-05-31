@@ -1,3 +1,4 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!--#include file="connect.asp"-->
 <%
     'Lay ve IDProduct
@@ -46,9 +47,9 @@
                     Set mycarts = Nothing
                     Response.Write("Session created!")
                 End if
-                Session("Success") = "The Product has bean added to your cart."
+                Session("Success") = "Sản phẩm đã được thêm vào giỏ hàng của bạn."
             Else
-                Session("Error") = "The Product is not exists, please try again."
+                Session("Error") = "Sản phẩm không tồn tại, vui lòng thử lại."
             End If
 
             ' Set Result = Nothing

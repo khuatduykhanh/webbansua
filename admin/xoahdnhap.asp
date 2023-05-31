@@ -17,7 +17,7 @@
     cmdPrep.execute
     connDB.Close()
     If Err.Number = 0 Then
-    Session("Success") = "Đã xoá"    
+    Session("Success") = "Đã xoá."    
     Else
         Session("Error") = Err.Description
     End If

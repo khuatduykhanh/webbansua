@@ -45,7 +45,7 @@
         if (isnull (id) OR trim(id) = "") then id=0 end if
         
         if (cint(id)=0) then
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 and giaban < giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc > 0 and NOT isnull(giaban) and giaban > 0 ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -71,7 +71,7 @@
                 Session("Error") = "Bạn phải nhập đủ thông tin."                
             end if
         else
-            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" and giaban < giagoc) then
+            if (NOT isnull(tensp) and tensp<>"" and NOT isnull(theloai) and theloai<>"" and NOT isnull(thuonghieu) and thuonghieu<>"" and NOT isnull(mota) and mota<>"" and NOT isnull(giagoc) and giagoc<>"" and NOT isnull(giaban) and giaban<>"" ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 connDB.Open()
                 cmdPrep.ActiveConnection = connDB
@@ -207,7 +207,16 @@
     <input type="number" class="form-control" name="giaban" id="giaban" value="<%=giaban%>">
     </div> 
     <div> 
-     
+        <%
+        If (NOT IsEmpty(Session("Error")) AND NOT isnull(Session("Error"))) AND (TRIM(Session("Error"))<>"") Then
+    %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%=Session("Error")%>
+            </div>
+    <%
+            Session.Contents.Remove("Error")
+        End If
+    %>   
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then
@@ -217,7 +226,7 @@
             end if
         %>
         </button>
-        <a href="sanpham.asp" class="btn btn-info">Cancel</a>        
+        <a href="sanpham.asp" class="btn btn-info">Quay lại</a>        
     </form>
     
     <div> 

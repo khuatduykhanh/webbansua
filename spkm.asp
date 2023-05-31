@@ -2,7 +2,7 @@
 <%
     ' code here to retrive the data from product table
     Dim sqlString, rs
-    sqlString = "Select * from SanPham"
+    sqlString = "Select * from SanPham Where GiaGoc<Gia"
     connDB.Open()
     set rs = connDB.execute(sqlString)    
 %>
@@ -27,16 +27,6 @@
         <%
         do while not rs.EOF
         %>
-           <%
-        If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
-    %>
-            <div class="alert alert-success mt-2" role="alert">
-                <%=Session("Success")%>
-            </div>
-    <%
-            Session.Contents.Remove("Success")
-        End If
-    %>
         <div class="row justify-content-center mb-3">
                 <div class="col-md-12 col-xl-10">
                     <div class="card shadow-0 border rounded-3">
@@ -84,6 +74,7 @@
                                 <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                                     <div class="d-flex flex-row align-items-center mb-1">
                                         <h4 class="mb-1 me-1"><%= rs("Gia")%>đ</h4>
+                                        <span class="text-danger"><s><%= rs("GiaGoc")%>đ</s></span>
                                     </div>
                                     <h6 class="text-success">Miễn phí vận chuyển</h6>
                                     <div class="d-flex flex-column mt-4">
