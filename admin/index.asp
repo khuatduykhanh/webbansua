@@ -42,10 +42,10 @@
 </style>
 <body>
 <div class="wrapper">
+ 
     <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
-    
     <div> 
 </div>
     

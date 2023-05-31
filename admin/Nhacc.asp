@@ -91,6 +91,16 @@
     <div class="content">
     <!-- #include file="header.asp" -->
     <div class="container">
+       <%
+        If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
+    %>
+            <div class="alert alert-success mt-2" role="alert">
+                <%=Session("Success")%>
+            </div>
+    <%
+            Session.Contents.Remove("Success")
+        End If
+    %>
         <div class="d-flex bd-highlight mb-3">
             <div class="me-auto p-2 bd-highlight"><h2>Danh sách nhà cung cấp</h2></div>
                 <div class="p-2 bd-highlight">

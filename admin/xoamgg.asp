@@ -16,11 +16,11 @@
     cmdPrep.execute
     connDB.Close()
     If Err.Number = 0 Then
-    Session("Success") = "Deleted"    
+    Session("Success") = "Đã xoá."    
     Else
         Session("Error") = Err.Description
     End If
-    Response.Redirect("index.asp")
+    Response.Redirect("magiamgia.asp")
     On Error Goto 0    
 
     

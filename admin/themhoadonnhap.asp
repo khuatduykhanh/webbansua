@@ -34,10 +34,10 @@
                 cmdPrep.Parameters(1)=tongnhap
                 cmdPrep.Parameters(2)=soluongloaimhnhap
                 cmdPrep.execute    
-                Session("Success") = "da them 1 hoa don"
+                Session("Success") = "Thêm hoá đơn thành công."
                 Response.redirect("hoadonnhap.asp")
         else
-                Session("Error") = "You have to input enough info"                
+                Session("Error") = "Bạn phải nhập đủ thông tin."                
         end if
     End If    
 %><!DOCTYPE html>
@@ -94,7 +94,16 @@
     <input type="number" class="form-control" name="sl" id="sl">
     </div>
     
-     
+        <%
+        If (NOT IsEmpty(Session("Error")) AND NOT isnull(Session("Error"))) AND (TRIM(Session("Error"))<>"") Then
+    %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%=Session("Error")%>
+            </div>
+    <%
+            Session.Contents.Remove("Error")
+        End If
+    %>   
     <button type="submit" class="btn btn-primary">Thêm</button>
         <a href="hoadonnhap.asp" class="btn btn-info">Huỷ</a>        
     </form>

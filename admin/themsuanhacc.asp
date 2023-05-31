@@ -58,10 +58,10 @@
                 cmdPrep.Parameters(2)=SDTNhacc
 
                 cmdPrep.execute    
-                Session("Success") = "da them 1 nhà cung cấp"
+                Session("Success") = "Thêm nhà cung cấp thành công."
                 Response.redirect("Nhacc.asp")
             else
-                Session("Error") = "You have to input enough info"                
+                Session("Error") = "Bạn phải nhập đủ thông tin."                
             end if
         else
             if (NOT isnull(TenNhacc) and TenNhacc<>"" and NOT isnull(DCNhacc) and DCNhacc<>"" and NOT isnull(SDTNhacc) and SDTNhacc<>"" ) then
@@ -77,10 +77,10 @@
                 cmdPrep.parameters.Append cmdPrep.createParameter("MaNhacc",3,1, ,id)
 
                 cmdPrep.execute
-                Session("Success") = "Nha cung cấp đã được sửa"
+                Session("Success") = "Sửa thành công."
                 Response.redirect("Nhacc.asp") 
             else
-                Session("Error") = "You have to input enough info"
+                Session("Error") = "Bạn phải nhập đủ thông tin"
             end if
         end if
     End If    
@@ -142,6 +142,7 @@
     End If
     %>
    <div class="mb-3">  
+   
     </div>  
     <form method="post"  >
     <div class="mb-3">
@@ -157,7 +158,16 @@
     <input type="text" class="form-control" name="SDTNhacc" id="SDTNhacc" value="<%=SDTNhacc%>">
     </div>
     <div> 
-     
+        <%
+        If (NOT IsEmpty(Session("Error")) AND NOT isnull(Session("Error"))) AND (TRIM(Session("Error"))<>"") Then
+    %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%=Session("Error")%>
+            </div>
+    <%
+            Session.Contents.Remove("Error")
+        End If
+    %>   
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then

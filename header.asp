@@ -1431,6 +1431,7 @@ select option
 .container{
     height:100%;
 }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 
@@ -1582,15 +1583,7 @@ select option
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="suahat.asp">Thức uống thiên nhiên từ hạt<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li>
-												<a href="#">Sữa hạt<i class="fas fa-chevron-down"></i></a>
-											</li>
-											<li>
-												<a href="#">Nước gạo rang<i class="fas fa-chevron-down"></i></a>
-											</li>
-										</ul>
+										<a href="spkm.asp">Sản phẩm đang khuyến mãi</i></a>
 									</li>
 									
 								</ul>

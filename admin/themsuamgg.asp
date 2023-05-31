@@ -59,10 +59,10 @@
                 
 
                 cmdPrep.execute    
-                Session("Success") = "da them 1 ma giam gia"
+                Session("Success") = "Thêm 1 mã giảm giá thành công."
                 Response.redirect("magiamgia.asp")
             else
-                Session("Error") = "You have to input enough info"                
+                Session("Error") = "Bạn phải nhập đủ thông tin."                
             end if
         else
             if (NOT isnull(ThongTin) and ThongTin<>"" and NOT isnull(NgayBD) and NgayBD<>"" and NOT isnull(NgayKT) and NgayKT<>""and NOT isnull(Giatri) and Giatri<>""  ) then
@@ -79,10 +79,10 @@
                 cmdPrep.parameters.Append cmdPrep.createParameter("IdMagiamgia",3,1, ,id)
                cmdPrep.execute
                
-                Session("Success") = "Ma giam gia da duoc sua"
+                Session("Success") = "Mã giảm giá đã được sửa thành công."
                 Response.redirect("magiamgia.asp") 
             else
-                Session("Error") = "You have to input enough info"
+                Session("Error") = "Bạn phải nhập đủ thông tin."
             end if
         end if
     End If    
@@ -137,7 +137,7 @@
     set rs = connDB.execute(sqlString) 
     If not rs.EOF Then
     %>   
-    <h5> Mã mã giảm giá hiện tại: <%=rs("Max")%></h5>
+    <h5> Mã mã giảm giá hiện tại: <%=rs("Max")+1%></h5>
     <%
     End If
     End If
@@ -162,7 +162,16 @@
     <label for="Giatri" class="form-label">Giá trị mã giảm giá</label>
     <input type="number" class="form-control" name="Giatri" id="Giatri" value="<%=Giatri%>">
     </div>
-     
+        <%
+        If (NOT IsEmpty(Session("Error")) AND NOT isnull(Session("Error"))) AND (TRIM(Session("Error"))<>"") Then
+    %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%=Session("Error")%>
+            </div>
+    <%
+            Session.Contents.Remove("Error")
+        End If
+    %>   
     <button type="submit" class="btn btn-primary">
         <%
             if (id=0) then
@@ -176,6 +185,7 @@
         <a href="magiamgia.asp" class="btn btn-info">Quay lại</a>       
     </form>
     <div> 
+    
 </div>
 </body>
 </html>

@@ -372,7 +372,9 @@ label {
                   <div class="product-name"><%= rs("TenSp")%></div>
                   <div class="reviews-counter">
               </div>
-                  <div class="product-price-discount"><span><%= rs("Gia")%>đ</span><span class="line-through"><%= rs("GiaGoc")%>đ</span></div>
+                  <div class="product-price-discount"><span><%= rs("Gia")%>đ</span>
+                    
+                  </div>
                 </div>
                 
                 <ul class="pdp-attribute">
