@@ -1,5 +1,4 @@
-
-<!--#include file="connect.asp"-->
+<!-- #include file="..\connect.asp" -->
 <%
 Dim TaiKhoan, MatKhau
 TaiKhoan = Request.Form("TaiKhoan")

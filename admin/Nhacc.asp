@@ -1,4 +1,4 @@
-<!-- #include file="connect.asp" -->
+<!-- #include file="..\connect.asp" -->
 <%
     
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
@@ -115,7 +115,7 @@
                             <th scope="col">Tên nhà cung cấp</th>
                             <th scope="col">Địa chỉ nhà cung cấp</th>
                             <th scope="col">SĐT Nhà cung cấp</th>
-                            <th scope="col"></th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>

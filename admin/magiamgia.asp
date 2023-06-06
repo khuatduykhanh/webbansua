@@ -1,5 +1,5 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
-<!-- #include file="connect.asp" -->
+<!-- #include file="..\connect.asp" -->
 <%
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
         Response.redirect("login.asp")
@@ -116,7 +116,7 @@
                             <th scope="col">Ngày bắt đầu</th>
                             <th scope="col">Ngày kết thúc</th>
                             <th scope="col">Giá trị mã giảm giá</th>
-                            <th scope="col"></th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>

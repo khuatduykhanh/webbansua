@@ -18,7 +18,10 @@
     <link rel='shortcut icon' href='./img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
     <title>Milk Store</title>
 </head>
-
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
+@charset "utf-8";
+</style>
 <body>
 
 <!-- #include file="header.asp" -->
