@@ -2,6 +2,28 @@
 <!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
+ If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
+    MaGG = Request.form("nhapkm")
+    
+    dim giam
+     Set cmdPrep = Server.CreateObject("ADODB.Command")
+      connDB.Open()
+      cmdPrep.ActiveConnection = connDB
+      cmdPrep.CommandType = 1
+      cmdPrep.Prepared = True
+      cmdPrep.CommandText = "Select * from GiamGia where IdMagiamgia = ? and getdate() < NgayKT and getdate() > NgayBD "
+      cmdPrep.parameters.Append cmdPrep.createParameter("IdMagiamgia",3,1, ,MaGG)
+      Set Result = cmdPrep.execute
+    If not Result.EOF then
+      giam = Result("Giatri")
+    else
+      giam = 0
+    end if
+    Result.Close()
+    connDB.Close()
+ End If
+
+ 
 Dim idList, mycarts, totalProduct, subtotal, statusViews, statusButtons, rs
 If (NOT IsEmpty(Session("mycarts"))) Then
   statusViews = "d-none"
@@ -45,6 +67,23 @@ If (NOT IsEmpty(Session("mycarts"))) Then
     Else
       Response.Write(" Sản phẩm")
     End If
+  End Sub
+  dim total
+  total = subtotal - giam
+  Sub themhoadon()
+  If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
+  if(total > 0) then    
+    Set cmdPrep = Server.CreateObject("ADODB.Command")
+    cmdPrep.ActiveConnection = connDB
+    cmdPrep.CommandType = 1
+    cmdPrep.Prepared = True
+    cmdPrep.CommandText = "INSERT INTO HoaDon(TaiKhoan,TongHD,NgayBan,TrangThaiHD) VALUES(?,?, getdate(),0)"
+    cmdPrep.Parameters(0)= Session("TaiKhoan")
+    cmdPrep.Parameters(1)=total
+    cmdPrep.execute 
+    mycarts.RemoveAll  
+  end if 
+  End If
   End Sub
 %>
 <!DOCTYPE html>
@@ -118,6 +157,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                 Vui lòng nhập số lượng lớn hơn 0.
                 </div>
                     </div>
+                    <% %>  
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0"><%= rs("Gia")%> đ</h6>
                     </div>
@@ -145,6 +185,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                 </div>
               </div>
               <div class="col-lg-4 bg-secondary-subtle <%= statusButtons %>">
+                
                 <div class="p-5">
                   <h3 class="fw-bold mb-5 mt-2 pt-1">TÓM TẮT</h3>
                   <hr class="my-4">
@@ -153,7 +194,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                     <h5 class="text-uppercase"><%= totalProduct %> <%call defineItems(totalProduct) %></h5>
                     <h5><%= subtotal%> Đ</h5>
                   </div>
-
+                  
                   <h5 class="text-uppercase mb-3">Shipping</h5>
 
                   <div class="mb-4 pb-2">
@@ -161,36 +202,41 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   </div>
 
                   <h5 class="text-uppercase mb-3">Mã khuyến mại</h5>
-
+                  <form method='post' >
                   <div class="mb-5">
                     <div class="form-outline">
-                      <input type="text" id="form3Examplea2" name="nhapkm" class="form-control form-control-lg" placeholder="Nhập mã của bạn tại đây"/>
-                      
+                      <input type="text" id="form3Examplea2" name="nhapkm" class="form-control form-control-lg" placeholder="Nhập mã của bạn tại đây"/> 
                     </div>
+                    <button type="submit" class="mt-2 btn btn-success btn-lg"
+                      data-mdb-ripple-color="dark">Ap Dung</button> 
                   </div>
-
+                  </form>
+                  <h5 class="d-flex flex-row-reverse" ><%= - giam%> Đ</h5>
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
         
-                    <h5><%= subtotal %> Đ</h5>
+                    <h5><%= total %>  Đ</h5>
                   </div>
                   <div class="row">
-                    <button type="button" class="btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark">Mua hàng</button>
+                    <form metod ="get" action="index.asp">
+                    <button type="submit" class="btn btn-success btn-lg"
+                      data-mdb-ripple-color="dark" onclick=<%call themhoadon() %>>Mua hàng</button>
+                     </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+         </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- #include file="footer.asp" -->
+<script></script>
 </body>
 
 </html>
