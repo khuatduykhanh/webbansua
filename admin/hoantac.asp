@@ -13,13 +13,13 @@
     connDB.Open()
     cmdPrep.ActiveConnection = connDB
     cmdPrep.CommandType = 1
-    cmdPrep.CommandText = "UPDATE SanPham SET TrangThai = '0' WHERE Masp=?"
+    cmdPrep.CommandText = "UPDATE SanPham SET TrangThai = '1' WHERE Masp=?"
     cmdPrep.parameters.Append cmdPrep.createParameter("MaSp",3,1, ,id)
 
     cmdPrep.execute
     connDB.Close()
     If Err.Number = 0 Then
-    Session("Success") = "Đã xoá."    
+    Session("Success") = "Đã hoàn tác."    
     Else
         Session("Error") = Err.Description
     End If

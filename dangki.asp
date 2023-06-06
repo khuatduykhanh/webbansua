@@ -184,7 +184,7 @@
             }
         }
         function validateName(e){
-            const name = document.querySelector('#name');
+            const name = document.querySelector('#name');            
             const re = /^.+$/;
              if (reSpaces.test(name.value)&& re.test(name.value)) {
                 name.classList.remove('is-invalid');
@@ -234,7 +234,7 @@
                         } else {
                             form.classList.add('was-validated');
                         }
-                    alert("dang ky thanh cong")
+                    alert("Đăng kí thành công")
                     },
                     false
                 );

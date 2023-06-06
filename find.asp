@@ -3,9 +3,11 @@
     ' code here to retrive the data from product table
     searchInput = Request.QueryString("searchinput")
     Dim sqlString, rs
-    sqlString = "Select * from SanPham Where TenSp Like '%" & searchInput & "%'"
+    sqlString = "Select * from SanPham Where TenSp Like N'%" & searchInput & "%'"
     connDB.Open()
     set rs = connDB.execute(sqlString)    
+
+
 %>
 <!DOCTYPE html>
 <html lang="en">

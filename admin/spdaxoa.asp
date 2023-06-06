@@ -107,10 +107,9 @@
         End If
     %>
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách sản phẩm</h2></div>
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách sản phẩm đã xoá</h2></div>
                 <div class="p-2 bd-highlight">
-                    <a href="themsuasp.asp" class="btn btn-primary">Thêm sản phẩm</a>
-                    <a href="spdaxoa.asp" class="btn btn-danger">Sản phẩm đã xoá</a>
+                    <a href="sanpham.asp" class="btn btn-danger">Quay lại</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -134,7 +133,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia,SoLuong FROM SanPham where TrangThai = '1' ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT MaSp,TenSp,LoaiSp,ThuongHieu,MoTa,GiaGoc,Gia,SoLuong FROM SanPham where TrangThai = '0' ORDER BY MaSp OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -153,8 +152,7 @@
                                     
 
                                     <td class= "text-center">
-                                        <a href="themsuasp.asp?id=<%=Result("MaSp")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="xoasp.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                        <a data-href="hoantac.asp?id=<%=Result("MaSp")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Hoàn tác</a>
                                     </td>
                                 </tr>
                         <%
@@ -171,18 +169,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Trước</a></li>
+                        <li class="page-item"><a class="page-link" href="spdaxoa.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="spdaxoa.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Sau</a></li>
+                        <li class="page-item"><a class="page-link" href="spdaxoa.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
@@ -193,15 +191,15 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Xác nhận xoá</h5>
+                            <h5 class="modal-title">Xác nhận hoàn tác</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá?</p>
+                            <p>Bạn có chắc chắn muốn hoàn tác?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                            <a class="btn btn-danger btn-delete">Xoá</a>
+                            <a class="btn btn-danger btn-delete">Hoàn tác</a>
                         </div>
                     </div>
                 </div>
