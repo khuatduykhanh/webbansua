@@ -258,6 +258,9 @@ a.article:hover {
                     <a href="danhsachmuahang.asp">Danh Sách Mua Hàng</a>
                 </li>
                 <li>
+                    <a href="dskhachhang.asp">Thông tin khách hàng</a>
+                </li>
+                <li>
                     <a href="..\index.asp">Trang bán hàng</a>
                 </li>
                 

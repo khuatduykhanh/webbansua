@@ -7,7 +7,7 @@ MatKhau = Request.Form("MatKhau")
 If (NOT isnull(TaiKhoan) AND NOT isnull(MatKhau) AND TRIM(TaiKhoan)<>"" AND TRIM(MatKhau)<>"") Then
     ' true
     Dim sql
-    sql = "select * from TKNguoiDung where TaiKhoan= ? and MatKhau= ?"
+    sql = "select * from TKNguoiDung where TaiKhoan= ? and MatKhau= ? and TrangThai= '1' "
     Dim cmdPrep
     set cmdPrep = Server.CreateObject("ADODB.Command")
     connDB.Open()

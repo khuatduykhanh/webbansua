@@ -107,18 +107,21 @@
         End If
     %>
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoá đơn</h2></div>
-                
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách khách hàng</h2></div>
+                <div class="p-2 bd-highlight">
+                    <a href="themsuasp.asp" class="btn btn-primary">Thêm sản phẩm</a>
+                    <a href="spdaxoa.asp" class="btn btn-danger">Sản phẩm đã xoá</a>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã Hoá Đơn </th>
-                            <th scope="col">Tên Tài Khoản</th>
-                            <th scope="col">Ngày bán</th>
-                            <th scope="col">Tổng hoá đơn</th>
-                            <th scope="col" >Trạng Thái</th>
+                           <th scope="col">Tên Tài Khoản </th>
+                            <th scope="col">Họ Tên</th>
+                            <th scope="col">Địa Chỉ</th>
+                            <th scope="col">Số Điện Thoại</th>
+                            <th scope="col">Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,7 +130,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT IdHoadon,TaiKhoan,NgayBan,TongHD,TrangThaiHD FROM Hoadon ORDER BY IdHoadon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT TaiKhoan,HoTen,DiaChi,SoDT FROM TKNguoiDung ORDER BY TaiKhoan OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -135,14 +138,17 @@
                             do while not Result.EOF
                         %>
                                 <tr>
-                                    <td class= "text-center"><%=Result("IdHoadon")%></td>
                                     <td class= "text-center"><%=Result("TaiKhoan")%></td>
-                                    <td class= "text-center"><%=Result("NgayBan")%></td>
-                                    <td class= "text-center"><%=Result("TongHD")%></td>
-                                    <td class= "text-center"><%=Result("TrangThaiHD")%>
-                                    
-                                    </td>
+                                    <td class= "text-center"><%=Result("HoTen")%></td>
+                                    <td class= "text-center"><%=Result("DiaChi")%></td>
+                                    <td class= "text-center"><%=Result("SoDT")%></td>
                                  
+                                    
+
+                                    <td class= "text-center">
+                                        <a href="themsuasp.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-secondary">Sửa</a>
+                                        <a data-href="xoasp.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete">Khoá tài khoản</a>
+                                    </td>
                                 </tr>
                         <%
                                 Result.MoveNext

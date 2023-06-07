@@ -1,7 +1,7 @@
-<!-- #include file="..\connect.asp" -->
+<!-- #include file="connect.asp" -->
 <%
     
-    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
+    If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) = "") Then
         Response.redirect("login.asp")
     End If
 ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(IdHoadon) AS count FROM Hoadon"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -57,7 +57,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel='shortcut icon' href='./img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
-    <title>Admin</title>
+    <title>Đơn hàng của bạn</title>
     
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -84,19 +84,13 @@
     min-height: 100vh;
     transition: all 0.3s;
 }
-.table td.text-center{
-    word-break: break-word;
-    max-width:200px;
-   
-}
 </style>
 <body>
 <div class="wrapper">
-    <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
     <div class="container">
-     <%
+       <%
         If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
     %>
             <div class="alert alert-success mt-2" role="alert">
@@ -107,18 +101,18 @@
         End If
     %>
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoá đơn</h2></div>
-                
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách đơn hàng của bạn</h2></div>
+               
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã Hoá Đơn </th>
-                            <th scope="col">Tên Tài Khoản</th>
-                            <th scope="col">Ngày bán</th>
+                            <th scope="col">Mã hoá đơn </th>
                             <th scope="col">Tổng hoá đơn</th>
-                            <th scope="col" >Trạng Thái</th>
+                            <th scope="col">Ngày thanh toán</th>
+                            <th scope="col">Mã giảm giá áp dụng</th>
+                            <th scope="col">Tình trạng</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,7 +121,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT IdHoadon,TaiKhoan,NgayBan,TongHD,TrangThaiHD FROM Hoadon ORDER BY IdHoadon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT IdHoadon,TongHD,NgayBan,MaGG FROM Hoadon where TrangThaiHD = '0' ORDER BY IdHoadon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -135,14 +129,14 @@
                             do while not Result.EOF
                         %>
                                 <tr>
-                                    <td class= "text-center"><%=Result("IdHoadon")%></td>
-                                    <td class= "text-center"><%=Result("TaiKhoan")%></td>
-                                    <td class= "text-center"><%=Result("NgayBan")%></td>
-                                    <td class= "text-center"><%=Result("TongHD")%></td>
-                                    <td class= "text-center"><%=Result("TrangThaiHD")%>
-                                    
+                                    <td><%=Result("IdHoadon")%></td>
+                                    <td><%=Result("TongHD")%></td>
+                                    <td><%=Result("NgayBan")%></td>
+                                    <td><%=Result("MaGG")%></td>
+
+                                    <td>  
+                                        <a data-href="xndonhang.asp?id=<%=Result("IdHoadon")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" >Đã nhận được sản phẩm</a>
                                     </td>
-                                 
                                 </tr>
                         <%
                                 Result.MoveNext
@@ -158,18 +152,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Trước</a></li>
+                        <li class="page-item"><a class="page-link" href="donhang.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="donhang.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Sau</a></li>
+                        <li class="page-item"><a class="page-link" href="donhang.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
@@ -180,15 +174,15 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Xác nhận xoá</h5>
+                            <h5 class="modal-title">Xác nhận đã nhận sản phẩm</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá?</p>
+                            <p>Bạn có chắc chắn muốn xác nhận là đã nhận được hàng?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                            <a class="btn btn-danger btn-delete">Xoá</a>
+                            <a class="btn btn-danger btn-delete">Đã nhận</a>
                         </div>
                     </div>
                 </div>
@@ -205,5 +199,10 @@
                 });
             });
         </script>
+        </div>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script> 
+<!-- #include file="footer.asp" -->    
 </body>
 </html>
