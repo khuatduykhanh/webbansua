@@ -154,7 +154,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         <i class="fas fa-plus"></i>
                       </button>
                        <div class="invalid-feedback">
-                Vui lòng nhập số lượng lớn hơn 0.
+                        Vui lòng nhập số lượng lớn hơn 0.
                 </div>
                     </div>
                     <% %>  
@@ -208,9 +208,10 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                       <input type="text" id="form3Examplea2" name="nhapkm" class="form-control form-control-lg" placeholder="Nhập mã của bạn tại đây"/> 
                     </div>
                     <button type="submit" class="mt-2 btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark">Ap Dung</button> 
+                      data-mdb-ripple-color="dark">Áp Dụng</button> 
                   </div>
                   </form>
+               
                   <h5 class="d-flex flex-row-reverse" ><%= - giam%> Đ</h5>
                   <hr class="my-4">
 
@@ -220,7 +221,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                     <h5><%= total %>  Đ</h5>
                   </div>
                   <div class="row">
-                    <form metod ="get" action="index.asp">
+                    <form metod ="get" action="donhang.asp">
                     <button type="submit" class="btn btn-success btn-lg"
                       data-mdb-ripple-color="dark" onclick=<%call themhoadon() %>>Mua hàng</button>
                      </form>
