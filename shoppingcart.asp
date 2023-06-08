@@ -2,7 +2,7 @@
 <!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
-    connDB.Open()
+   connDB.Open()
     dim giam
      If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN
      MaGG = Request.form("nhapkm")
@@ -19,7 +19,6 @@
       giam = 0
     end if
     Result.Close()
-    connDB.Close()
  End If
 
  
@@ -41,7 +40,6 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 	Next
 	Dim sqlString
 	sqlString = "Select * from SanPham where MaSp IN (" & idList &")"
-	
 	set rs = connDB.execute(sqlString)
 	calSubtotal(rs)
   Else
@@ -68,21 +66,17 @@ If (NOT IsEmpty(Session("mycarts"))) Then
   End Sub
   dim total
   total = subtotal - giam
-  Sub themhoadon()
-  If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
-  if(total > 0) then    
-    Set cmdPrep = Server.CreateObject("ADODB.Command")
-    cmdPrep.ActiveConnection = connDB
-    cmdPrep.CommandType = 1
-    cmdPrep.Prepared = True
-    cmdPrep.CommandText = "INSERT INTO HoaDon(TaiKhoan,TongHD,NgayBan,TrangThaiHD) VALUES(?,?, getdate(),0)"
-    cmdPrep.Parameters(0)= Session("TaiKhoan")
-    cmdPrep.Parameters(1)=total
-    cmdPrep.execute 
-    mycarts.RemoveAll  
-  end if 
-  End If
-  End Sub
+  Dim sqlString2, rs2, mhdht
+    sqlString2 = "Select Max(IdHoadon) as Max from HoaDon"
+     set rs2 = connDB.execute(sqlString2) 
+    If not rs2.EOF Then
+       if( rs2("Max") ) then
+         mhdht = rs2("Max") + 1
+       else
+         mhdht = 1
+       end if
+    end if
+  
 %>
 <!DOCTYPE html>
 <html lang="en">
