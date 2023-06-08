@@ -2,10 +2,10 @@
 <!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
- If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
-    MaGG = Request.form("nhapkm")
     
     dim giam
+     If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN
+     MaGG = Request.form("nhapkm")
      Set cmdPrep = Server.CreateObject("ADODB.Command")
       connDB.Open()
       cmdPrep.ActiveConnection = connDB
@@ -21,9 +21,8 @@
     end if
     Result.Close()
     connDB.Close()
- End If
+    End if
 
- 
 Dim idList, mycarts, totalProduct, subtotal, statusViews, statusButtons, rs
 If (NOT IsEmpty(Session("mycarts"))) Then
   statusViews = "d-none"
@@ -70,21 +69,17 @@ If (NOT IsEmpty(Session("mycarts"))) Then
   End Sub
   dim total
   total = subtotal - giam
-  Sub themhoadon()
-  If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
-  if(total > 0) then    
-    Set cmdPrep = Server.CreateObject("ADODB.Command")
-    cmdPrep.ActiveConnection = connDB
-    cmdPrep.CommandType = 1
-    cmdPrep.Prepared = True
-    cmdPrep.CommandText = "INSERT INTO HoaDon(TaiKhoan,TongHD,NgayBan,TrangThaiHD) VALUES(?,?, getdate(),0)"
-    cmdPrep.Parameters(0)= Session("TaiKhoan")
-    cmdPrep.Parameters(1)=total
-    cmdPrep.execute 
-    mycarts.RemoveAll  
-  end if 
-  End If
-  End Sub
+  Dim sqlString2, rs2, mhdht
+    sqlString2 = "Select Max(IdHoadon) as Max from HoaDon"
+    set rs2 = connDB.execute(sqlString2) 
+    If not rs2.EOF Then
+       if( rs2("Max") ) then
+         mhdht = rs2("Max") + 1
+       else
+         mhdht = 1
+       end if
+    end if
+   
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -154,10 +149,10 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         <i class="fas fa-plus"></i>
                       </button>
                        <div class="invalid-feedback">
-                Vui lòng nhập số lượng lớn hơn 0.
+                        Vui lòng nhập số lượng lớn hơn 0.
                 </div>
                     </div>
-                    <% %>  
+                     
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0"><%= rs("Gia")%> đ</h6>
                     </div>
@@ -208,9 +203,10 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                       <input type="text" id="form3Examplea2" name="nhapkm" class="form-control form-control-lg" placeholder="Nhập mã của bạn tại đây"/> 
                     </div>
                     <button type="submit" class="mt-2 btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark">Ap Dung</button> 
+                      data-mdb-ripple-color="dark">Áp Dụng</button> 
                   </div>
                   </form>
+               
                   <h5 class="d-flex flex-row-reverse" ><%= - giam%> Đ</h5>
                   <hr class="my-4">
 
@@ -220,10 +216,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                     <h5><%= total %>  Đ</h5>
                   </div>
                   <div class="row">
-                    <form metod ="get" action="index.asp">
-                    <button type="submit" class="btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark" onclick=<%call themhoadon() %>>Mua hàng</button>
-                     </form>
+                 
+                    <a href="themhoadon.asp?total=<%= total%>&id=<%=mhdht%>"  class="btn btn-success btn-lg">Mua Hang</a>
+                    
                   </div>
                 </div>
               </div>
