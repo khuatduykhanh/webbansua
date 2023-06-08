@@ -45,7 +45,7 @@
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
                 cmdPrep.CommandText = "INSERT INTO CTHDNhap(MaHDnhap,Masp,Tensp,Loaisp,GiaNhap,SLNhap) VALUES(?,?,?,?,?,?)"
-                cmdPrep.Parameters(0)=mahoadon
+                cmdPrep.Parameters(0)= mahoadon
                 cmdPrep.Parameters(1)=msp
                 cmdPrep.Parameters(2)=tensp
                 cmdPrep.Parameters(3)=loaisp

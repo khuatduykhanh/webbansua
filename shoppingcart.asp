@@ -2,12 +2,11 @@
 <!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
- If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
-    MaGG = Request.form("nhapkm")
-    
+    connDB.Open()
     dim giam
+     If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN
+     MaGG = Request.form("nhapkm")
      Set cmdPrep = Server.CreateObject("ADODB.Command")
-      connDB.Open()
       cmdPrep.ActiveConnection = connDB
       cmdPrep.CommandType = 1
       cmdPrep.Prepared = True
@@ -42,10 +41,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 	Next
 	Dim sqlString
 	sqlString = "Select * from SanPham where MaSp IN (" & idList &")"
-	connDB.Open()
+	
 	set rs = connDB.execute(sqlString)
 	calSubtotal(rs)
-
   Else
     'Session empty
     statusViews = "d-block"
@@ -154,10 +152,10 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         <i class="fas fa-plus"></i>
                       </button>
                        <div class="invalid-feedback">
-                        Vui lòng nhập số lượng lớn hơn 0.
+                Vui lòng nhập số lượng lớn hơn 0.
                 </div>
                     </div>
-                    <% %>  
+                     
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0"><%= rs("Gia")%> đ</h6>
                     </div>
@@ -221,10 +219,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                     <h5><%= total %>  Đ</h5>
                   </div>
                   <div class="row">
-                    <form metod ="get" action="donhang.asp">
-                    <button type="submit" class="btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark" onclick=<%call themhoadon() %>>Mua hàng</button>
-                     </form>
+                 
+                    <a href="themhoadon.asp?total=<%= total%>&id=<%=mhdht%>"  class="btn btn-success btn-lg">Mua Hang</a>
+                    
                   </div>
                 </div>
               </div>
