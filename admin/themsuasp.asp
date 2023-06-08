@@ -158,16 +158,16 @@
    <div class="mb-3"> 
    <label for="sanpham" class="form-label">Tải ảnh lên tại đây:</label>
     <%
-              'Step 2: Create Uploader object     
-              Dim uploader   
-              Set uploader=new AspUploader   
-              'Step 3: Set a unique name to Uploader
-              uploader.Name="anh1"
-              uploader.SaveDirectory="Anh"  
-              uploader.AllowedFileExtensions=".jpg,.png,*.gif"  
-              'Step 4: Render Uploader
-              uploader.Render()
-              uploader.GetString()
+            '  'Step 2: Create Uploader object     
+            ' Dim uploader   
+            ' Set uploader=new AspUploader   
+            ' 'Step 3: Set a unique name to Uploader
+            ' uploader.Name="myuploader"
+            ' uploader.SaveDirectory="Anh"  
+            ' uploader.AllowedFileExtensions="*.jpg,*.png,*.gif"  
+            ' 'Step 4: Render Uploader
+            ' uploader.Render()
+            '   uploader.GetString()
     %>  
     </div>  
     <form method="post"  >
