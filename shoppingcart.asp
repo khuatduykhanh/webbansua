@@ -19,8 +19,10 @@
       giam = 0
     end if
     Result.Close()
-    End if
+    connDB.Close()
+ End If
 
+ 
 Dim idList, mycarts, totalProduct, subtotal, statusViews, statusButtons, rs
 If (NOT IsEmpty(Session("mycarts"))) Then
   statusViews = "d-none"
@@ -66,18 +68,21 @@ If (NOT IsEmpty(Session("mycarts"))) Then
   End Sub
   dim total
   total = subtotal - giam
-  Dim sqlString2, rs2, mhdht
-    sqlString2 = "Select Max(IdHoadon) as Max from HoaDon"
-    
-    set rs2 = connDB.execute(sqlString2) 
-    If not rs2.EOF Then
-       if( rs2("Max") ) then
-         mhdht = rs2("Max") + 1
-       else
-         mhdht = 1
-       end if
-    end if
-   
+  Sub themhoadon()
+  If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN    
+  if(total > 0) then    
+    Set cmdPrep = Server.CreateObject("ADODB.Command")
+    cmdPrep.ActiveConnection = connDB
+    cmdPrep.CommandType = 1
+    cmdPrep.Prepared = True
+    cmdPrep.CommandText = "INSERT INTO HoaDon(TaiKhoan,TongHD,NgayBan,TrangThaiHD) VALUES(?,?, getdate(),0)"
+    cmdPrep.Parameters(0)= Session("TaiKhoan")
+    cmdPrep.Parameters(1)=total
+    cmdPrep.execute 
+    mycarts.RemoveAll  
+  end if 
+  End If
+  End Sub
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +152,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         <i class="fas fa-plus"></i>
                       </button>
                        <div class="invalid-feedback">
-                                Vui lòng nhập số lượng lớn hơn 0.
+                Vui lòng nhập số lượng lớn hơn 0.
                 </div>
                     </div>
                      
@@ -214,10 +219,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                     <h5><%= total %>  Đ</h5>
                   </div>
                   <div class="row">
-                    <form metod ="get" action="index.asp">
-                    <button type="submit" class="btn btn-success btn-lg"
-                      data-mdb-ripple-color="dark" onclick=<%call themhoadon() %>>Mua hàng</button>
-                     </form>
+                 
+                    <a href="themhoadon.asp?total=<%= total%>&id=<%=mhdht%>"  class="btn btn-success btn-lg">Mua Hang</a>
+                    
                   </div>
                 </div>
               </div>
