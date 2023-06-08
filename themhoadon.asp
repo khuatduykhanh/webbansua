@@ -63,5 +63,5 @@
                    
             Session.Contents.Remove("mycarts")  
         End If
-        Response.Redirect("shoppingcart.asp")              
+        Response.Redirect("index.asp")              
 %>

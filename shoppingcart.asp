@@ -2,12 +2,11 @@
 <!--#include file="connect.asp"-->
 <%
 'lay ve danh sach product theo id trong my cart
-    
+    connDB.Open()
     dim giam
      If (Request.ServerVariables("REQUEST_METHOD") = "POST") THEN
      MaGG = Request.form("nhapkm")
      Set cmdPrep = Server.CreateObject("ADODB.Command")
-      connDB.Open()
       cmdPrep.ActiveConnection = connDB
       cmdPrep.CommandType = 1
       cmdPrep.Prepared = True
@@ -20,7 +19,6 @@
       giam = 0
     end if
     Result.Close()
-    connDB.Close()
     End if
 
 Dim idList, mycarts, totalProduct, subtotal, statusViews, statusButtons, rs
@@ -41,10 +39,9 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 	Next
 	Dim sqlString
 	sqlString = "Select * from SanPham where MaSp IN (" & idList &")"
-	connDB.Open()
+	
 	set rs = connDB.execute(sqlString)
 	calSubtotal(rs)
-
   Else
     'Session empty
     statusViews = "d-block"
@@ -71,6 +68,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
   total = subtotal - giam
   Dim sqlString2, rs2, mhdht
     sqlString2 = "Select Max(IdHoadon) as Max from HoaDon"
+    
     set rs2 = connDB.execute(sqlString2) 
     If not rs2.EOF Then
        if( rs2("Max") ) then
