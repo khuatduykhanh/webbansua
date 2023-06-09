@@ -111,20 +111,21 @@
                             <th scope="col">Mã hoá đơn </th>
                             <th scope="col">Tổng hoá đơn</th>
                             <th scope="col">Ngày thanh toán</th>
-                            <th scope="col">Mã giảm giá áp dụng</th>
                             <th scope="col">Tình trạng</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
+                            dim taikhoan
+                            taikhoan = Session("TaiKhoan")
                             Set cmdPrep = Server.CreateObject("ADODB.Command")
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT IdHoadon,TongHD,NgayBan,MaGG FROM Hoadon where TrangThaiHD = '0' ORDER BY IdHoadon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT IdHoadon,TongHD,NgayBan FROM Hoadon where TrangThaiHD = '0' and TaiKhoan = ?  ORDER BY IdHoadon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.parameters.Append cmdPrep.createParameter("TaiKhoan",202,1,255,taikhoan)
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
-
                             Set Result = cmdPrep.execute
                             do while not Result.EOF
                         %>
@@ -132,7 +133,7 @@
                                     <td><%=Result("IdHoadon")%></td>
                                     <td><%=Result("TongHD")%></td>
                                     <td><%=Result("NgayBan")%></td>
-                                    <td><%=Result("MaGG")%></td>
+    
 
                                     <td>  
                                         <a data-href="xndonhang.asp?id=<%=Result("IdHoadon")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" >Đã nhận được sản phẩm</a>

@@ -44,8 +44,9 @@
                     Dim result
                     set result = cmdPrep.execute()
                     'kiem tra ket qua result o day
-                    If not result.EOF Then   
-                                 Set cmdPrep = Server.CreateObject("ADODB.Command")
+                    If not result.EOF Then  
+                        If( cint(result("SoLuong")) > 0 and cint(result("SoLuong")) >  cint(mycarts.Item(List))) then
+                                Set cmdPrep = Server.CreateObject("ADODB.Command")
                                 cmdPrep.ActiveConnection = connDB
                                 cmdPrep.CommandType = 1
                                 cmdPrep.Prepared = True
@@ -55,7 +56,7 @@
                                 cmdPrep.Parameters(2)=  result("Gia")
                                 cmdPrep.Parameters(3)=  mycarts.Item(List)
                                 cmdPrep.execute 
-                                  
+                         End if         
                     end if  
                     connDB.Close()
             Next
