@@ -63,7 +63,7 @@
 
                    
             Session.Contents.Remove("mycarts")  
-            Response.Redirect("index.asp")
+            Response.Redirect("donhang.asp")
         End If
                       
 %>
