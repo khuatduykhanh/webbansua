@@ -24,12 +24,6 @@
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
                 cmdPrep.CommandText = "INSERT INTO HDNhap(MaNhacc,TongNhap,NgayNhap,SoLoaiMHNhap) VALUES(?,?,getdate(),?)"
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("tensp",202,1,255,tensp)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("theloai",202,1,255,theloai)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("thuonghieu",202,1,255,thuonghieu)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
                 cmdPrep.Parameters(0)=manhacc
                 cmdPrep.Parameters(1)=tongnhap
                 cmdPrep.Parameters(2)=soluongloaimhnhap
@@ -110,5 +104,6 @@
     
     <div> 
 </div>
+        <!-- #include file="footer.asp" -->
 </body>
 </html>

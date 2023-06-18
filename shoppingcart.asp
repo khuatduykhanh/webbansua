@@ -97,7 +97,16 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 
 <body>
 <!-- #include file="header.asp" -->
-
+   <%
+        If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
+    %>
+            <div class="alert alert-success mt-2" role="alert">
+                <%=Session("Success")%>
+            </div>
+    <%
+            Session.Contents.Remove("Success")
+        End If
+    %>
 <section class="h-100 h-custom" style="background-color: #eee; ">
   <div class="container py-2 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -214,7 +223,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                   </div>
                   <div class="row">
                  
-                    <a href="themhoadon.asp?total=<%= total%>&id=<%=mhdht%>"  class="btn btn-success btn-lg">Mua Hang</a>
+                    <a href="themhoadon.asp?total=<%= total%>&id=<%=mhdht%>"  class="btn btn-success btn-lg">Mua Hàng</a>
                     
                   </div>
                 </div>

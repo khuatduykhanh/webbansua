@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(IdHoadon) AS count FROM Hoadon"
+    strSQL = "SELECT COUNT(IdHoadon) AS count FROM Hoadon where TrangThaiHD = '0'"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 

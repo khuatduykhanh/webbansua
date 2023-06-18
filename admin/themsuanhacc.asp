@@ -47,12 +47,7 @@
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
                 cmdPrep.CommandText = "INSERT INTO Nhacc(TenNhacc,DCNhacc,SDTNhacc) VALUES(?,?,?)"
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("TenNhacc",202,1,255,TenNhacc)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("DCNhacc",202,1,255,DCNhacc)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("SDTNhacc",202,1,255,SDTNhacc)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
+              
                 cmdPrep.Parameters(0)=TenNhacc
                 cmdPrep.Parameters(1)=DCNhacc
                 cmdPrep.Parameters(2)=SDTNhacc
@@ -183,5 +178,6 @@
     
     <div> 
 </div>
+        <!-- #include file="footer.asp" -->
 </body>
 </html>

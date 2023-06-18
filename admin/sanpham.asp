@@ -6,7 +6,7 @@
     End If
 ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
 ' ham lam tron so nguyen
-    function Ceil(Number)
+     function Ceil(Number)
         Ceil = Int(Number)
         if Ceil<>Number Then
             Ceil = Ceil + 1
@@ -22,7 +22,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 10
+    limit = 3
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(Masp) AS count FROM SanPham where TrangThai = '1'"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -125,7 +125,7 @@
                             <th scope="col">Giá Gốc </th>
                             <th scope="col">Giá Bán</th>
                             <th scope="col">Số lượng</th>
-                            <th scope="col" >Thao tác</th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -210,7 +210,7 @@
         </div>
     </div> 
 </div>
-     <script>
+    <script>
             $(function()
             {
                 $('#confirm-delete').on('show.bs.modal', function(e){
@@ -218,5 +218,6 @@
                 });
             });
         </script>
+                <!-- #include file="footer.asp" -->
 </body>
 </html>

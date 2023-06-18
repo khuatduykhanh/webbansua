@@ -108,20 +108,19 @@
     %>
         <div class="d-flex bd-highlight mb-3">
             <div class="me-auto p-2 bd-highlight"><h2>Danh sách khách hàng</h2></div>
-                <div class="p-2 bd-highlight">
-                    <a href="themsuasp.asp" class="btn btn-primary">Thêm sản phẩm</a>
-                    <a href="spdaxoa.asp" class="btn btn-danger">Sản phẩm đã xoá</a>
+                <div class="p-2 bd-highlight"> 
+                    <a href="spdaxoa.asp" class="btn btn-danger">Tài khoản đã khoá</a>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                           <th scope="col">Tên Tài Khoản </th>
-                            <th scope="col">Họ Tên</th>
-                            <th scope="col">Địa Chỉ</th>
-                            <th scope="col">Số Điện Thoại</th>
-                            <th scope="col">Trạng thái</th>
+                           <th scope="col" class= "text-center">Tên Tài Khoản </th>
+                            <th scope="col" class= "text-center">Họ Tên</th>
+                            <th scope="col" class= "text-center">Địa Chỉ</th>
+                            <th scope="col" class= "text-center">Số Điện Thoại</th>
+                            <th scope="col"class= "text-center">Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,8 +145,8 @@
                                     
 
                                     <td class= "text-center">
-                                        <a href="themsuasp.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-secondary">Sửa</a>
-                                        <a data-href="xoasp.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete">Khoá tài khoản</a>
+                                      
+                                        <a data-href="khoatk.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete">Khoá tài khoản</a>
                                     </td>
                                 </tr>
                         <%
@@ -186,15 +185,15 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Xác nhận xoá</h5>
+                            <h5 class="modal-title">Xác nhận khoá tài khoản</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá?</p>
+                            <p>Bạn có chắc chắn muốn khoá tài khoản khách hàng này?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                            <a class="btn btn-danger btn-delete">Xoá</a>
+                            <a class="btn btn-danger btn-delete">Khoá</a>
                         </div>
                     </div>
                 </div>
@@ -211,5 +210,6 @@
                 });
             });
         </script>
+                <!-- #include file="footer.asp" -->
 </body>
 </html>

@@ -114,11 +114,11 @@
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã Hoá Đơn </th>
-                            <th scope="col">Tên Tài Khoản</th>
-                            <th scope="col">Ngày bán</th>
-                            <th scope="col">Tổng hoá đơn</th>
-                            <th scope="col" >Trạng Thái</th>
+                            <th scope="col" class= "text-center">Mã Hoá Đơn </th>
+                            <th scope="col"class= "text-center">Tên Tài Khoản</th>
+                            <th scope="col"class= "text-center">Ngày bán</th>
+                            <th scope="col"class= "text-center">Tổng hoá đơn</th>
+                            <th scope="col" class= "text-center">Trạng Thái</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -205,5 +205,6 @@
                 });
             });
         </script>
+                <!-- #include file="footer.asp" -->
 </body>
 </html>

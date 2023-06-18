@@ -2,6 +2,7 @@
 <!-- #include file="connect.asp" -->
 
 <%
+
         id = Request.QueryString("id")
         taikhoan = Request.form("taikhoan")
         name = Request.form("name")
@@ -23,7 +24,7 @@
                 cmdPrep.parameters.Append cmdPrep.createParameter("diachi",202,1,255,diachi)
 
                 cmdPrep.execute               
-                
+               
                 If Err.Number = 0 Then 
                 ' Set rs = connDB.execute("SELECT @@IDENTITY AS NewID")
                 '     Response.write(rs("NewID"))  
@@ -183,10 +184,10 @@
                 return false;
             }
         }
-        function validateName(e){
+        function validateName(){
             const name = document.querySelector('#name');            
-            const re = /^.+$/;
-             if (reSpaces.test(name.value)&& re.test(name.value)) {
+
+             if (name.value!="") {
                 name.classList.remove('is-invalid');
                 name.classList.add('is-valid');
 
@@ -201,8 +202,8 @@
 
         function validateDiachi(e){
             const diachi = document.querySelector('#diachi');
-            const re = /^.+$/;
-             if (reSpaces.test(diachi.value)&& re.test(diachi.value)) {
+
+             if (diachi.value !="") {
                 diachi.classList.remove('is-invalid');
                 diachi.classList.add('is-valid');
 
@@ -241,6 +242,7 @@
             }
         })();
     </script>
+            <!-- #include file="footer.asp" --> 
 </body>
 
 </html>

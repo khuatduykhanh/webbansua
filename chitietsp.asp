@@ -312,10 +312,14 @@ ul {
     justify-content: space-between;
     margin-bottom: 15px;
 }
-.pdp-attribute > li > span {
+.pdp-attribute > li > span{
     flex: 1;
     font-weight: 500;
     margin-top: -5px;
+  
+}
+.SL{
+  color:red;
 }
 li {
     text-align: -webkit-match-parent;
@@ -388,14 +392,12 @@ label {
                 <li>
                     <label>Mô tả</label>
                     <span><%= rs("MoTa")%></span></li>
-                <li> </li>
+                <li> 
+                    <label>Số lượng hàng trong kho</label>
+                    <span class = "SL"><%= rs("SoLuong")%></span></li>
+                </li>
                 </ul>
-                <div class="product-count">
-                  <label for="size">Số lượng</label>
-                  <form action="#" class="display-flex">
-                  <div class="qtyminus">-</div>
-                  <input type="text" name="quantity" value="1" class="qty">
-                  <div class="qtyplus">+</div>
+                
               </form>
               <a href="addCart.asp?idproduct=<%= rs("MaSp")%>  " class="round-black-btn">Thêm vào giỏ hàng</a>
                 </div>

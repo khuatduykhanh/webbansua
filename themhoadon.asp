@@ -56,7 +56,15 @@
                                 cmdPrep.Parameters(2)=  result("Gia")
                                 cmdPrep.Parameters(3)=  mycarts.Item(List)
                                 cmdPrep.execute 
-                         End if         
+                        else 
+                             Set cmdPrep = Server.CreateObject("ADODB.Command")
+                                cmdPrep.ActiveConnection = connDB
+                                cmdPrep.CommandType = 1
+                                cmdPrep.CommandText = "DELETE FROM HoaDon WHERE IdHoaDon=?"
+                                cmdPrep.parameters.Append cmdPrep.createParameter("idhoadon",3,1, ,mhdht)
+                                cmdPrep.execute
+                         End if  
+
                     end if  
                     connDB.Close()
             Next

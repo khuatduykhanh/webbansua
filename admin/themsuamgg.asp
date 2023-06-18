@@ -46,12 +46,7 @@
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
                 cmdPrep.CommandText = "INSERT INTO GiamGia(ThongTin,NgayBD,NgayKT,Giatri) VALUES(?,?,?,?)"
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("ThongTin",202,1,255,ThongTin)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("NgayBD",202,1,255,NgayBD)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("NgayKT",202,1,255,NgayKT)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("giaban",3,1, ,giaban)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("mota",202,1,255,mota)
-                ' cmdPrep.parameters.Append cmdPrep.createParameter("giagoc",3,1, ,giagoc)
+                
                 cmdPrep.Parameters(0)=ThongTin
                 cmdPrep.Parameters(1)=NgayBD
                 cmdPrep.Parameters(2)=NgayKT
@@ -187,5 +182,6 @@
     <div> 
     
 </div>
+        <!-- #include file="footer.asp" -->
 </body>
 </html>
