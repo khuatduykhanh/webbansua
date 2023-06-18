@@ -61,7 +61,7 @@
                                 cmdPrep.ActiveConnection = connDB
                                 cmdPrep.CommandType = 1
                                 cmdPrep.CommandText = "DELETE FROM HoaDon WHERE IdHoaDon=?"
-                                cmdPrep.parameters.Append cmdPrep.createParameter("idhoadon",3,1, ,mhdht)
+                                cmdPrep.parameters.Append cmdPrep.createParameter("IdHoaDon",3,1, ,mhdht)
                                 cmdPrep.execute
                          End if  
 

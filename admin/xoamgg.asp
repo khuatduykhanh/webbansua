@@ -12,7 +12,7 @@
     cmdPrep.ActiveConnection = connDB
     cmdPrep.CommandType = 1
     cmdPrep.CommandText = "DELETE FROM GiamGia WHERE IdMagiamgia=?"
-    cmdPrep.parameters.Append cmdPrep.createParameter("id",3,1, ,id)
+    cmdPrep.parameters.Append cmdPrep.createParameter("IdMagiamgia",3,1, ,id)
 
     cmdPrep.execute
     connDB.Close()
