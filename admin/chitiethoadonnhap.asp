@@ -142,49 +142,8 @@
                 </table>
             </div>
 
-            <nav aria-label="Page Navigation">
-                <ul class="pagination pagination-sm justify-content-center my-5">
-                    <% if (pages>1) then
-                    'kiem tra trang hien tai co >=2
-                        if(Clng(page)>=2) then
-                    %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
-                    <%    
-                        end if 
-                        for i = 1 to range
-                    %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
-                    <%
-                        next
-                        if (Clng(page)<pages) then
-
-                    %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
-                    <%
-                        end if    
-                    end if
-                    %>
-                </ul>
-            </nav>
-      <div class="modal" tabindex="-12" id="confirm-delete">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Xác nhận xoá</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <a class="btn btn-danger btn-delete">Xoá</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
-        </div>
+      
     </div> 
 </div>
      <script>
