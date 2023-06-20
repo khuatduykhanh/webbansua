@@ -169,6 +169,17 @@
 .tk{
   display:flex;
   }
+  .tk2{
+    height:50px;
+    display:flex;
+  }
+   .tk2 button{
+    display: flex;
+    width: 186px;
+    justify-content: center;
+    margin-left: 10px;
+    
+  }
 </style>
 <body>
 <div class="wrapper">
@@ -179,7 +190,7 @@
     <div class ="tk"> 
       <p class="title">Biểu đồ thống kê doanh thu theo: </p>
       <div class="chartheader">
-        <form method="post" id="myForm" >
+        <form method="post" id="myForm" class = "tk2" >
           <select class="form-select" name="thongke" id="thongke" aria-label="Default select example">
             <option value="thang">Tháng</option>
             <option value="quy">Quý</option>
