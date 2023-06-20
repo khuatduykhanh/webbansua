@@ -22,7 +22,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 3
+    limit = 2
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
