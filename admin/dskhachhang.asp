@@ -108,9 +108,7 @@
     %>
         <div class="d-flex bd-highlight mb-3">
             <div class="me-auto p-2 bd-highlight"><h2>Danh sách khách hàng</h2></div>
-                <div class="p-2 bd-highlight"> 
-                    <a href="spdaxoa.asp" class="btn btn-danger">Tài khoản đã khoá</a>
-                </div>
+              
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
@@ -120,7 +118,7 @@
                             <th scope="col" class= "text-center">Họ Tên</th>
                             <th scope="col" class= "text-center">Địa Chỉ</th>
                             <th scope="col" class= "text-center">Số Điện Thoại</th>
-                            <th scope="col"class= "text-center">Thao Tác</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -144,10 +142,7 @@
                                  
                                     
 
-                                    <td class= "text-center">
-                                      
-                                        <a data-href="khoatk.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete">Khoá tài khoản</a>
-                                    </td>
+                                    
                                 </tr>
                         <%
                                 Result.MoveNext

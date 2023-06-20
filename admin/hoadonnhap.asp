@@ -22,7 +22,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 10
+    limit = 5
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -41,10 +41,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=5) Then
+    If (pages<=10) Then
         range = pages
     Else
-        range = 5
+        range = 10
     End if
 %>
 <!DOCTYPE html>
@@ -140,7 +140,7 @@
                                     <td><%=Result("TongNhap")%></td>
                                     <td>
                                         <a href="chitiethoadonnhap.asp?id=<%=Result("MaHDnhap")%>&sl=<%=Result("SoLoaiMHNhap")%>&tongnhap=<%=Result("TongNhap")%>" class="btn btn-secondary">Xem </a>
-                                        <a data-href="xoahdnhap.asp?id=<%=Result("MaHDnhap")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" title="Delete">Xoá</a>
+                                    
                                     </td>
                                 </tr>
                         <%
@@ -157,44 +157,28 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="hoadonnhap.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="hoadonnhap.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="hoadonnhap.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if
                     %>
                 </ul>
             </nav>
-      <div class="modal" tabindex="-12" id="confirm-delete">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Xác nhận xoá</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <a class="btn btn-danger btn-delete">Xoá</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+      
+    
     </div> 
+</div>
 </div>
      <script>
             $(function()

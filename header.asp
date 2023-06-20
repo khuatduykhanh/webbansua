@@ -1588,7 +1588,9 @@ select option
 									<li class="hassubs">
 										<a href="donhang.asp">Đơn hàng của bạn</i></a>
 									</li>
-									
+									<li class="hassubs">
+										<a href="ctgiamgia.asp">Mã giảm giá</i></a>
+									</li>
 								</ul>
 							</div>
 

@@ -147,13 +147,13 @@
     transition: all 0.3s;
 }
 .title{
-    margin-left: 450px;
-    width: 300px;
+    margin-left: 20px;
+ 
 }
 .chartheader{
     display: flex;
     width: 200px;
-    margin: 20px auto;
+    margin: auto 10px;
 
 }
 .chart{
@@ -166,6 +166,9 @@
     margin-top: 30px;
     margin-bottom:30px;
 }
+.tk{
+  display:flex;
+  }
 </style>
 <body>
 <div class="wrapper">
@@ -173,25 +176,27 @@
     <!-- #include file="sidebar.asp" -->
     <div class="content">
     <!-- #include file="header.asp" -->
-    <p class="title">Biểu đồ thống kê doanh thu</p>
-    <div class="chartheader">
-    <form method="post" id="myForm" >
-    <select class="form-select" name="thongke" id="thongke" aria-label="Default select example">
-    <option value="thang">Tháng</option>
-    <option value="quy">Quý</option>
-    <option value="nam">Năm</option>
-    </select>
-    <button type="submit" class="btn btn-primary">Thống kê</button>
-    </form>
+    <div class ="tk"> 
+      <p class="title">Biểu đồ thống kê doanh thu theo: </p>
+      <div class="chartheader">
+        <form method="post" id="myForm" >
+          <select class="form-select" name="thongke" id="thongke" aria-label="Default select example">
+            <option value="thang">Tháng</option>
+            <option value="quy">Quý</option>
+            <option value="nam">Năm</option>
+          </select>
+          <button type="submit" class="btn btn-primary">Thống kê</button>
+        </form>
+      </div>
     </div>
     <div class="chart">
     <canvas id="myChart"></canvas>
     </div>
-    <div class="header">So Luong Nguoi mua trong thang hien tai</div>
+    <div class="header">Số lượng người mua trong tháng hiện tại</div>
     <div class="chart1">
     <canvas id="myChart1"></canvas>
     </div>
-    <div class="header">Top 3 san pham ban chay nhat thang</div>
+    <div class="header">Top 3 sản phẩm bán chạy nhất tháng</div>
     <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
@@ -243,13 +248,13 @@
       labels: ['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
       datasets: [{
         type: 'line',
-        label: 'So Luong Nguoi Mua',
+        label: 'Số lượng người mua',
         data: [ <%=arraySlnguoimua(0)%>, <%=arraySlnguoimua(1)%>, <%=arraySlnguoimua(2)%>, <%=arraySlnguoimua(3)%>, <%=arraySlnguoimua(4)%>, <%=arraySlnguoimua(5)%>, <%=arraySlnguoimua(6)%>, <%=arraySlnguoimua(7)%>, <%=arraySlnguoimua(8)%>, <%=arraySlnguoimua(9)%>, <%=arraySlnguoimua(10)%>, <%=arraySlnguoimua(11)%>, <%=arraySlnguoimua(12)%>, <%=arraySlnguoimua(13)%>, <%=arraySlnguoimua(14)%>, <%=arraySlnguoimua(15)%>, <%=arraySlnguoimua(16)%>, <%=arraySlnguoimua(17)%>, <%=arraySlnguoimua(18)%>, <%=arraySlnguoimua(19)%>, <%=arraySlnguoimua(20)%>, <%=arraySlnguoimua(21)%>, <%=arraySlnguoimua(22)%>, <%=arraySlnguoimua(23)%>, <%=arraySlnguoimua(24)%>, <%=arraySlnguoimua(25)%>, <%=arraySlnguoimua(26)%>, <%=arraySlnguoimua(27)%>, <%=arraySlnguoimua(28)%>, <%=arraySlnguoimua(29)%>, <%=arraySlnguoimua(30)%>],
         borderWidth: 1
       },
       {
         type: 'line',
-        label: 'So Luong Don Dat Hang',
+        label: 'Số lượng đơn đặt hàng',
         data: [ <%=arraySldondathang(0)%>, <%=arraySldondathang(1)%>, <%=arraySldondathang(2)%>, <%=arraySldondathang(3)%>, <%=arraySldondathang(4)%>, <%=arraySldondathang(5)%>, <%=arraySldondathang(6)%>, <%=arraySldondathang(7)%>, <%=arraySldondathang(8)%>, <%=arraySldondathang(9)%>, <%=arraySldondathang(10)%>, <%=arraySldondathang(11)%>, <%=arraySldondathang(12)%>, <%=arraySldondathang(13)%>, <%=arraySldondathang(14)%>, <%=arraySldondathang(15)%>, <%=arraySldondathang(16)%>, <%=arraySldondathang(17)%>, <%=arraySldondathang(18)%>, <%=arraySldondathang(19)%>, <%=arraySldondathang(20)%>, <%=arraySldondathang(21)%>, <%=arraySldondathang(22)%>, <%=arraySldondathang(23)%>, <%=arraySldondathang(24)%>, <%=arraySldondathang(25)%>, <%=arraySldondathang(26)%>, <%=arraySldondathang(27)%>, <%=arraySldondathang(28)%>, <%=arraySldondathang(29)%>, <%=arraySldondathang(30)%>],
         borderWidth: 1
       }
@@ -268,22 +273,22 @@
     new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Thang 1', 'Thang 2','Thang 3','Thang 4','Thang 5','Thang 6','Thang 7','Thang 8','Thang 9','Thang 10','Thang 11','Thang 12'],
+      labels: ['Tháng 1', 'Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
       datasets: [{
         type: 'line',
-        label: 'Tong Doanh Thu',
+        label: 'Tổng doanh thu',
         data: [ <%=arraythang(0)%>, <%=arraythang(1)%>, <%=arraythang(2)%>, <%=arraythang(3)%>, <%=arraythang(4)%>, <%=arraythang(5)%>, <%=arraythang(6)%>, <%=arraythang(7)%>, <%=arraythang(8)%>, <%=arraythang(9)%>, <%=arraythang(10)%>, <%=arraythang(11)%>],
         borderWidth: 1
       },
       {
         type: 'line',
-        label: 'Tong Nhap',
+        label: 'Tổng nhập',
         data: [ <%=arraynhap(0)%>, <%=arraynhap(1)%>, <%=arraynhap(2)%>, <%=arraynhap(3)%>, <%=arraynhap(4)%>, <%=arraynhap(5)%>, <%=arraynhap(6)%>, <%=arraynhap(7)%>, <%=arraynhap(8)%>, <%=arraynhap(9)%>, <%=arraynhap(10)%>, <%=arraynhap(11)%>],
         borderWidth: 1
       },
       {
         type: 'line',
-        label: 'Tong Xuat',
+        label: 'Tổng xuất',
         data: [ <%=arrayxuat(0)%>, <%=arrayxuat(1)%>, <%=arrayxuat(2)%>, <%=arrayxuat(3)%>, <%=arrayxuat(4)%>, <%=arrayxuat(5)%>, <%=arrayxuat(6)%>, <%=arrayxuat(7)%>, <%=arrayxuat(8)%>, <%=arrayxuat(9)%>, <%=arrayxuat(10)%>, <%=arrayxuat(11)%>],
         borderWidth: 1
       }
@@ -302,7 +307,7 @@
         new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Quy 1', 'Quy 2','Quy 3','Quy 4'],
+      labels: ['Quý 1', 'Quý 2','Quý 3','Quý 4'],
       datasets: [{
         type: 'bar',
         label: 'Tong Doanh Thu',
@@ -311,12 +316,12 @@
       },
       {
         type: 'bar',
-        label: 'Tong Nhap',
+        label: 'Tổng nhập',
         data: [ <%=arraynhap(0)%>, <%=arraynhap(1)%>, <%=arraynhap(2)%>, <%=arraynhap(3)%>],
         borderWidth: 1
       },{
         type: 'bar',
-        label: 'Tong Xuat',
+        label: 'Tổng xuất',
         data: [ <%=arrayxuat(0)%>, <%=arrayxuat(1)%>, <%=arrayxuat(2)%>, <%=arrayxuat(3)%>],
         borderWidth: 1
       }
@@ -336,22 +341,22 @@
         new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Nam 2023', 'Nam 2024','Nam 2025','Nam 2026'],
+      labels: ['Năm 2023', 'Năm 2024','Năm 2025','Năm 2026'],
       datasets: [{
         type: 'bar',
-        label: 'Tong Doanh Thu',
+        label: 'Tổng doanh thu',
         data: [ <%=arraynam(0)%>, <%=arraynam(1)%>, <%=arraynam(2)%>, <%=arraynam(3)%>],
         borderWidth: 1
       },
       {
         type: 'bar',
-        label: 'Tong Nhap',
+        label: 'Tổng nhập',
         data: [ <%=arraynhap(0)%>, <%=arraynhap(1)%>, <%=arraynhap(2)%>, <%=arraynhap(3)%>],
         borderWidth: 1
       },
       {
         type: 'bar',
-        label: 'Tong Xuat',
+        label: 'Tổng xuất',
         data: [ <%=arrayxuat(0)%>, <%=arrayxuat(1)%>, <%=arrayxuat(2)%>, <%=arrayxuat(3)%>],
         borderWidth: 1
       }
