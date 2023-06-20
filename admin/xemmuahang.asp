@@ -1,3 +1,4 @@
+
 <!-- #include file="..\connect.asp" -->
 <%
     
@@ -26,7 +27,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 5
+    limit = 10
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -34,7 +35,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaCTHDNHap) AS count FROM CTHDNhap"
+    strSQL = "SELECT COUNT(IdHoaDon) AS count FROM CTHDBan"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -45,10 +46,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=10) Then
+    If (pages<=5) Then
         range = pages
     Else
-        range = 10
+        range = 5
     End if
 %>
 <!DOCTYPE html>
@@ -95,29 +96,21 @@
     <!-- #include file="header.asp" -->
     <div class="container">
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Chi tiết hoá đơn của Mã HD nhập <%=id%></h2></div>
-                <div class="p-2 bd-highlight">
-                <%
-                    if (sl<>0) then
-                %>
-                    <a href="themchitiethoadonnhap.asp?sl=<%=sl%>&id=<%=id%>&tongnhap=<%=tongnhap%>" class="btn btn-primary">Thêm </a>
-                <% 
-                    end if 
-                %>
-                    <a href="hoadonnhap.asp" class="btn btn-danger">Quay lại </a>
+            <div class="me-auto p-2 bd-highlight"><h2>Chi tiết danh sách mua hàng mã hoá đơn <%=id%></h2></div>
+                <div class="p-2 bd-highlight">   
+                    <a href="danhsachmuahang.asp" class="btn btn-danger">Quay lại </a>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã CTHD nhập </th>
-                            <th scope="col">Mã HD nhập</th>
-                            <th scope="col">Mã sản phẩm</th>
+                            <th scope="col">Mã hoá đơn</th>
                             <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Mã sản phẩm</th>
                             <th scope="col">Loại sản phẩm</th>
-                            <th scope="col">Giá nhập</th>
-                            <th scope="col">Số lượng nhập</th>
+                            <th scope="col">Số lượng Mua</th>
+                            <th scope="col">Giá 1 sản phẩm</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,19 +120,18 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT * FROM CTHDNhap WHERE MaHDnhap = ?"
+                            cmdPrep.CommandText = "SELECT CTHDBan.IdHoaDon,CTHDBan.MaSp,CTHDBan.SoLuong,SanPham.TenSp,SanPham.LoaiSp,SanPham.Gia FROM CTHDBan INNER JOIN SanPham ON CTHDBan.MaSp = SanPham.MaSp WHERE IdHoaDon = ?"
                             cmdPrep.Parameters(0)= id
                             Set Result = cmdPrep.execute
                             do while not Result.EOF
                         %>
                                 <tr>
-                                    <td><%=Result("MactHDnhap")%></td>
-                                    <td><%=Result("MaHDnhap")%></td>
-                                    <td><%=Result("Masp")%></td>
-                                    <td><%=Result("Tensp")%></td>
+                                    <td><%=Result("IdHoaDon")%></td>
+                                    <td><%=Result("TenSp")%></td>
+                                    <td><%=Result("MaSp")%></td>
                                     <td><%=Result("Loaisp")%></td>
-                                    <td><%=Result("GiaNhap")%></td>
-                                    <td><%=Result("SLNhap")%></td>
+                                    <td><%=Result("SoLuong")%></td>
+                                    <td><%=Result("Gia")%></td>
                                 </tr>
                         <%
                                 Result.MoveNext
@@ -149,9 +141,49 @@
                 </table>
             </div>
 
+            <nav aria-label="Page Navigation">
+                <ul class="pagination pagination-sm justify-content-center my-5">
+                    <% if (pages>1) then
+                    'kiem tra trang hien tai co >=2
+                        if(Clng(page)>=2) then
+                    %>
+                        <li class="page-item"><a class="page-link" href="xemmuahang.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                    <%    
+                        end if 
+                        for i = 1 to range
+                    %>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="xemmuahang.asp?page=<%=i%>"><%=i%></a></li>
+                    <%
+                        next
+                        if (Clng(page)<pages) then
 
+                    %>
+                        <li class="page-item"><a class="page-link" href="xemmuahang.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                    <%
+                        end if    
+                    end if
+                    %>
+                </ul>
+            </nav>
+      <div class="modal" tabindex="-12" id="confirm-delete">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Xác nhận xoá</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn xoá?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <a class="btn btn-danger btn-delete">Xoá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-      
+        </div>
     </div> 
 </div>
      <script>

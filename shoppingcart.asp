@@ -193,7 +193,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                     <h5><%= subtotal%> Đ</h5>
                   </div>
                   
-                  <h5 class="text-uppercase mb-3">Shipping</h5>
+                  <h5 class="text-uppercase mb-3">Vận chuyển</h5>
 
                   <div class="mb-4 pb-2">
                     Miễn phí

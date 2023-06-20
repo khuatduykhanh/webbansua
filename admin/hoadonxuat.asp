@@ -22,7 +22,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 10
+    limit = 5
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(IdHoadon) AS count FROM HoaDon"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -41,10 +41,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=5) Then
+    If (pages<=10) Then
         range = pages
     Else
-        range = 5
+        range = 10
     End if
 %>
 <!DOCTYPE html>
@@ -158,18 +158,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Trước</a></li>
+                        <li class="page-item"><a class="page-link" href="hoadonxuat.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="hoadonxuat.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Sau</a></li>
+                        <li class="page-item"><a class="page-link" href="hoadonxuat.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
