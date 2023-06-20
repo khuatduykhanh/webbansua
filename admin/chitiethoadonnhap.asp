@@ -9,6 +9,7 @@
     id = Request.QueryString("id")
     sl = Request.QueryString("sl")
     tongnhap = Request.QueryString("tongnhap")
+    SoLoaiMHNhap = Request.QueryString("SoLoaiMHNhap")
     function Ceil(Number)
         Ceil = Int(Number)
         if Ceil<>Number Then
@@ -25,7 +26,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 10
+    limit = 5
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -33,7 +34,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(MaCTHDNHap) AS count FROM CTHDNhap"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -44,10 +45,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=5) Then
+    If (pages<=10) Then
         range = pages
     Else
-        range = 5
+        range = 10
     End if
 %>
 <!DOCTYPE html>
@@ -94,10 +95,16 @@
     <!-- #include file="header.asp" -->
     <div class="container">
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Chi tiet hoa don cua Ma HD Nhap <%=id%></h2></div>
+            <div class="me-auto p-2 bd-highlight"><h2>Chi tiết hoá đơn của Mã HD nhập <%=id%></h2></div>
                 <div class="p-2 bd-highlight">
+                <%
+                    if (sl<>0) then
+                %>
                     <a href="themchitiethoadonnhap.asp?sl=<%=sl%>&id=<%=id%>&tongnhap=<%=tongnhap%>" class="btn btn-primary">Thêm </a>
-                    <a href="hoadonnhap.asp" class="btn btn-danger">Quai lại </a>
+                <% 
+                    end if 
+                %>
+                    <a href="hoadonnhap.asp" class="btn btn-danger">Quay lại </a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -148,18 +155,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="chitiethoadonnhap.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="chitiethoadonnhap.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="chitiethoadonnhap.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if

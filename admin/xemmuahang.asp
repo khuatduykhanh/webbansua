@@ -1,11 +1,16 @@
+
 <!-- #include file="..\connect.asp" -->
 <%
     
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
-' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
-' ham lam tron so nguyen
+    ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
+    ' ham lam tron so nguyen
+    id = Request.QueryString("id")
+    sl = Request.QueryString("sl")
+    tongnhap = Request.QueryString("tongnhap")
+    SoLoaiMHNhap = Request.QueryString("SoLoaiMHNhap")
     function Ceil(Number)
         Ceil = Int(Number)
         if Ceil<>Number Then
@@ -22,7 +27,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 5
+    limit = 10
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -30,7 +35,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(IdHoadon) AS count FROM HoaDon"
+    strSQL = "SELECT COUNT(IdHoaDon) AS count FROM CTHDBan"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -41,10 +46,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=10) Then
+    If (pages<=5) Then
         range = pages
     Else
-        range = 10
+        range = 5
     End if
 %>
 <!DOCTYPE html>
@@ -69,7 +74,6 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </head>
 <style>
@@ -84,11 +88,6 @@
     min-height: 100vh;
     transition: all 0.3s;
 }
-.table td.text-center{
-    word-break: break-word;
-    max-width:200px;
-   
-}
 </style>
 <body>
 <div class="wrapper">
@@ -96,53 +95,43 @@
     <div class="content">
     <!-- #include file="header.asp" -->
     <div class="container">
-     <%
-        If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
-    %>
-            <div class="alert alert-success mt-2" role="alert">
-                <%=Session("Success")%>
-            </div>
-    <%
-            Session.Contents.Remove("Success")
-        End If
-    %>
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách hoá đơn</h2></div>
-                
+            <div class="me-auto p-2 bd-highlight"><h2>Chi tiết danh sách mua hàng mã hoá đơn <%=id%></h2></div>
+                <div class="p-2 bd-highlight">   
+                    <a href="danhsachmuahang.asp" class="btn btn-danger">Quay lại </a>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col" class= "text-center">Mã Hoá Đơn </th>
-                            <th scope="col"class= "text-center">Tên Tài Khoản</th>
-                            <th scope="col"class= "text-center">Ngày bán</th>
-                            <th scope="col"class= "text-center">Tổng hoá đơn</th>
-                            <th scope="col" class= "text-center">Trạng Thái</th>
+                            <th scope="col">Mã hoá đơn</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Mã sản phẩm</th>
+                            <th scope="col">Loại sản phẩm</th>
+                            <th scope="col">Số lượng Mua</th>
+                            <th scope="col">Giá 1 sản phẩm</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
+                            id = Request.QueryString("id")
                             Set cmdPrep = Server.CreateObject("ADODB.Command")
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT IdHoadon,TaiKhoan,NgayBan,TongHD,TrangThaiHD FROM Hoadon ORDER BY IdHoadon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
-                            cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
-                            cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
-
+                            cmdPrep.CommandText = "SELECT CTHDBan.IdHoaDon,CTHDBan.MaSp,CTHDBan.SoLuong,SanPham.TenSp,SanPham.LoaiSp,SanPham.Gia FROM CTHDBan INNER JOIN SanPham ON CTHDBan.MaSp = SanPham.MaSp WHERE IdHoaDon = ?"
+                            cmdPrep.Parameters(0)= id
                             Set Result = cmdPrep.execute
                             do while not Result.EOF
                         %>
                                 <tr>
-                                    <td class= "text-center"><%=Result("IdHoadon")%></td>
-                                    <td class= "text-center"><%=Result("TaiKhoan")%></td>
-                                    <td class= "text-center"><%=Result("NgayBan")%></td>
-                                    <td class= "text-center"><%=Result("TongHD")%></td>
-                                    <td class= "text-center"><%=Result("TrangThaiHD")%>
-                                    
-                                    </td>
-                                 
+                                    <td><%=Result("IdHoaDon")%></td>
+                                    <td><%=Result("TenSp")%></td>
+                                    <td><%=Result("MaSp")%></td>
+                                    <td><%=Result("Loaisp")%></td>
+                                    <td><%=Result("SoLuong")%></td>
+                                    <td><%=Result("Gia")%></td>
                                 </tr>
                         <%
                                 Result.MoveNext
@@ -158,18 +147,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="hoadonxuat.asp?page=<%=Clng(page)-1%>">Trước</a></li>
+                        <li class="page-item"><a class="page-link" href="xemmuahang.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="hoadonxuat.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="xemmuahang.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="hoadonxuat.asp?page=<%=Clng(page)+1%>">Sau</a></li>
+                        <li class="page-item"><a class="page-link" href="xemmuahang.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if
@@ -187,7 +176,7 @@
                             <p>Bạn có chắc chắn muốn xoá?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                             <a class="btn btn-danger btn-delete">Xoá</a>
                         </div>
                     </div>
@@ -205,6 +194,6 @@
                 });
             });
         </script>
-                <!-- #include file="footer.asp" -->
+        <!-- #include file="footer.asp" -->
 </body>
 </html>
