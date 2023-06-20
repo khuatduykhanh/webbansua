@@ -92,7 +92,7 @@
     End if 
     Dim arraySlnguoimua(30)
     Dim arraySldondathang(30)
-    Dim sqlString2, rs2,sqlString3, rs3
+    Dim sqlString2, rs2,sqlString3, rs3,sqlString4, rs4
     For i = 0 To  30
                 sqlString2 = "SELECT COUNT(DISTINCT TaiKhoan) AS SLNguoiMua FROM HoaDon WHERE DATEPART(YEAR, NgayBan) = YEAR(GETDATE()) AND DATEPART(MONTH, NgayBan) = MONTH(GETDATE()) AND DATEPART(DAY, NgayBan) = " & i+1 & ""
                 sqlString3 = "SELECT COUNT(IdHoaDon) AS SLDonDat FROM HoaDon WHERE DATEPART(YEAR, NgayBan) = YEAR(GETDATE()) AND DATEPART(MONTH, NgayBan) = MONTH(GETDATE()) AND DATEPART(DAY, NgayBan) = " & i+1 & ""
@@ -108,7 +108,7 @@
                 else 
                     arraySldondathang(i) = 0
                 end if
-            Next   
+            Next 
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -184,7 +184,6 @@
     <button type="submit" class="btn btn-primary">Thống kê</button>
     </form>
     </div>
-    ' 
     <div class="chart">
     <canvas id="myChart"></canvas>
     </div>
@@ -192,7 +191,45 @@
     <div class="chart1">
     <canvas id="myChart1"></canvas>
     </div>
-    <div> 
+    <div class="header">Top 3 san pham ban chay nhat thang</div>
+    <div class="table-responsive">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Số thứ tự</th>
+                            <th scope="col">Mã Sản Phẩm </th>
+                            <th scope="col">Tên Sản Phẩm</th>
+                            <th scope="col">Số lượng đã bán</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                             Set cmdPrep = Server.CreateObject("ADODB.Command")
+                            cmdPrep.ActiveConnection = connDB
+                            cmdPrep.CommandType = 1
+                            cmdPrep.Prepared = True
+                            cmdPrep.CommandText = "SELECT TOP 3 CTHDBan.MaSp as MaSp, SanPham.TenSp as TenSp, SUM(CTHDBan.SoLuong) AS SoLuong FROM CTHDBan INNER JOIN HoaDon ON CTHDBan.IdHoaDon = HoaDon.IdHoaDon INNER JOIN SanPham ON SanPham.MaSp = CTHDBan.MaSp WHERE DATEPART(YEAR, HoaDon.NgayBan) = YEAR(GETDATE()) AND DATEPART(MONTH, HoaDon.NgayBan) = MONTH(GETDATE()) GROUP BY CTHDBan.MaSp, SanPham.TenSp ORDER BY SoLuong DESC"
+                            Set Result = cmdPrep.execute
+                            dim dem
+                            dem = 1
+                            do while not Result.EOF
+                        %>
+                                <tr>
+                                    <td class= "text-center"><%=dem%></td>
+                                    <td class= "text-center"><%=Result("MaSp")%></td>
+                                    <td class= "text-center"><%=Result("TenSp")%></td>
+                                    <td class= "text-center"><%=Result("SoLuong")%></td>
+                                </tr>
+                        <%
+                            dem = dem + 1
+                                Result.MoveNext
+                            loop
+                        %>
+                    </tbody>
+                </table>
+            </div>
+    
 </div>
 <!-- #include file="footer.asp" -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
