@@ -155,7 +155,7 @@
     %>
    <div class="mb-3"> 
    <label for="sanpham" class="form-label">Tải ảnh lên tại đây:</label>
-    <!-- #include file="pure/upload.html" -->
+    <!-- #include file="upload.html" -->
     </div>  
     <form method="post"  >
     <div class="mb-3">

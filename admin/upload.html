@@ -22,43 +22,8 @@
         <input type="file" name="arquivo" multiple />
         
         <input type="submit" value="Upload" />
-        <input type="button" value="Upload using Ajax" onclick="enviar();" />
     </form>
-    
-    <br />
-    
-    <iframe name="iframe_upload" src="upload.asp" width="100%" height="200px"></iframe>
-    
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript">
-		function enviar() {
-			
-			var form = $("form");
-			
-			var formdata = false;
-			if (window.FormData){
-				formdata = new FormData(form[0]);
-			}
-			
-			$.ajax({
-				url         : 'upload.ajax.asp',
-				data        : formdata ? formdata : form.serialize(),
-				cache       : false,
-				contentType : false,
-				processData : false,
-				type        : 'POST',
-				success     : function(data, textStatus, jqXHR){
-					
-					console.log(data);
-					alert(data);
-					// Callback code
-				}
-			});			
-			
-			
-		}
-	</script>
-    
 </div>
 
 </body>
