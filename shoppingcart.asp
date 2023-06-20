@@ -137,7 +137,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                       <h6 class="text-muted"><%= rs("TenSp")%></h6>
                       <h6 class="text-black mb-0"><%= rs("MoTa")%></h6>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                       <button class="btn btn-link px-2"
                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                         <i class="fas fa-minus"></i>
@@ -145,7 +145,7 @@ If (NOT IsEmpty(Session("mycarts"))) Then
 
                       <input id="form1" min="0" name="quantity" value="<%
                                     Dim id
-                                    id  = CStr(rs("MaSp"))
+                                    id  = CStr(rs("masp"))
                                     Response.Write(mycarts.Item(id))                                     
                                     %>" type="number"
                         class="form-control form-control-sm" />
@@ -154,9 +154,6 @@ If (NOT IsEmpty(Session("mycarts"))) Then
                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                         <i class="fas fa-plus"></i>
                       </button>
-                       <div class="invalid-feedback">
-                Vui lòng nhập số lượng lớn hơn 0.
-                </div>
                     </div>
                      
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
