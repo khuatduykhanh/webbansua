@@ -106,7 +106,7 @@
              
             </div>
             <div class="table-responsive">
-                <table class="table table-dark">
+                <table class="table table-primary">
                     <thead>
                         <tr>
                             <th scope="col">Mã hoá đơn</th>

@@ -26,7 +26,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(IdHoadon) AS count FROM Hoadon where TrangThaiHD = '0'"
+    strSQL = "SELECT COUNT(IdMagiamgia) AS count FROM GiamGia "
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -85,7 +85,7 @@
         End If
     %>
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách đơn hàng của bạn</h2></div>
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách mã giảm giá</h2></div>
                
             </div>
             <div class="table-responsive">
@@ -105,7 +105,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT IdMagiamgia,ThongTin,NgayBD,NgayKT,Giatri FROM GiamGia ORDER BY IdMagiamgia OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT IdMagiamgia,ThongTin,NgayBD,NgayKT,Giatri FROM GiamGia ORDER BY IdMagiamgia   OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 

@@ -169,6 +169,17 @@
 .tk{
   display:flex;
   }
+  .tk2{
+    height:50px;
+    display:flex;
+  }
+   .tk2 button{
+    display: flex;
+    width: 186px;
+    justify-content: center;
+    margin-left: 10px;
+    
+  }
 </style>
 <body>
 <div class="wrapper">
@@ -179,7 +190,7 @@
     <div class ="tk"> 
       <p class="title">Biểu đồ thống kê doanh thu theo: </p>
       <div class="chartheader">
-        <form method="post" id="myForm" >
+        <form method="post" id="myForm" class = "tk2" >
           <select class="form-select" name="thongke" id="thongke" aria-label="Default select example">
             <option value="thang">Tháng</option>
             <option value="quy">Quý</option>
@@ -198,7 +209,7 @@
     </div>
     <div class="header">Top 3 sản phẩm bán chạy nhất tháng</div>
     <div class="table-responsive">
-                <table class="table table-dark">
+                <table class="table table-primary">
                     <thead>
                         <tr>
                             <th scope="col">Số thứ tự</th>
@@ -310,7 +321,7 @@
       labels: ['Quý 1', 'Quý 2','Quý 3','Quý 4'],
       datasets: [{
         type: 'bar',
-        label: 'Tong Doanh Thu',
+        label: 'Tổng Doanh Thu',
         data: [ <%=arrayquy(0)%>, <%=arrayquy(1)%>, <%=arrayquy(2)%>, <%=arrayquy(3)%>],
         borderWidth: 1
       },

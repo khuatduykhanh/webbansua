@@ -23,7 +23,7 @@ If (NOT isnull(TaiKhoan) AND NOT isnull(MatKhau) AND TRIM(TaiKhoan)<>"" AND TRIM
         ' dang nhap thanh cong
         Session("TaiKhoan")=result("TaiKhoan")
         Session("HoTen") = result("HoTen")
-        Session("Success")="Login Successfully"
+        Session("Success")="Đăng nhập thành công."
         Dim carts(2)
         carts(0)=5
         carts(1)=10
@@ -32,7 +32,7 @@ If (NOT isnull(TaiKhoan) AND NOT isnull(MatKhau) AND TRIM(TaiKhoan)<>"" AND TRIM
         Response.redirect("index.asp")
     Else
         ' dang nhap ko thanh cong
-        Session("Error") = "Wrong TaiKhoan or MatKhau"
+        Session("Error") = "Tài khoản hoặc mật khẩu không chính xác"
     End if
     result.Close()
     connDB.Close()
@@ -46,7 +46,7 @@ End if
 If(TaiKhoan = "admin" and MatKhau = "1") Then
         Session("TaiKhoan")= "admin"
         Session("HoTen") = "admin"
-        Session("Success")="Login Successfully"
+        Session("Success")="Đăng nhập thành công."
         Response.redirect("index.asp")
 End if
 'Lay ve thong tin dang nhap gom TaiKhoan va MatKhau

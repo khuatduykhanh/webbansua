@@ -356,15 +356,14 @@ label {
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"><div class="pd-wrap">
-    <div class="container">
+    <div class="container"> 
          
           <div class="row">
             <div class="col-md-6">
               <div id="slider" class="owl-carousel product-slider">
             <div class="item">
-                <img src="/admin/Anh/anh<%= rs("MaSp")%>.png"/>
+                <img src="/admin/upload/anh<%= rs("MaSp")%>.png"/> 
             </div>
-            
           </div>
           <div id="thumb" class="owl-carousel product-thumb">
            
@@ -385,6 +384,7 @@ label {
                 <li>
                     <label>Thương Hiệu</label>
                     <span><%= rs("ThuongHieu")%></span>
+                    
                 </li>
                 <li>
                     <label>Loại sản phẩm</label>
