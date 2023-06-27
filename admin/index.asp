@@ -209,7 +209,7 @@
     </div>
     <div class="header">Top 3 sản phẩm bán chạy nhất tháng</div>
     <div class="table-responsive">
-                <table class="table table-dark">
+                <table class="table table-primary">
                     <thead>
                         <tr>
                             <th scope="col">Số thứ tự</th>
@@ -321,7 +321,7 @@
       labels: ['Quý 1', 'Quý 2','Quý 3','Quý 4'],
       datasets: [{
         type: 'bar',
-        label: 'Tong Doanh Thu',
+        label: 'Tổng Doanh Thu',
         data: [ <%=arrayquy(0)%>, <%=arrayquy(1)%>, <%=arrayquy(2)%>, <%=arrayquy(3)%>],
         borderWidth: 1
       },

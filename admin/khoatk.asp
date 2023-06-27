@@ -6,15 +6,17 @@
     End If
     On Error Resume Next
     id = Request.QueryString("id")
+Response.write(id)
 
-   
-
+    
     Set cmdPrep = Server.CreateObject("ADODB.Command")
     connDB.Open()
     cmdPrep.ActiveConnection = connDB
     cmdPrep.CommandType = 1
-    cmdPrep.CommandText = "UPDATE TKNguoiDung SET TrangThai = '0' WHERE TaiKhoan='lviet13zx@gmail.com"
+    cmdPrep.CommandText = "UPDATE TKNguoiDung SET TrangThai = '0' WHERE TaiKhoan= '"& id & "'"
+    
     cmdPrep.parameters.Append cmdPrep.createParameter("TaiKhoan",3,1, ,id)
+    
 
     cmdPrep.execute
     connDB.Close()

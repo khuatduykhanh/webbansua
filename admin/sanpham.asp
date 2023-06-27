@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(Masp) AS count FROM SanPham where TrangThai = '1'"
+    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham where TrangThai = '1'"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-dark">
+                <table class="table table-primary">
                     <thead>
                         <tr>
                             <th scope="col">Mã Sản Phẩm </th>

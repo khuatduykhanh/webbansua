@@ -38,7 +38,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="ctgiamgia" class="text-white">Chương trình khuyến mãi</a>
+            <a href="spkm.asp" class="text-white">Chương trình khuyến mãi</a>
           </li>
           <li>
             <a href="#!" class="text-white">Khảo sát</a>

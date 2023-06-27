@@ -118,7 +118,7 @@
                             <th scope="col" class= "text-center">Họ Tên</th>
                             <th scope="col" class= "text-center">Địa Chỉ</th>
                             <th scope="col" class= "text-center">Số Điện Thoại</th>
-                            
+                            <th scope="col" class= "text-center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,7 +127,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT TaiKhoan,HoTen,DiaChi,SoDT FROM TKNguoiDung ORDER BY TaiKhoan OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT TaiKhoan,HoTen,DiaChi,SoDT FROM TKNguoiDung where TrangThai='1' ORDER BY TaiKhoan OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -138,12 +138,10 @@
                                     <td class= "text-center"><%=Result("TaiKhoan")%></td>
                                     <td class= "text-center"><%=Result("HoTen")%></td>
                                     <td class= "text-center"><%=Result("DiaChi")%></td>
-                                    <td class= "text-center"><%=Result("SoDT")%></td>
-                                 
-                                    
-
-                                    
+                                    <td class= "text-center"><%=Result("SoDT")%></td>  
+                                    <td class= "text-center"> <a data-href="khoatk.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" >Khoá tài khoản</a> </td>
                                 </tr>
+                                
                         <%
                                 Result.MoveNext
                             loop

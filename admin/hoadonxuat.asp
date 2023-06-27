@@ -111,7 +111,7 @@
                 
             </div>
             <div class="table-responsive">
-                <table class="table table-dark">
+                <table class="table table-primary">
                     <thead>
                         <tr>
                             <th scope="col" class= "text-center">Mã Hoá Đơn </th>
@@ -139,9 +139,7 @@
                                     <td class= "text-center"><%=Result("TaiKhoan")%></td>
                                     <td class= "text-center"><%=Result("NgayBan")%></td>
                                     <td class= "text-center"><%=Result("TongHD")%></td>
-                                    <td class= "text-center"><%=Result("TrangThaiHD")%>
-                                    
-                                    </td>
+                                    <td class= "text-center"><%=Result("TrangThaiHD")%></td>
                                  
                                 </tr>
                         <%
