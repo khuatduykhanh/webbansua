@@ -339,7 +339,9 @@ label, .label {
     text-align: left;
     line-height: 21px;
 }
-
+.sizeimage{
+  width:480px;
+}
 label {
     display: inline-block;
     margin-bottom: 0.5rem;
@@ -360,14 +362,7 @@ label {
          
           <div class="row">
             <div class="col-md-6">
-              <div id="slider" class="owl-carousel product-slider">
-            <div class="item">
-                <img src="/admin/upload/anh<%= rs("MaSp")%>.png"/> 
-            </div>
-          </div>
-          <div id="thumb" class="owl-carousel product-thumb">
-           
-          </div>
+              <img class="sizeimage" src="/admin/upload/anh<%= rs("MaSp")%>.png"/> 
             </div>
             <div class="col-md-6">
               <div class="product-dtl">
