@@ -26,7 +26,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 5
+    limit = 10
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -45,10 +45,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=10) Then
+    If (pages<=5) Then
         range = pages
     Else
-        range = 10
+        range = 5
     End if
 %>
 <!DOCTYPE html>

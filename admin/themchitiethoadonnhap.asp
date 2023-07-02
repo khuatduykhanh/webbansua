@@ -39,7 +39,7 @@
                 Response.redirect("hoadonnhap.asp") 
             end if
         end if
-        if (NOT isnull(msp) and msp<>"" and NOT isnull(tensp) and tensp<>"" and NOT isnull(loaisp) and loaisp<>"" and NOT isnull(gianhap) and gianhap<>""and NOT isnull(slnhap) and slnhap<>"" and gianhap > 0 and slnhap > 0 ) then
+        if (NOT isnull(msp) and msp<>"" and NOT isnull(gianhap) and gianhap<>""and NOT isnull(slnhap) and slnhap<>"" and gianhap > 0 and slnhap > 0 ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
