@@ -120,7 +120,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT CTHDBan.IdHoaDon,CTHDBan.MaSp,CTHDBan.SoLuong,SanPham.TenSp,SanPham.LoaiSp,SanPham.Gia FROM CTHDBan INNER JOIN SanPham ON CTHDBan.MaSp = SanPham.MaSp WHERE IdHoaDon = ?"
+                            cmdPrep.CommandText = "SELECT CTHDBan.IdHoaDon,CTHDBan.MaSp,CTHDBan.SoLuong,SanPham.TenSp,SanPham.LoaiSp,SanPham.Gia FROM CTHDBan INNER JOIN SanPham ON CTHDBan.MaSp = SanPham.MaSp WHERE IdHoaDon = ? "
                             cmdPrep.Parameters(0)= id
                             Set Result = cmdPrep.execute
                             do while not Result.EOF

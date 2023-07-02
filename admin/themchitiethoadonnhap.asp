@@ -39,18 +39,17 @@
                 Response.redirect("hoadonnhap.asp") 
             end if
         end if
-        if (NOT isnull(msp) and msp<>"" and NOT isnull(tensp) and tensp<>"" and NOT isnull(loaisp) and loaisp<>"" and NOT isnull(gianhap) and gianhap<>""and NOT isnull(slnhap) and slnhap<>"" and gianhap > 0 and slnhap > 0 ) then
+        if (NOT isnull(msp) and msp<>"" and NOT isnull(gianhap) and gianhap<>""and NOT isnull(slnhap) and slnhap<>"" and gianhap > 0 and slnhap > 0 ) then
                 Set cmdPrep = Server.CreateObject("ADODB.Command")
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "INSERT INTO CTHDNhap(MaHDnhap,Masp,Tensp,Loaisp,GiaNhap,SLNhap) VALUES(?,?,?,?,?,?)"
+                cmdPrep.CommandText = "INSERT INTO CTHDNhap(MaHDnhap,Masp,GiaNhap,SLNhap) VALUES(?,?,?,?)"
                 cmdPrep.Parameters(0)= mahoadon
                 cmdPrep.Parameters(1)=msp
-                cmdPrep.Parameters(2)=tensp
-                cmdPrep.Parameters(3)=loaisp
-                cmdPrep.Parameters(4)=gianhap
-                cmdPrep.Parameters(5)=slnhap
+
+                cmdPrep.Parameters(2)=gianhap
+                cmdPrep.Parameters(3)=slnhap
                 cmdPrep.execute    
                 Session("Success") = "da them 1 hoa don"
                 Response.redirect("chitiethoadonnhap.asp?id="+ cstr(id) +"&sl="+ cstr(mhconlai)  +"&tongnhap="+ cstr(gia))

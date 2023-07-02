@@ -26,7 +26,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 5
+    limit = 10
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -45,10 +45,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=10) Then
+    If (pages<=5) Then
         range = pages
     Else
-        range = 10
+        range = 5
     End if
 %>
 <!DOCTYPE html>
@@ -127,7 +127,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT * FROM CTHDNhap WHERE MaHDnhap = ?"
+                            cmdPrep.CommandText = "SELECT MactHDnhap,MaHDnhap,SanPham.Masp,SanPham.Tensp,SanPham.Loaisp,GiaNhap,SLNhap FROM CTHDNhap INNER JOIN SanPham ON CTHDNhap.MaSp = SanPham.MaSp  WHERE MaHDnhap = ?"
                             cmdPrep.Parameters(0)= id
                             Set Result = cmdPrep.execute
                             do while not Result.EOF
