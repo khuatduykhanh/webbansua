@@ -22,7 +22,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 5
+    limit = 10
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(MaHDnhap) AS count FROM HDNhap"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -125,7 +125,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc "
+                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc ORDER BY MaHDnhap OFFSET ? ROWS FETCH NEXT ? ROWS ONLY "
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
