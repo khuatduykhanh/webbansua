@@ -44,13 +44,12 @@
                 cmdPrep.ActiveConnection = connDB
                 cmdPrep.CommandType = 1
                 cmdPrep.Prepared = True
-                cmdPrep.CommandText = "INSERT INTO CTHDNhap(MaHDnhap,Masp,Tensp,Loaisp,GiaNhap,SLNhap) VALUES(?,?,?,?,?,?)"
+                cmdPrep.CommandText = "INSERT INTO CTHDNhap(MaHDnhap,Masp,GiaNhap,SLNhap) VALUES(?,?,?,?)"
                 cmdPrep.Parameters(0)= mahoadon
                 cmdPrep.Parameters(1)=msp
-                cmdPrep.Parameters(2)=tensp
-                cmdPrep.Parameters(3)=loaisp
-                cmdPrep.Parameters(4)=gianhap
-                cmdPrep.Parameters(5)=slnhap
+
+                cmdPrep.Parameters(2)=gianhap
+                cmdPrep.Parameters(3)=slnhap
                 cmdPrep.execute    
                 Session("Success") = "da them 1 hoa don"
                 Response.redirect("chitiethoadonnhap.asp?id="+ cstr(id) +"&sl="+ cstr(mhconlai)  +"&tongnhap="+ cstr(gia))
@@ -106,14 +105,7 @@
             <label for="msp" class="form-label">Mã sản phẩm</label>
             <input type="number" class="form-control" name="msp" id="msp">
             </div>
-            <div class="mb-3">
-            <label for="tensp" class="form-label">Tên sản phẩm</label>
-            <input type="text" class="form-control" name="tensp" id="tensp">
-            </div>
-            <div class="mb-3">
-            <label for="loaisp" class="form-label">Loại sản phẩm</label>
-            <input type="text" class="form-control" name="loaisp" id="loaisp">
-            </div> 
+
             <div class="mb-3">
             <label for="gianhap" class="form-label">Giá nhập</label>
             <input type="number" class="form-control" name="gianhap" id="gianhap">
