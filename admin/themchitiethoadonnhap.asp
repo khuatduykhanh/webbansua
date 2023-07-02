@@ -106,14 +106,7 @@
             <label for="msp" class="form-label">Mã sản phẩm</label>
             <input type="number" class="form-control" name="msp" id="msp">
             </div>
-            <div class="mb-3">
-            <label for="tensp" class="form-label">Tên sản phẩm</label>
-            <input type="text" class="form-control" name="tensp" id="tensp">
-            </div>
-            <div class="mb-3">
-            <label for="loaisp" class="form-label">Loại sản phẩm</label>
-            <input type="text" class="form-control" name="loaisp" id="loaisp">
-            </div> 
+
             <div class="mb-3">
             <label for="gianhap" class="form-label">Giá nhập</label>
             <input type="number" class="form-control" name="gianhap" id="gianhap">
