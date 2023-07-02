@@ -1,4 +1,5 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
+<!--#include file="connect.asp"-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,17 +53,30 @@
 </div>
 <!-- #include file="carousel.asp" -->
 <div clas="row g-2">
-  <div class='featured_product'><p>Sản Phẩm Nổi Bật</p></div>
+  <div class='featured_product'><p>Top 3 san pham ban chay nhat</p></div>
+   <div class='features_item'>
+    <%
+         
+        Set cmdPrep = Server.CreateObject("ADODB.Command")
+        connDB.Open()
+        cmdPrep.ActiveConnection = connDB
+        cmdPrep.CommandType = 1
+        cmdPrep.Prepared = True
+        cmdPrep.CommandText = "SELECT TOP 3 CTHDBan.MaSp as MaSp, SanPham.TenSp as TenSp, SUM(CTHDBan.SoLuong) AS SoLuong FROM CTHDBan INNER JOIN HoaDon ON CTHDBan.IdHoaDon = HoaDon.IdHoaDon INNER JOIN SanPham ON SanPham.MaSp = CTHDBan.MaSp GROUP BY CTHDBan.MaSp, SanPham.TenSp ORDER BY SoLuong DESC"
+        Set Result = cmdPrep.execute
+        do while not Result.EOF
+                      
+    %>
     <div class='features_item'>
         <div class='features_item1'>
-            <div class="card mb-3" style="max-width: 540px;">
+            <div class="card mb-3" style="max-width: 540px; height: 135px">
                 <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="./admin/upload/anh6.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
+                    <img src="./admin/upload/anh<%=Result("MaSp")%>.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Sữa tươi</h5>
+                        <h5 class="card-title"><%=Result("TenSp")%></h5>
                         
                         <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
                     </div>
@@ -70,39 +84,15 @@
                 </div>
             </div>
         </div>
-        <div class='features_item1'>
-            <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img src="./admin/Anh/anh7.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
-                </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Sữa chua tự nhiên</h5>
-                             <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
-                </div>
-            </div>
-            </div>
-            </div>
-        </div>
-        <div class='features_item1'>
-            <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-       <img src="./admin/upload/anh10.png" class="img-fluid rounded-start" alt="Lỗi ảnh">
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Thức uống thiên nhên từ hạt</h5>
-        <button type="button" class="btn btn-outline-primary">Mua Ngay</button>
-      </div>
-    </div>
-  </div>
+    <%
+        
+        Result.MoveNext
+        loop
+    %>
+    <div>
 </div>
-        </div>
-    </div>
-</div>
-
+</div>  
 <!-- #include file="footer.asp" -->
 </body>
 
