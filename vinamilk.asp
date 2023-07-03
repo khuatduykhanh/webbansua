@@ -78,7 +78,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                                     <div class="bg-image hover-zoom ripple rounded ripple-surface">
-                                        <img src="/admin/Anh/anh<%= rs("MaSp")%>.png"
+                                        <img src="/admin/upload/anh<%= rs("MaSp")%>.png"
                                             class="w-100" />
                                         <a href="#!">
                                             <div class="hover-overlay">
