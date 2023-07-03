@@ -34,7 +34,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaCTHDNHap) AS count FROM CTHDNhap"
+    strSQL = "SELECT COUNT(MaHDNhap) AS count FROM CTHDNhap"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -60,7 +60,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel='shortcut icon' href='./img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
+    <link rel='shortcut icon' href='./upload/download.ico' />
     <title>Admin</title>
     
     <!-- Font Awesome JS -->
@@ -155,18 +155,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="chitiethoadonnhap.asp?page=<%=Clng(page)-1%>">Previous</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="chitiethoadonnhap.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="chitiethoadonnhap.asp?page=<%=Clng(page)+1%>">Next</a></li>
                     <%
                         end if    
                     end if

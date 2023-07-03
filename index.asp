@@ -53,7 +53,7 @@
 </div>
 <!-- #include file="carousel.asp" -->
 <div clas="row g-2">
-  <div class='featured_product'><p>Top 3 san pham ban chay nhat</p></div>
+  <div class='featured_product'><p>Top sản phẩm bán chạy nhất</p></div>
    <div class='features_item'>
     <%
          
@@ -69,7 +69,7 @@
     %>
     <div class='features_item'>
         <div class='features_item1'>
-            <div class="card mb-3" style="max-width: 540px; height: 135px">
+            <div class="card mb-3" style="max-width: 560px; height: 200px">
                 <div class="row g-0">
                 <div class="col-md-4">
                     <img src="./admin/upload/anh<%=Result("MaSp")%>.png" class="img-fluid rounded-start" alt="Lỗi ảnh">

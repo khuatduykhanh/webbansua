@@ -5,8 +5,7 @@
     If (isnull(Session("TaiKhoan")) OR TRIM(Session("TaiKhoan")) <> "admin") Then
         Response.redirect("login.asp")
     End If
-    ' khi moi san pham duoc add vao gio hang, tien hanh lay ra s_Carts, tang them 1 phan tu cua mang va luu lai trong sesssion
-    ' ham lam tron so nguyen
+  
     id = Request.QueryString("id")
     sl = Request.QueryString("sl")
     tongnhap = Request.QueryString("tongnhap")
@@ -61,7 +60,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel='shortcut icon' href='./img/milk-store-logo-symbol-template-design-your-company-community-whatever-needs-200975497.ico' />
+    <link rel='shortcut icon' href='./upload/download.ico' />
     <title>Admin</title>
     
     <!-- Font Awesome JS -->
