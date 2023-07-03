@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(TaiKhoan) AS count FROM TKNguoiDung"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -108,10 +108,12 @@
     %>
         <div class="d-flex bd-highlight mb-3">
             <div class="me-auto p-2 bd-highlight"><h2>Danh sách khách hàng</h2></div>
-              
+               <div class="p-2 bd-highlight">
+                    <a href="TKdakhoa.asp" class="btn btn-danger">Tài khoản đã khoá</a>
+                </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-dark">
+                <table class="table table-primary">
                     <thead>
                         <tr>
                            <th scope="col" class= "text-center">Tên Tài Khoản </th>
@@ -156,18 +158,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)-1%>">Trước</a></li>
+                        <li class="page-item"><a class="page-link" href="dskhachhang.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="sanpham.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="dskhachhang.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="sanpham.asp?page=<%=Clng(page)+1%>">Sau</a></li>
+                        <li class="page-item"><a class="page-link" href="dskhachhang.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
