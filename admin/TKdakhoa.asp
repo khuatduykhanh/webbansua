@@ -22,7 +22,7 @@
     end function
 ' trang hien tai
     page = Request.QueryString("page")
-    limit = 3
+    limit = 10
 
     if (trim(page) = "") or (isnull(page)) then
         page = 1
@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(IDHoaDon) AS count FROM Hoadon where TrangThaiHD = '0'"
+    strSQL = "SELECT COUNT(TaiKhoan) AS count FROM TKNguoiDung"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -84,6 +84,11 @@
     min-height: 100vh;
     transition: all 0.3s;
 }
+.table td.text-center{
+    word-break: break-word;
+    max-width:200px;
+   
+}
 </style>
 <body>
 <div class="wrapper">
@@ -91,7 +96,7 @@
     <div class="content">
     <!-- #include file="header.asp" -->
     <div class="container">
-       <%
+     <%
         If (NOT isnull(Session("Success"))) AND (TRIM(Session("Success"))<>"") Then
     %>
             <div class="alert alert-success mt-2" role="alert">
@@ -102,19 +107,20 @@
         End If
     %>
         <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight"><h2>Danh sách mua hàng</h2></div>
-             
+            <div class="me-auto p-2 bd-highlight"><h2>Danh sách tài khoản khách hàng đã khoá</h2></div>
+               <div class="p-2 bd-highlight">
+                    <a href="dskhachhang.asp" class="btn btn-danger">Quay lại</a>
+                </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-primary">
+                <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Mã hoá đơn</th>
-                            <th scope="col">Tên Khách hàng</th>
-                            <th scope="col">Địa chỉ</th>
-                            <th scope="col">Thời gian mua</th>
-                            <th scope="col">Danh sách sản phẩm</th>
-                         
+                           <th scope="col" class= "text-center">Tên Tài Khoản </th>
+                            <th scope="col" class= "text-center">Họ Tên</th>
+                            <th scope="col" class= "text-center">Địa Chỉ</th>
+                            <th scope="col" class= "text-center">Số Điện Thoại</th>
+                            <th scope="col" class= "text-center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -123,22 +129,21 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT IDHoaDon,TKNguoiDung.HoTen,TKNguoiDung.DiaChi,NgayBan  FROM Hoadon INNER JOIN TKNguoiDung ON HoaDon.TaiKhoan = TKNguoiDung.TaiKhoan where TrangThaiHD = '0' ORDER BY IDHoaDon OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+                            cmdPrep.CommandText = "SELECT TaiKhoan,HoTen,DiaChi,SoDT FROM TKNguoiDung where TrangThai='0' ORDER BY TaiKhoan OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
-
+                             
                             Set Result = cmdPrep.execute
                             do while not Result.EOF
                         %>
                                 <tr>
-                                    <td><%=Result("IDHoaDon")%></td>
-                                    <td><%=Result("HoTen")%></td>
-                                    <td><%=Result("DiaChi")%></td>
-                                    <td><%=Result("NgayBan")%></td>
-                                    <td>
-                                        <a href="xemmuahang.asp?id=<%=Result("IDHoaDon")%>&hoten=<%=Result("HoTen")%>&diachi=<%=Result("DiaChi")%>" class="btn btn-secondary">Xem </a>
-                                    </td>
+                                    <td class= "text-center"><%=Result("TaiKhoan")%></td>
+                                    <td class= "text-center"><%=Result("HoTen")%></td>
+                                    <td class= "text-center"><%=Result("DiaChi")%></td>
+                                    <td class= "text-center"><%=Result("SoDT")%></td>  
+                                    <td class= "text-center"> <a data-href="motk.asp?id=<%=Result("TaiKhoan")%>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete" >Mở tài khoản</a> </td>
                                 </tr>
+                                
                         <%
                                 Result.MoveNext
                             loop
@@ -153,18 +158,18 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="danhsachmuahang.asp?page=<%=Clng(page)-1%>">Trước</a></li>
+                        <li class="page-item"><a class="page-link" href="TKdakhoa.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i = 1 to range
                     %>
-                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="danhsachmuahang.asp?page=<%=i%>"><%=i%></a></li>
+                            <li class="page-item <%=checkPage(Clng(i)=Clng(page),"active")%>"><a class="page-link" href="TKdakhoa.asp?page=<%=i%>"><%=i%></a></li>
                     <%
                         next
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="danhsachmuahang.asp?page=<%=Clng(page)+1%>">Sau</a></li>
+                        <li class="page-item"><a class="page-link" href="TKdakhoa.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
@@ -175,15 +180,15 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Xác nhận xoá</h5>
+                            <hx5 class="modal-title">Xác nhận mở khoá tài khoản</hx5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xoá?</p>
+                            <p>Bạn có chắc chắn muốn mở khoá tài khoản khách hàng này?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <a class="btn btn-danger btn-delete">Xoá</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
+                            <a class="btn btn-danger btn-delete">Mở</a>
                         </div>
                     </div>
                 </div>

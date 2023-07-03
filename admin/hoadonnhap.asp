@@ -30,7 +30,7 @@
 
     offset = (Clng(page) * Clng(limit)) - Clng(limit)
 
-    strSQL = "SELECT COUNT(MaSp) AS count FROM SanPham"
+    strSQL = "SELECT COUNT(MaHDnhap) AS count FROM HDNhap"
     connDB.Open()
     Set CountResult = connDB.execute(strSQL)
 
@@ -41,10 +41,10 @@
     pages = Ceil(totalRows/limit)
     'gioi han tong so trang la 5
     Dim range
-    If (pages<=10) Then
+    If (pages<=5) Then
         range = pages
     Else
-        range = 10
+        range = 5
     End if
 %>
 <!DOCTYPE html>
@@ -125,7 +125,7 @@
                             cmdPrep.ActiveConnection = connDB
                             cmdPrep.CommandType = 1
                             cmdPrep.Prepared = True
-                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc "
+                            cmdPrep.CommandText = "SELECT MaHDnhap,TongNhap,NgayNhap, Nhacc.TenNhacc,SoLoaiMHNhap FROM HDNhap INNER JOIN Nhacc ON HDNhap.MaNhacc = Nhacc.MaNhacc ORDER BY MaHDnhap OFFSET ? ROWS FETCH NEXT ? ROWS ONLY  "
                             cmdPrep.parameters.Append cmdPrep.createParameter("offset",3,1, ,offset)
                             cmdPrep.parameters.Append cmdPrep.createParameter("limit",3,1, , limit)
 
@@ -157,7 +157,7 @@
                     'kiem tra trang hien tai co >=2
                         if(Clng(page)>=2) then
                     %>
-                        <li class="page-item"><a class="page-link" href="hoadonnhap.asp?page=<%=Clng(page)-1%>">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="hoadonnhap.asp?page=<%=Clng(page)-1%>">Trước</a></li>
                     <%    
                         end if 
                         for i = 1 to range
@@ -168,7 +168,7 @@
                         if (Clng(page)<pages) then
 
                     %>
-                        <li class="page-item"><a class="page-link" href="hoadonnhap.asp?page=<%=Clng(page)+1%>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="hoadonnhap.asp?page=<%=Clng(page)+1%>">Sau</a></li>
                     <%
                         end if    
                     end if
